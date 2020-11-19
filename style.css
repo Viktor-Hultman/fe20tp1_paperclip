@@ -63,6 +63,16 @@ body {
     text-align: center;
     width: 100%;
     background-color: #1C354C;
-    height: 50px;
-    line-height: 50px;
+    padding: 10px 0;
+    margin-bottom: 40px;
+}
+
+.nav-icon {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.nav-icon svg {
+    width: 20px;
+    fill: #fff;
 }
