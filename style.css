@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&display=swap');
+
+
 body {
     margin: 0px;
 }
@@ -35,7 +38,7 @@ body {
 .toolbar-and-editor-container {
     display: flex;
     flex-direction: column;
-    flex-basis: 100vw;
+    /* flex-basis: 100vw; */
 }
 
 @media screen and (max-width: 600px) {
@@ -50,4 +53,16 @@ body {
     .toolbar-and-editor-container {
         display: none;
     }
+}
+
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    background-color: #1C354C;
+    height: 50px;
+    line-height: 50px;
 }
