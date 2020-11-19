@@ -37,3 +37,17 @@ body {
     flex-direction: column;
     flex-basis: 100vw;
 }
+
+@media screen and (max-width: 800px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .saved-notes-div {
+        flex-basis: 100vh;
+    }
+
+    .toolbar-and-editor-container {
+        display: none;
+    }
+}
