@@ -1,4 +1,4 @@
-body{
+body {
     margin: 0px;
 }
 
@@ -13,23 +13,26 @@ body{
     display: flex;
     flex-direction: column;
     flex-basis: 100px;
-    background-color: rgb(75, 75, 255);
+    background-color: #005392;
 }
 
-.nav-list{
+.nav-list {
     list-style: none;
 }
 
-.saved-notes-div{
-    background-color: rgb(206, 206, 206);
+.saved-notes-div {
+    background-color: #EBEBEB;
     flex-basis: 300px;
+    border-left: 3.5px solid #D3D3D3;
+    border-right: 3.5px solid #D3D3D3;
+    box-shadow: 0 0 5px 1px #ccc;
 }
 
-.saved-notes-list{
+.saved-notes-list {
     list-style: none;
 }
 
-.toolbar-and-editor-container{
+.toolbar-and-editor-container {
     display: flex;
     flex-direction: column;
     flex-basis: 100vw;
