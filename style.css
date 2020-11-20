@@ -21,6 +21,11 @@ for an element's width and height */
     outline: thin dotted #E0AD34;
 }
 
+/* removes the text decoration from all navigation links */
+a {
+    text-decoration: none;
+}
+
 
 /* ======= Hide scrollbar ====== */
 html {
@@ -52,6 +57,7 @@ html::-webkit-scrollbar {
     --text-font: Montserrat;
     /*borders*/
     --notes-border: 3.5px solid #D3D3D3;
+    --links-border: 2.5px solid #005392;
 }
 
 /*page layout*/
@@ -142,6 +148,12 @@ p {
 .intro {
     width: 90%;
     margin: 0 auto;
+}
+
+.intro p a {
+    color: var(--blue-txt);
+    font-weight: bold;
+    border-bottom: var(--links-border);
 }
 
 /*large screen version*/
