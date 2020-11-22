@@ -34,7 +34,7 @@ cite,
 code,
 del,
 dfn,
-em,
+/* em,When "resetting" em (italic), the editor can't use italic style */
 img,
 ins,
 kbd,
