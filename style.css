@@ -1,22 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display:wght@500;700&display=swap');
 
 
-body {
-    margin: 0px;
+/*
+  ==============================================================================
+  Custom styles
+  ==============================================================================
+*/
+/* account for any border and padding in the values you specify 
+for an element's width and height */
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
+
+/* styles the tab navigation links and buttons outline */
+*:focus {
+    outline: thin dotted #E0AD34;
+}
+
+/* removes the text decoration from all navigation links */
+a {
+    text-decoration: none;
+}
+
+
+/* ======= Hide scrollbar ====== */
+html {
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar {
+    display: none;
+}
+
+/* main variables are used in order to be able to quickly change styles if needed or in case of rebranding */
+:root {
+    /* text color  */
+    --white-txt: #fff;
+    --dark-txt: #1C354C;
+    --blue-txt: #005392;
+    /* background color */
+    --white-bg: #fff;
+    --light-grey-bg: #EBEBEB;
+    --dark-bg: #1C354C;
+    --blue-bg: #005392;
+    /* font */
+    --title-font: 'Playfair Display', serif;
+    --text-font: Montserrat;
+    /*borders*/
+    --notes-border: 3.5px solid #D3D3D3;
+    --links-border: 2.5px solid #005392;
+}
+
+/*page layout*/
 
 .main {
     display: flex;
     max-width: 100vw;
     height: 100vh;
+    flex-direction: column;
 }
 
 .navbar {
     height: 100%;
+    min-height: 50px;
+    min-width: 50px;
     display: flex;
-    flex-direction: column;
-    flex-basis: 100px;
-    background-color: #005392;
+    flex-basis: 50px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--blue-bg);
 }
 
 .nav-list {
@@ -24,10 +85,10 @@ body {
 }
 
 .saved-notes-div {
-    background-color: #EBEBEB;
-    flex-basis: 300px;
-    border-left: 3.5px solid #D3D3D3;
-    border-right: 3.5px solid #D3D3D3;
+    background-color: var(--light-grey-bg);
+    flex-basis: 100vh;
+    border-left: var(--notes-border);
+    border-right: var(--notes-border);
     box-shadow: 0 0 5px 1px #ccc;
 }
 
@@ -36,43 +97,94 @@ body {
 }
 
 .toolbar-and-editor-container {
-    display: flex;
+    display: none;
     flex-direction: column;
-    /* flex-basis: 100vw; */
+    flex-basis: 100vw;
 }
 
-@media screen and (max-width: 600px) {
-    .main {
-        flex-direction: column;
-    }
-
-    .saved-notes-div {
-        flex-basis: 100vh;
-    }
-
-    .toolbar-and-editor-container {
-        display: none;
-    }
-}
-
-
+/* logo and navbar icons*/
 .logo {
     font-family: 'Playfair Display', serif;
     font-size: 30px;
-    color: #fff;
-    text-align: center;
-    width: 100%;
-    background-color: #1C354C;
-    padding: 10px 0;
-    margin-bottom: 40px;
+    color: var(--white-txt);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark-bg);
+    width: 50px;
+    height: 100%;
 }
 
 .nav-icon {
-    text-align: center;
-    padding-bottom: 10px;
+    display: inline-flex;
+    min-width: 50px;
 }
 
 .nav-icon svg {
     width: 20px;
-    fill: #fff;
+    fill: var(--white-txt);
+}
+
+/*typography*/
+h1,
+h2 {
+    font-family: var(--title-font);
+    font-size: 2rem;
+    color: var(--dark-txt);
+}
+
+h2 {
+    font-variant: small-caps;
+}
+
+p {
+    font-family: var(--text-font);
+    color: var(--dark-txt);
+    line-height: 1.8;
+    margin-bottom: 50px;
+}
+
+/*intro section*/
+.intro {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.intro p a {
+    color: var(--blue-txt);
+    font-weight: bold;
+    border-bottom: var(--links-border);
+}
+
+/*large screen version*/
+@media screen and (min-width: 800px) {
+    .main {
+        flex-direction: row;
+    }
+
+    .saved-notes-div {
+        flex-basis: 300px;
+    }
+
+    .toolbar-and-editor-container {
+        display: flex;
+    }
+
+    .navbar {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .logo {
+        width: 100%;
+        height: 50px;
+        margin-bottom: 40px;
+    }
+
+    .nav-icon {
+        flex-direction: column;
+        align-items: center;
+        min-height: 50px;
+    }
 }
