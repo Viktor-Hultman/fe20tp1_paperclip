@@ -9,15 +9,12 @@
 
   function redirectToInfo(){
     window.location = "intro.html";
-  }
+}
 
   function redirectNewUser(){   
    if (pageVisits == null) {
       pageVisits += 1;
       localStorage.setItem("pageVisits", pageVisits);
       redirectToInfo();
-    } else {
-      pageVisits += 1;
-      localStorage.setItem("pageVisits", pageVisits);
-    }
+    } 
   }
