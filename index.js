@@ -74,3 +74,92 @@ function submitTitle() {
       redirectToInfo();
     } 
   }
+
+
+  /* ADDITIONAL FUNCTIONS NOT IMPLEMENTED */
+  /* Date Function */
+function date() {
+  let now = new Date();
+
+  let dd = now.getDate();
+  let m = now.getMonth() + 1;
+  let yyyy = now.getFullYear();
+  let hh = now.getHours();
+  let mm = now.getMinutes();
+  let ss = now.getSeconds();
+
+  if (dd < 10) {
+      dd = `0${dd}`;
+  }
+  if (m < 10) {
+      m = `0${m}`;
+  }
+  if (hh < 10) {
+      hh = `0${hh}`;
+  }
+  if (mm < 10) {
+      mm = `0${mm}`;
+  }
+  if (ss < 10) {
+      ss = `0${ss}`;
+  }
+
+  now = `${dd}/${m}/${yyyy} ${hh}:${mm}`;
+  return now;
+}
+
+
+
+/* Read only mode */
+// To turn the editor into "read-only-mode" - the toolbar is hidden and the content of the editor is non-editable. When clcked on again, it is made into "edit-mode" and the toolbar is shown again.
+// Activate function from e.g. a button with a event listener that activates the function
+// Also need to create a class of "hide-toolbar" with a "display: none; property"
+function editToggle(e) {
+  // Add the class "edit-button" to the html element that activates this function
+  if (!e.target.classList.contains('edit-button')) {
+      return;
+  }
+
+  const editor = document.querySelector('.ql-editor');
+  const toolbar = document.querySelector('.ql-toolbar.ql-snow');
+
+  if (editor.getAttribute('contenteditable') === 'true') {
+      // makes the editor non-editable
+      editor.setAttribute('contenteditable', false);
+      // adds the class "hide-toolbar" containing a "dsplay: none;" to hide the toolbar
+      toolbar.classList.toggle('hide-toolbar');
+  } else {
+      // the opposite
+      editor.setAttribute('contenteditable', true);
+      toolbar.classList.toggle('hide-toolbar');
+  }
+}
+
+
+
+// EXAMPLE OF TOOLBAR CUSTOMIZATION
+var toolbarOptions = [
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  [{ 'font': [] }],
+
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  ['blockquote', 'code-block'],
+  [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }],
+  [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],          // outdent/indent
+  [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  ['clean']                                         // remove formatting button
+];
+
+// IN ORDER TO WORK THE FOLLOWING NEEDS TO BE WRITTEN WHEN INITIALIZING THE EDITOR
+/* 
+
+quill = new Quill('.editor', {
+    modules: {
+        toolbar: toolbarOptions
+    },
+    theme: 'snow'
+});
+
+*/
