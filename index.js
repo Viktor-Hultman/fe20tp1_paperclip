@@ -76,20 +76,21 @@ var quill = new Quill('#editor', {
   }
 
 
-  //create note
+  //creating a note
   let editingField = document.querySelector(".ql-editor");
   let notesListContainer = document.querySelector('.saved-notes-list');
   let saveNoteBtn = document.querySelector('.save-note-btn');
 
+  function createNote() {
+    notesListContainer.innerHTML += `<li class="note">${editingField.innerHTML}</li>`;
+  }
 
   saveNoteBtn.onclick = function saveNote(){
     let firstElement = editingField.firstChild;
 
-    if (firstElement.tagName === 'H1' && firstElement.textContent.trim() != "") {
-      notesListContainer.innerHTML += `<li class="note">${editingField.innerHTML}</li>`;
-
-
-    } else alert("Please add a heading to your note, it will act as the note\'s title")
+    if (firstElement.tagName.startsWith('H') && firstElement.textContent.trim() != "") {
+      createNote();
+    } else alert("Please add a heading at the begining of your note, it will act as the note\'s title")
   }
 
   // editingField.addEventListener(onkeyup, () => {
