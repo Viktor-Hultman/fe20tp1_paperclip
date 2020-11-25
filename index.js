@@ -80,10 +80,9 @@ var quill = new Quill('#editor', {
   let editingField = document.querySelector(".ql-editor");
   let notesListContainer = document.querySelector('.saved-notes-list');
   let saveNoteBtn = document.querySelector('.save-note-btn');
-  //unique identifyer for each note to act as a local storage key
-  let notesNumber = 0;
 
-
+  //unique identifyer for each note to act as a local storage key that is taken from local storage
+  let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
 
 
 //creating a note
@@ -97,8 +96,9 @@ var quill = new Quill('#editor', {
 
 //saving a note
   saveNoteBtn.onclick = function saveNote(){
-    //the id increases by 1 for each saved note
+    //the id increases by 1 for each created note
     notesNumber += 1;
+    //saves the number in local storage for access
     localStorage.setItem('notesNumber', notesNumber);
     //select the first element in the editing field
     let firstElement = editingField.firstChild;
@@ -109,29 +109,20 @@ var quill = new Quill('#editor', {
   }
 
 
-console.log(notesNumber);
   //loading notes from local storage
  function loadNotes() {
-   notesNumber = localStorage.getItem('notesNumber')
-  // for (i = 1; 1<= notesNumber; i++){
-  //   console.log(i);
-    //localStorage.getItem(i)
- // }
+
+  for (i = 1; i<= notesNumber; i++){
+    console.log(i);
+   console.log(localStorage.getItem(i));
+ }
  }
 
  document.addEventListener('DOMContentLoaded', e => {
-   console.log('content is loading');
+
  } )
 
-  // editingField.addEventListener(onkeyup, () => {
-  //   console.log("in listener");
-    
-  //   // let note = document.createElement("li");
-
-
-
-  //   // notesListContainer.appendChild(note);
-  // })
+ 
 
 
   /* ADDITIONAL FUNCTIONS NOT IMPLEMENTED */
