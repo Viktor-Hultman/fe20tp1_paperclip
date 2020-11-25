@@ -116,7 +116,7 @@ console.log(notesNumber);
   // for (i = 1; 1<= notesNumber; i++){
   //   console.log(i);
     //localStorage.getItem(i)
-  }
+ // }
  }
 
 
