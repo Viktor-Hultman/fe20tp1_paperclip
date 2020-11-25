@@ -111,14 +111,16 @@ var quill = new Quill('#editor', {
  function loadNotes() {
 
   for (i = 1; i<= notesNumber; i++){
-    console.log(i);
-   console.log(localStorage.getItem(i));
+    //console.log(i);
+   //console.log(localStorage.getItem(i));
+   let note = JSON.parse(localStorage.getItem(i));
+    notesListContainer.innerHTML += note;
  }
  }
 
  document.addEventListener('DOMContentLoaded', e => {
-
- } )
+  loadNotes();
+ })
 
  
 
