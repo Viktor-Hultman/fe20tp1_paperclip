@@ -1,4 +1,4 @@
-// let newNoteButton = document.querySelector(".new-note-button")
+// 
 // let titleInputContainer = document.querySelector(".titel-input-container")
 // let submitTitleBtn = document.querySelector("#submit-title-button")
 // let titleInputValue = document.querySelector("#input-title").value
@@ -58,6 +58,8 @@ var quill = new Quill('#editor', {
 //   clicked --;
 // }
 
+
+
   //new user redirect
   let pageVisits = JSON.parse(localStorage.getItem('pageVisits')); 
 
@@ -78,6 +80,13 @@ var quill = new Quill('#editor', {
   let editingField = document.querySelector(".ql-editor");
   let notesListContainer = document.querySelector('.saved-notes-list');
   let saveNoteBtn = document.querySelector('.save-note-btn');
+  let newNoteButton = document.querySelector(".new-note-button");
+
+  //function that opens the editor
+  newNoteButton.addEventListener("click", function() {
+    document.querySelector(".toolbar-and-editor-container").classList.remove("hidden")
+    console.log("Hej");
+  });
 
   //unique identifyer for each note to act as a local storage key that is taken from local storage
   let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
@@ -103,7 +112,8 @@ var quill = new Quill('#editor', {
     //only creates a note if first element is a heading(h1, h2...h6) and it is not empty
     if (firstElement.tagName.startsWith('H') && firstElement.textContent.trim() != "") {
       createNote();
-    } else alert("Please add a heading at the begining of your note, it will act as the note\'s title")
+    } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
+    document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
   }
 
 
