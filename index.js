@@ -119,6 +119,9 @@ console.log(notesNumber);
  // }
  }
 
+ document.addEventListener('DOMContentLoaded', e => {
+   console.log('content is loading');
+ } )
 
   // editingField.addEventListener(onkeyup, () => {
   //   console.log("in listener");
