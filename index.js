@@ -7,8 +7,6 @@
 // //Event listeners
 // newNoteButton.addEventListener("click", createNewNote)
 
-//Global variable for click checks
-let clicked = 0;
 
 //Sets up the quill editor in the element with the id of "editor"
 var quill = new Quill('#editor', {
