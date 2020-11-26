@@ -1,146 +1,85 @@
-let newNoteButton = document.querySelector(".new-note-button")
-let titleInputContainer = document.querySelector(".titel-input-container")
-let submitTitleBtn = document.querySelector("#submit-title-button")
-let titleInputValue = document.querySelector("#input-title").value
-
-//Event listeners
-newNoteButton.addEventListener("click", createNewNote)
-
-//Global variable for click checks
-let clicked = 0;
-
 //Sets up the quill editor in the element with the id of "editor"
 var quill = new Quill('#editor', {
   theme: 'snow'
-  });
+});
 
-//Function for opening the input field for creating a new note
-function createNewNote() {
-  //First checks the global check variable
-  if(clicked < 1){
-    //Removes the "hidden" css class from the input field container
-    titleInputContainer.classList.remove("hidden")
-    //Adds the "hidden" css class to the entire editor container to only show the input field container
-    document.querySelector(".toolbar-and-editor-container").classList.add("hidden")
-    //Removes the first child (previous title) so a new first child can be used
-    document.querySelector(".ql-editor").removeChild(document.querySelector(".ql-editor").childNodes[0])
-    //Adds value to the global variable so the "Create new note" button does nothing while the input container is used
-    clicked ++;
-  } 
+
+
+//new user redirect
+let pageVisits = JSON.parse(localStorage.getItem('pageVisits'));
+
+function redirectToInfo() {
+  window.location = "intro.html";
 }
 
-//Function for submiting the input value as the title for the editor
-function submitTitle() {
-  //Sets the value of the input field to a vatiable
-  let inputValue = document.querySelector("#input-title").value;
-
-  //Creates a h1 element and sets it to a variable
-  let h = document.createElement("h1");
-  h.classList.add('title');
-
-  //Creates text that uses the value of the input field and sets it to a variable
-  var t = document.createTextNode(inputValue);
-
-  //Appends the text with the value to the h1 element
-  h.appendChild(t);
-
-  //"Getting" the element that is the parent were we want to place the title
-  let parentElement = document.querySelector(".ql-editor")
-  //"Getting" the current first child element (an empty "p" tag that comes with the editor when created)
-  let theFirstChild = parentElement.firstChild
-  //Places the new title before the empty "p" tag
-  parentElement.insertBefore(h, theFirstChild)
-  //Resets the value of the input field to blank
-  document.querySelector("#input-title").value = ""
-  //Adds the "hidden" class to the input container
-  titleInputContainer.classList.add("hidden")
-  //Removes the "hidden" class from the editor container
-  document.querySelector(".toolbar-and-editor-container").classList.remove("hidden")
-  //Removes value from the global "check" variable so the "Create new note" button can be used again
-  clicked --;
-}
-
-  //new user redirect
-  let pageVisits = JSON.parse(localStorage.getItem('pageVisits')); 
-  console.log(pageVisits);
-
-  function redirectToInfo(){
-    window.location = "intro.html";
-}
-
-  function redirectNewUser(){   
-   if (pageVisits == null) {
-      pageVisits += 1;
-      localStorage.setItem("pageVisits", pageVisits);
-      redirectToInfo();
-    } 
-}
-
-
-
-const notesListContainer = document.querySelector('.saved-notes-list');
-
-function addNote(e) {
-
-  // Note DIV
-  const noteDiv = document.createElement('div');
-  guestDiv.classList.add('guest');
-  guestDiv.setAttribute('id', Date.now());
-
-  // Create H2 & append to DIV
-  const newGuest = document.createElement('h2');
-  newGuest.innerText = guestInput.value;
-  newGuest.classList.add('guest-heading');
-  guestDiv.appendChild(newGuest);
-
-  // Create PARAGRAPH & append to DIV
-  const newComment = document.createElement('p');
-  newComment.innerText = guestText.value;
-  newComment.classList.add('guest-comment');
-  guestDiv.appendChild(newComment);
-
-  // Create DATE-paragraph & append to div
-  const currentDate = document.createElement('p');
-  currentDate.innerText = date();
-  currentDate.classList.add('guest-date');
-  guestDiv.appendChild(currentDate);
-
-  // Create guest object and ADD TODO TO LOCAL STORAGE
-  const note = {
-      name: guestInput.value,
-      comment: guestText.value,
-      date: date(),
-      id: Date.now()
-  };
-
-  saveLocalGuests(guest);
-
-  //APPEND TO CONTAINER
-  guestContainer.appendChild(guestDiv);
-}
-
-
-
-function saveLocalNotes(note) {
-  //CHECK IF THERE IS ITEMS IN LOCAL STORAGE
-  let notes;
-  if(localStorage.getItem('notes') === null) {
-      notes = [];
-  } else {
-      notes = JSON.parse(localStorage.getItem('notes'));
+function redirectNewUser() {
+  if (pageVisits == null) {
+    pageVisits += 1;
+    localStorage.setItem("pageVisits", pageVisits);
+    redirectToInfo();
   }
+}
 
-  notes.push(note);
-  localStorage.setItem('notes', JSON.stringify(notes));
+//global variables
+let editingField = document.querySelector(".ql-editor");
+let notesListContainer = document.querySelector('.saved-notes-list');
+let saveNoteBtn = document.querySelector('.save-note-btn');
+let newNoteButton = document.querySelector(".new-note-button");
+
+//function that opens the editor
+newNoteButton.addEventListener("click", function () {
+  document.querySelector(".toolbar-and-editor-container").classList.remove("hidden")
+  console.log("Hej");
+});
+
+//unique identifyer for each note to act as a local storage key that is taken from local storage
+let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
+
+
+//creating a note
+function createNote() {
+  //creates one list item in the saved notes div containing all of the html generated by the editor
+  let note = `<li class="note">${editingField.innerHTML}<span>${date()}</span></li>`;
+  notesListContainer.innerHTML += note;
+  //saves the note html as a JSON string in Local Storage
+  localStorage.setItem(notesNumber, JSON.stringify(note))
+}
+
+//saving a note
+saveNoteBtn.onclick = function saveNote() {
+  //the id increases by 1 for each created note
+  notesNumber += 1;
+  //saves the number in local storage for access
+  localStorage.setItem('notesNumber', notesNumber);
+  //select the first element in the editing field
+  let firstElement = editingField.firstChild;
+  //only creates a note if first element is a heading(h1, h2...h6) and it is not empty
+  if (firstElement.tagName.startsWith('H') && firstElement.textContent.trim() != "") {
+    createNote();
+  } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
+  document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
 }
 
 
+//loading notes from local storage
+function loadNotes() {
+
+  for (i = 1; i <= notesNumber; i++) {
+    //console.log(i);
+    //console.log(localStorage.getItem(i));
+    let note = JSON.parse(localStorage.getItem(i));
+    notesListContainer.innerHTML += note;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', e => {
+  loadNotes();
+})
 
 
 
-
-  /* ADDITIONAL FUNCTIONS NOT IMPLEMENTED */
-  /* Date Function */
+/* ADDITIONAL FUNCTIONS NOT IMPLEMENTED */
+/* Date Function */
 function date() {
   let now = new Date();
 
@@ -152,19 +91,19 @@ function date() {
   let ss = now.getSeconds();
 
   if (dd < 10) {
-      dd = `0${dd}`;
+    dd = `0${dd}`;
   }
   if (m < 10) {
-      m = `0${m}`;
+    m = `0${m}`;
   }
   if (hh < 10) {
-      hh = `0${hh}`;
+    hh = `0${hh}`;
   }
   if (mm < 10) {
-      mm = `0${mm}`;
+    mm = `0${mm}`;
   }
   if (ss < 10) {
-      ss = `0${ss}`;
+    ss = `0${ss}`;
   }
 
   now = `${dd}/${m}/${yyyy} ${hh}:${mm}`;
@@ -180,21 +119,21 @@ function date() {
 function editToggle(e) {
   // Add the class "edit-button" to the html element that activates this function
   if (!e.target.classList.contains('edit-button')) {
-      return;
+    return;
   }
 
   const editor = document.querySelector('.ql-editor');
   const toolbar = document.querySelector('.ql-toolbar.ql-snow');
 
   if (editor.getAttribute('contenteditable') === 'true') {
-      // makes the editor non-editable
-      editor.setAttribute('contenteditable', false);
-      // adds the class "hide-toolbar" containing a "dsplay: none;" to hide the toolbar
-      toolbar.classList.toggle('hide-toolbar');
+    // makes the editor non-editable
+    editor.setAttribute('contenteditable', false);
+    // adds the class "hide-toolbar" containing a "dsplay: none;" to hide the toolbar
+    toolbar.classList.toggle('hide-toolbar');
   } else {
-      // the opposite
-      editor.setAttribute('contenteditable', true);
-      toolbar.classList.toggle('hide-toolbar');
+    // the opposite
+    editor.setAttribute('contenteditable', true);
+    toolbar.classList.toggle('hide-toolbar');
   }
 }
 
@@ -216,13 +155,11 @@ var toolbarOptions = [
 ];
 
 // IN ORDER TO WORK THE FOLLOWING NEEDS TO BE WRITTEN WHEN INITIALIZING THE EDITOR
-/* 
-
+/*
 quill = new Quill('.editor', {
     modules: {
         toolbar: toolbarOptions
     },
     theme: 'snow'
 });
-
 */

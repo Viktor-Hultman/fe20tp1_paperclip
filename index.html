@@ -8,7 +8,7 @@
       content="Quire helps you capture ideeas and find them fast.
         It is a browser based program that let's you save notes directly from your computer or mobile device."
     />
-    <title>Quire - Paperclip</title>
+    <title>Quire - Paperclip - Note editing tool</title>
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -111,20 +111,19 @@
       </nav>
 
       <div class="saved-notes-div">
+        <button class="new-note-button">Create new note</button>
         <ul class="saved-notes-list">
-          <button class="new-note-button">Create new note</button>
+         
         </ul>
       </div>
-
-      <div class="titel-input-container hidden">
-        <div id="title-form">
-          <input type="text" id="input-title" name="input-title" required placeholder="Note title...">
-          <button id="submit-title-button" onclick="submitTitle()">Add Title</button>
+      
+      <div class="toolbar-and-editor-container hidden">
+        <div id="editor">
+            <h1>Please add a title here</h1>
         </div>
-      </div>
-
-      <div class="toolbar-and-editor-container hidden ">
-        <div id="editor"></div>
+        <div>
+            <button class="save-note-btn">save</button>
+        </div>
       </div>
 
     </main>
