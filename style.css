@@ -85,28 +85,28 @@ html::-webkit-scrollbar {
 }
 
 .saved-notes-div {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     background-color: var(--light-grey-bg);
     border-left: var(--notes-border);
     border-right: var(--notes-border);
     box-shadow: 0 0 5px 1px #ccc;
+    padding-left: 20px;
+    height: calc(100% - 50px);
+    min-width: 250px;
 }
 
 .saved-notes-list {
     list-style: none;
     overflow: auto;
-    min-width: 250px;
     width: 100%;
-    padding-left: 20px;
+    height: calc(100% - 50px);
 }
 
 .toolbar-and-editor-container {
     display: flex;
-    flex-basis: 100vh;
+    /* flex-basis: 100vh; */
     flex-direction: column;
-    position: fixed;
+    position: absolute;
     top: 50px;
     left: 0;
     background-color: var(--white-bg);
@@ -179,19 +179,30 @@ p {
     border-bottom: var(--links-border);
 }
 
+/* buttons */
+.new-note-button {
+    background-color: var(--blue-bg);
+    border: none;
+    color: var(--white-txt);
+    font-family: var(--text-font);
+    border-radius: 5px;
+}
+
 /*large screen version*/
 @media screen and (min-width: 800px) {
     .main {
         flex-direction: row;
-        height: 100vh;
     }
 
     .saved-notes-div {
-        flex-basis: 300px;
+        flex-basis: 250px;
+        height: 100%;
+        width: 250px;
     }
 
     .toolbar-and-editor-container {
         position: static;
+        width: auto;
     }
 
     .navbar {
