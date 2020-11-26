@@ -36,6 +36,7 @@ function submitTitle() {
 
   //Creates a h1 element and sets it to a variable
   let h = document.createElement("h1");
+  h.classList.add('title');
 
   //Creates text that uses the value of the input field and sets it to a variable
   var t = document.createTextNode(inputValue);
@@ -73,7 +74,69 @@ function submitTitle() {
       localStorage.setItem("pageVisits", pageVisits);
       redirectToInfo();
     } 
+}
+
+
+
+const notesListContainer = document.querySelector('.saved-notes-list');
+
+function addNote(e) {
+
+  // Note DIV
+  const noteDiv = document.createElement('div');
+  guestDiv.classList.add('guest');
+  guestDiv.setAttribute('id', Date.now());
+
+  // Create H2 & append to DIV
+  const newGuest = document.createElement('h2');
+  newGuest.innerText = guestInput.value;
+  newGuest.classList.add('guest-heading');
+  guestDiv.appendChild(newGuest);
+
+  // Create PARAGRAPH & append to DIV
+  const newComment = document.createElement('p');
+  newComment.innerText = guestText.value;
+  newComment.classList.add('guest-comment');
+  guestDiv.appendChild(newComment);
+
+  // Create DATE-paragraph & append to div
+  const currentDate = document.createElement('p');
+  currentDate.innerText = date();
+  currentDate.classList.add('guest-date');
+  guestDiv.appendChild(currentDate);
+
+  // Create guest object and ADD TODO TO LOCAL STORAGE
+  const note = {
+      name: guestInput.value,
+      comment: guestText.value,
+      date: date(),
+      id: Date.now()
+  };
+
+  saveLocalGuests(guest);
+
+  //APPEND TO CONTAINER
+  guestContainer.appendChild(guestDiv);
+}
+
+
+
+function saveLocalNotes(note) {
+  //CHECK IF THERE IS ITEMS IN LOCAL STORAGE
+  let notes;
+  if(localStorage.getItem('notes') === null) {
+      notes = [];
+  } else {
+      notes = JSON.parse(localStorage.getItem('notes'));
   }
+
+  notes.push(note);
+  localStorage.setItem('notes', JSON.stringify(notes));
+}
+
+
+
+
 
 
   /* ADDITIONAL FUNCTIONS NOT IMPLEMENTED */
