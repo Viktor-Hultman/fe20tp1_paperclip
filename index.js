@@ -48,17 +48,20 @@ var quill = new Quill('#editor', {
 
 //saving a note
   saveNoteBtn.onclick = function saveNote(){
-    //the id increases by 1 for each created note
-    notesNumber += 1;
-    //saves the number in local storage for access
-    localStorage.setItem('notesNumber', notesNumber);
+    
     //select the first element in the editing field
     let firstElement = editingField.firstChild;
     //only creates a note if first element is a heading(h1, h2...h6) and it is not empty
     if (firstElement.tagName.startsWith('H') && firstElement.textContent.trim() != "") {
+      //the id increases by 1 for each created note
+      notesNumber += 1;
+      //saves the number in local storage for access
+      localStorage.setItem('notesNumber', notesNumber);
+      //creates the note
       createNote();
+      //closes the editor
+      document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
     } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
-    document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
   }
 
 
