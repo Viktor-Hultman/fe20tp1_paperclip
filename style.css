@@ -98,7 +98,7 @@ a {
 }
 
 .saved-notes-list {
-    list-style: none;
+    /* list-style: none; */
     overflow: auto;
     width: 85%;
     height: calc(100% - 50px);
