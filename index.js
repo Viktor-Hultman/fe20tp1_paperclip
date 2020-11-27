@@ -1,40 +1,57 @@
 
+let toolbarOptions = [
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  [{ 'font': [] }],
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  ['blockquote', 'code-block'],
+  [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }],
+  [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],          // outdent/indent
+  [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  ['link', 'image'],
+  ['clean']                                         // remove formatting button
+];
+
 //Sets up the quill editor in the element with the id of "editor"
-var quill = new Quill('#editor', {
+quill = new Quill('#editor', {
+  modules: {
+    toolbar: toolbarOptions
+  },
   theme: 'snow'
-  });
+});
 
 
 
-  //new user redirect
-  let pageVisits = JSON.parse(localStorage.getItem('pageVisits')); 
+//new user redirect
+let pageVisits = JSON.parse(localStorage.getItem('pageVisits'));
 
-  function redirectToInfo(){
-    window.location = "intro.html";
+function redirectToInfo() {
+  window.location = "intro.html";
 }
 
-  function redirectNewUser(){   
-   if (pageVisits == null) {
-      pageVisits += 1;
-      localStorage.setItem("pageVisits", pageVisits);
-      redirectToInfo();
-    } 
+function redirectNewUser() {
+  if (pageVisits == null) {
+    pageVisits += 1;
+    localStorage.setItem("pageVisits", pageVisits);
+    redirectToInfo();
   }
+}
 
- //global variables
-  let editingField = document.querySelector(".ql-editor");
-  let notesListContainer = document.querySelector('.saved-notes-list');
-  let saveNoteBtn = document.querySelector('.save-note-btn');
-  let newNoteButton = document.querySelector(".new-note-button");
+//global variables
+let editingField = document.querySelector(".ql-editor");
+let notesListContainer = document.querySelector('.saved-notes-list');
+let saveNoteBtn = document.querySelector('.save-note-btn');
+let newNoteButton = document.querySelector(".new-note-button");
 
-  //function that opens the editor
-  newNoteButton.addEventListener("click", function() {
-    document.querySelector(".toolbar-and-editor-container").classList.remove("hidden")
-    console.log("Hej");
-  });
+//function that opens the editor
+newNoteButton.addEventListener("click", function () {
+  document.querySelector(".toolbar-and-editor-container").classList.remove("hidden")
+  console.log("Hej");
+});
 
-  //unique identifyer for each note to act as a local storage key that is taken from local storage
-  let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
+//unique identifyer for each note to act as a local storage key that is taken from local storage
+let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
 
 
 //creating a note
@@ -65,25 +82,25 @@ var quill = new Quill('#editor', {
   }
 
 
-  //loading notes from local storage
- function loadNotes() {
+//loading notes from local storage
+function loadNotes() {
 
-  for (i = 1; i<= notesNumber; i++){
+  for (i = 1; i <= notesNumber; i++) {
     //console.log(i);
-   //console.log(localStorage.getItem(i));
-   let note = JSON.parse(localStorage.getItem(i));
+    //console.log(localStorage.getItem(i));
+    let note = JSON.parse(localStorage.getItem(i));
     notesListContainer.innerHTML += note;
- }
- }
+  }
+}
 
- document.addEventListener('DOMContentLoaded', e => {
+document.addEventListener('DOMContentLoaded', e => {
   loadNotes();
- })
+})
 
- 
 
-  /* ADDITIONAL FUNCTIONS NOT IMPLEMENTED */
-  /* Date Function */
+
+/* ADDITIONAL FUNCTIONS NOT IMPLEMENTED */
+/* Date Function */
 function date() {
   let now = new Date();
 
@@ -95,19 +112,19 @@ function date() {
   let ss = now.getSeconds();
 
   if (dd < 10) {
-      dd = `0${dd}`;
+    dd = `0${dd}`;
   }
   if (m < 10) {
-      m = `0${m}`;
+    m = `0${m}`;
   }
   if (hh < 10) {
-      hh = `0${hh}`;
+    hh = `0${hh}`;
   }
   if (mm < 10) {
-      mm = `0${mm}`;
+    mm = `0${mm}`;
   }
   if (ss < 10) {
-      ss = `0${ss}`;
+    ss = `0${ss}`;
   }
 
   now = `${dd}/${m}/${yyyy} ${hh}:${mm}`;
@@ -123,31 +140,31 @@ function date() {
 function editToggle(e) {
   // Add the class "edit-button" to the html element that activates this function
   if (!e.target.classList.contains('edit-button')) {
-      return;
+    return;
   }
 
   const editor = document.querySelector('.ql-editor');
   const toolbar = document.querySelector('.ql-toolbar.ql-snow');
 
   if (editor.getAttribute('contenteditable') === 'true') {
-      // makes the editor non-editable
-      editor.setAttribute('contenteditable', false);
-      // adds the class "hide-toolbar" containing a "dsplay: none;" to hide the toolbar
-      toolbar.classList.toggle('hide-toolbar');
+    // makes the editor non-editable
+    editor.setAttribute('contenteditable', false);
+    // adds the class "hide-toolbar" containing a "dsplay: none;" to hide the toolbar
+    toolbar.classList.toggle('hide-toolbar');
   } else {
-      // the opposite
-      editor.setAttribute('contenteditable', true);
-      toolbar.classList.toggle('hide-toolbar');
+    // the opposite
+    editor.setAttribute('contenteditable', true);
+    toolbar.classList.toggle('hide-toolbar');
   }
 }
 
 
 
-// EXAMPLE OF TOOLBAR CUSTOMIZATION
+
+/* // EXAMPLE OF TOOLBAR CUSTOMIZATION
 var toolbarOptions = [
   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
   [{ 'font': [] }],
-
   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
   [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
   ['blockquote', 'code-block'],
@@ -155,17 +172,16 @@ var toolbarOptions = [
   [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],          // outdent/indent
   [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
   [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  ['link', 'image'],
   ['clean']                                         // remove formatting button
-];
+]; */
 
 // IN ORDER TO WORK THE FOLLOWING NEEDS TO BE WRITTEN WHEN INITIALIZING THE EDITOR
-/* 
-
-quill = new Quill('.editor', {
+/*
+quill = new Quill('#editor', {
     modules: {
         toolbar: toolbarOptions
     },
     theme: 'snow'
 });
-
 */
