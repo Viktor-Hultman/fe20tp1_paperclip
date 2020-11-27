@@ -215,6 +215,10 @@ p {
     padding: 8px;
 }
 
+.note.favorite .favorite-toggle {
+    color: gold;
+}
+
 .note h1,
 .note h2,
 .note h3,
