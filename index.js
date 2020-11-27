@@ -1,5 +1,23 @@
+
+let toolbarOptions = [
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  [{ 'font': [] }],
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  ['blockquote', 'code-block'],
+  [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }],
+  [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],          // outdent/indent
+  [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  ['link', 'image'],
+  ['clean']                                         // remove formatting button
+];
+
 //Sets up the quill editor in the element with the id of "editor"
-var quill = new Quill('#editor', {
+quill = new Quill('#editor', {
+  modules: {
+    toolbar: toolbarOptions
+  },
   theme: 'snow'
 });
 
@@ -139,11 +157,11 @@ function editToggle(e) {
 
 
 
-// EXAMPLE OF TOOLBAR CUSTOMIZATION
+
+/* // EXAMPLE OF TOOLBAR CUSTOMIZATION
 var toolbarOptions = [
   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
   [{ 'font': [] }],
-
   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
   [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
   ['blockquote', 'code-block'],
@@ -151,12 +169,13 @@ var toolbarOptions = [
   [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],          // outdent/indent
   [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
   [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  ['link', 'image'],
   ['clean']                                         // remove formatting button
-];
+]; */
 
 // IN ORDER TO WORK THE FOLLOWING NEEDS TO BE WRITTEN WHEN INITIALIZING THE EDITOR
 /*
-quill = new Quill('.editor', {
+quill = new Quill('#editor', {
     modules: {
         toolbar: toolbarOptions
     },
