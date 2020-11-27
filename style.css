@@ -28,7 +28,7 @@ a {
 
 
 /* ======= Hide scrollbar ====== */
-html {
+* {
     /* Hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none;
     /* IE and Edge */
@@ -37,7 +37,7 @@ html {
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-html::-webkit-scrollbar {
+::-webkit-scrollbar {
     display: none;
 }
 
@@ -56,8 +56,9 @@ html::-webkit-scrollbar {
     --title-font: 'Playfair Display', serif;
     --text-font: Montserrat;
     /*borders*/
-    --notes-border: 3.5px solid #D3D3D3;
+    --notes-border: 2.5px solid #D3D3D3;
     --links-border: 2.5px solid #005392;
+    --button-border-dark: 1.5px solid #1C354C;
 }
 
 /*page layout*/
@@ -89,20 +90,38 @@ html::-webkit-scrollbar {
     flex-direction: column;
     align-items: center;
     background-color: var(--light-grey-bg);
-    flex-basis: 100vh;
     border-left: var(--notes-border);
     border-right: var(--notes-border);
     box-shadow: 0 0 5px 1px #ccc;
+    height: calc(100% - 50px);
+    min-width: 250px;
 }
 
 .saved-notes-list {
-    list-style: none;
+    /* list-style: none; */
+    overflow: auto;
+    width: 85%;
+    height: calc(100% - 50px);
 }
 
 .toolbar-and-editor-container {
-    display: none;
+    display: flex;
+    /* flex-basis: 100vh; */
     flex-direction: column;
-    flex-basis: 100vw;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background-color: var(--white-bg);
+    min-height: 100%;
+    width: 100%;
+}
+
+.ql-editor {
+    flex-basis: 280px;
+}
+
+.save-note-btn {
+    align-self: center;
 }
 
 /* logo and navbar icons*/
@@ -115,7 +134,7 @@ html::-webkit-scrollbar {
     justify-content: center;
     background-color: var(--dark-bg);
     width: 50px;
-    height: 100%;
+    height: 50px;
 }
 
 .nav-icon {
@@ -144,7 +163,6 @@ p {
     font-family: var(--text-font);
     color: var(--dark-txt);
     line-height: 1.8;
-    margin-bottom: 50px;
 }
 
 .hidden {
@@ -155,6 +173,11 @@ p {
 .intro {
     width: 90%;
     margin: 0 auto;
+    overflow: auto;
+}
+
+.intro p {
+    margin-bottom: 50px;
 }
 
 .intro p a {
@@ -163,6 +186,46 @@ p {
     border-bottom: var(--links-border);
 }
 
+/* buttons */
+.dark-blue-btn {
+    border: var(--button-border-dark);
+    background-color: var(--white-bg);
+    color: var(--dark-txt);
+    font-family: var(--title-font);
+    font-size: 1rem;
+    border-radius: 5px;
+    margin: 20px 0;
+    padding: 8px;
+}
+
+.dark-blue-btn:active,
+.dark-blue-btn:hover,
+.dark-blue-btn:focus {
+    background-color: var(--dark-bg);
+    color: var(--white-txt);
+}
+
+/* notes */
+.note {
+    border: var(--notes-border);
+    border-radius: 3px;
+    margin-bottom: 20px;
+    font-size: .8rem;
+    font-family: Montserrat;
+    padding: 8px;
+}
+
+.note h1,
+.note h2,
+.note h3,
+.note h4,
+.note h5,
+.note h6 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+
 /*large screen version*/
 @media screen and (min-width: 800px) {
     .main {
@@ -170,15 +233,19 @@ p {
     }
 
     .saved-notes-div {
-        flex-basis: 300px;
+        flex-basis: 250px;
+        height: 100%;
+        width: 250px;
     }
 
     .toolbar-and-editor-container {
-        display: flex;
+        position: static;
     }
 
     .navbar {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 }
 
