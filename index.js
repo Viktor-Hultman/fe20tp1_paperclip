@@ -2,11 +2,11 @@
 let toolbarOptions = [
   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
   [{ 'font': [] }],
-  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  ['bold', 'italic', 'underline', 'strike'],
+  [{ 'size': ['small', false, 'large', 'huge'] }],
   ['blockquote', 'code-block'],
   [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }],
-  [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],          // outdent/indent
+  [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],
   [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
   [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
   ['link', 'image'],
@@ -21,6 +21,7 @@ quill = new Quill('#editor', {
   theme: 'snow'
 });
 
+const initialContent = quill.getContents();
 
 
 //new user redirect
@@ -46,7 +47,8 @@ let newNoteButton = document.querySelector(".new-note-button");
 
 //function that opens the editor
 newNoteButton.addEventListener("click", function () {
-  document.querySelector(".toolbar-and-editor-container").classList.remove("hidden")
+  document.querySelector(".toolbar-and-editor-container").classList.remove("hidden");
+  quill.setContents(initialContent);
   console.log("Hej");
 });
 
