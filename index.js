@@ -208,23 +208,25 @@ document.addEventListener('DOMContentLoaded', e => {
   bindStarButton();
 })
 
-
+//remove focus from notes
+function removeFocus(notes) {
+  notes.forEach(note => {
+    note.classList.remove('active-note');
+  });
+}
 //add active class to note
 
 // function makeNoteActive(){
   // myNotes.forEach(note => {
     // console.log('one');
     
-    let clickCount = 0
     notesListContainer.addEventListener('click', e =>{
       
       if (!e.target.closest('.note')) {
         return
       } else {
         let myNotes = document.querySelectorAll(".note");
-        myNotes.forEach(note => {
-          note.classList.remove('active-note');
-        });
+        removeFocus(myNotes);
         e.target.closest('.note').classList.add('active-note');
         openEditor();
         editingField.innerHTML = e.target.closest('.note').innerHTML;
