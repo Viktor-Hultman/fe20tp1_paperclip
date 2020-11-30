@@ -85,6 +85,10 @@ a {
     list-style: none;
 }
 
+.nav-button{
+    background-color: var(--blue-bg);
+}
+
 .saved-notes-div {
     display: flex;
     flex-direction: column;
