@@ -226,6 +226,8 @@ document.addEventListener('DOMContentLoaded', e => {
           note.classList.remove('active-note');
         });
         e.target.closest('.note').classList.add('active-note');
+        openEditor();
+        editingField.innerHTML = e.target.closest('.note').innerHTML;
       }
 
       
