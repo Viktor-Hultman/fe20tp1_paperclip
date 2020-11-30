@@ -61,6 +61,15 @@ function closeEditor () {
   document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
 }
 
+//close the editor when clicking on close button with both save and close option
+let closeBtn = document.querySelector('body > main > section.toolbar-and-editor-container > div.close-btn > button');
+
+closeBtn.onclick = function confirmClose() {
+  if (confirm("Do you want to save your note before closing?")) {
+    saveNote();
+  } else closeEditor();
+}
+
 //unique identifyer for each note to act as a local storage key that is taken from local storage
 let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
 
@@ -120,8 +129,7 @@ let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
   }
 
 //saving a note
-saveNoteBtn.onclick = function saveNote() {
-
+function saveNote() {
   //select the first element in the editing field
   let firstElement = editingField.firstChild;
   //only creates a note if first element is a heading(h1, h2...h6) and it is not empty
@@ -137,6 +145,8 @@ saveNoteBtn.onclick = function saveNote() {
   } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
 }
 
+// saves and creates the note when clicking on the save button
+saveNoteBtn.onclick = saveNote;
 
 //loading notes from local storage
 function loadNotes() {
