@@ -85,8 +85,23 @@ a {
     list-style: none;
 }
 
-.nav-button{
+.nav-button {
     background-color: var(--blue-bg);
+}
+
+.favorite-toggle {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    cursor: pointer;
+}
+
+.favorite-toggle svg {
+    width: 20px;
+    fill: white;
 }
 
 .saved-notes-div {
@@ -149,6 +164,10 @@ a {
 .nav-icon svg {
     width: 20px;
     fill: var(--white-txt);
+}
+
+#starred-button.selected svg {
+    fill: gold; 
 }
 
 /*typography*/
@@ -217,6 +236,11 @@ p {
     font-size: .8rem;
     font-family: Montserrat;
     padding: 8px;
+    position: relative;
+}
+
+.note.favorite .favorite-toggle svg {
+    fill: gold;
 }
 
 .note h1,
