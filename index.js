@@ -48,10 +48,18 @@ let starButton = document.querySelector('#starred-button')
 let currentView = 'allNotes'
 
 //function that opens the editor
-newNoteButton.addEventListener("click", function () {
+function openEditor() {
   document.querySelector(".toolbar-and-editor-container").classList.remove("hidden");
   quill.setContents(initialContent);
-});
+}
+
+//open editor when clicking on new note button
+newNoteButton.addEventListener("click", openEditor);
+
+//function that closes the editor
+function closeEditor () {
+  document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
+}
 
 //unique identifyer for each note to act as a local storage key that is taken from local storage
 let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
@@ -125,7 +133,7 @@ saveNoteBtn.onclick = function saveNote() {
     //creates the note
     createNote();
     //closes the editor
-    document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
+    closeEditor();
   } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
 }
 
