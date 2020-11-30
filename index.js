@@ -114,7 +114,7 @@ function printContent(){
     myWindow.focus();
     setTimeout(function() {
       myWindow.print();
-      // myWindow.close();
+      myWindow.close();
   }, 100);
 }
 

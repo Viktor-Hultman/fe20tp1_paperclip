@@ -85,7 +85,7 @@ a {
     list-style: none;
 }
 
-.nav-button{
+.nav-button {
     background-color: var(--blue-bg);
 }
 
@@ -190,16 +190,21 @@ p {
     border-bottom: var(--links-border);
 }
 
+/* editors bottom toolbar */
+.bottom-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
 /* buttons */
 .dark-blue-btn {
     border: var(--button-border-dark);
     background-color: var(--white-bg);
     color: var(--dark-txt);
     font-family: var(--title-font);
-    font-size: 1rem;
     border-radius: 5px;
-    margin: 20px 0;
-    padding: 8px;
 }
 
 .dark-blue-btn:active,
@@ -207,6 +212,23 @@ p {
 .dark-blue-btn:focus {
     background-color: var(--dark-bg);
     color: var(--white-txt);
+}
+
+.new-note-button {
+    font-size: 1rem;
+    margin: 20px 0;
+    padding: 6px;
+}
+
+.save-note-btn {
+    font-size: 1rem;
+    margin: 20px 0;
+    padding: 6px;
+}
+
+.printBtn {
+    position: absolute;
+    right: 20px;
 }
 
 /* notes */
