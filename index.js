@@ -104,11 +104,18 @@ document.addEventListener('DOMContentLoaded', e => {
 let printBtn = document.querySelector('.printBtn');
 
 function printContent(){
-	var restorepage = document.body.innerHTML;
-	var printcontent = document.querySelector(".ql-editor").innerHTML;
-	document.body.innerHTML = printcontent;
-	window.print();
-	document.body.innerHTML = restorepage;
+  var myWindow = window.open('','','width=800,height=600');
+    //open the window
+    myWindow.document.open();
+    myWindow.document.write('<html><head><title>Print it</title><link rel="stylesheet" type="text/css" href="reset.css"><link rel="stylesheet" type="text/css" href="style.css"></head><body>');
+    myWindow.document.write(document.querySelector(".ql-editor").innerHTML);
+    myWindow.document.write('</body></html>');
+    myWindow.document.close();
+    myWindow.focus();
+    setTimeout(function() {
+      myWindow.print();
+      // myWindow.close();
+  }, 100);
 }
 
 
