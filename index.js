@@ -84,7 +84,10 @@ let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
   function toggleFavorite(noteId){
     //get note from localStorage
     const listItem = document.querySelector(`[data-noteid="${noteId}"]`)
-    listItem.classList.add("favorite")
+    //toggle favorit class on listItem
+    listItem.classList.toggle("favorite")
+    //saving in localStorage
+    localStorage.setItem(noteId, JSON.stringify(listItem.outerHTML))
   }
 
 //saving a note
@@ -119,6 +122,7 @@ function loadNotes() {
 
 document.addEventListener('DOMContentLoaded', e => {
   loadNotes();
+  bindFavoriteButtons();
 })
 
 
