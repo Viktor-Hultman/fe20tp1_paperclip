@@ -23,7 +23,6 @@ quill = new Quill('#editor', {
 
 const initialContent = quill.getContents();
 
-
 //new user redirect
 let pageVisits = JSON.parse(localStorage.getItem('pageVisits'));
 
@@ -98,6 +97,20 @@ function loadNotes() {
 document.addEventListener('DOMContentLoaded', e => {
   loadNotes();
 })
+
+
+
+// print function
+let printBtn = document.querySelector('.printBtn');
+
+function printContent(){
+	var restorepage = document.body.innerHTML;
+	var printcontent = document.querySelector(".ql-editor").innerHTML;
+	document.body.innerHTML = printcontent;
+	window.print();
+	document.body.innerHTML = restorepage;
+}
+
 
 
 
