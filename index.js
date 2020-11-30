@@ -21,6 +21,7 @@ quill = new Quill('#editor', {
   theme: 'snow'
 });
 
+// Saves the initial content of the editor. When one pushes on "Create new note" button, the content of the editor is set to this variable
 const initialContent = quill.getContents();
 
 
@@ -51,7 +52,6 @@ let currentView = 'allNotes'
 newNoteButton.addEventListener("click", function () {
   document.querySelector(".toolbar-and-editor-container").classList.remove("hidden");
   quill.setContents(initialContent);
-  console.log("Hej");
 });
 
 //unique identifyer for each note to act as a local storage key that is taken from local storage
@@ -82,7 +82,9 @@ let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
                     </svg>
                   </button>
                 </li>`;
-    notesListContainer.innerHTML += note;
+
+    notesListContainer.insertAdjacentHTML("afterbegin", note);
+    //notesListContainer.innerHTML += note;
     //saves the note html as a JSON string in Local Storage
     localStorage.setItem(notesNumber, JSON.stringify(note))
     bindFavoriteButtons()
@@ -111,28 +113,28 @@ let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
   }
 
 //saving a note
-  saveNoteBtn.onclick = function saveNote(){
-    
-    //select the first element in the editing field
-    let firstElement = editingField.firstChild;
-    //only creates a note if first element is a heading(h1, h2...h6) and it is not empty
-    if (firstElement.tagName.startsWith('H') && firstElement.textContent.trim() != "") {
-      //the id increases by 1 for each created note
-      notesNumber += 1;
-      //saves the number in local storage for access
-      localStorage.setItem('notesNumber', notesNumber);
-      //creates the note
-      createNote();
-      //closes the editor
-      document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
-    } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
-  }
+saveNoteBtn.onclick = function saveNote() {
+
+  //select the first element in the editing field
+  let firstElement = editingField.firstChild;
+  //only creates a note if first element is a heading(h1, h2...h6) and it is not empty
+  if (firstElement.tagName.startsWith('H') && firstElement.textContent.trim() != "") {
+    //the id increases by 1 for each created note
+    notesNumber += 1;
+    //saves the number in local storage for access
+    localStorage.setItem('notesNumber', notesNumber);
+    //creates the note
+    createNote();
+    //closes the editor
+    document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
+  } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
+}
 
 
 //loading notes from local storage
 function loadNotes() {
 
-  for (i = 1; i <= notesNumber; i++) {
+  for (let i = notesNumber; i >= 1; i--) {
     //console.log(i);
     //console.log(localStorage.getItem(i));
     let note = JSON.parse(localStorage.getItem(i));
@@ -251,6 +253,27 @@ function editToggle(e) {
     toolbar.classList.toggle('hide-toolbar');
   }
 }
+
+//Eventlistener for removing the "placeholder text" in the editor when creating a new note
+editingField.addEventListener('click', () => {
+  //First does a check to see if the editor has any "children"
+  if (editingField.firstChild.innerHTML == null) {
+    //If not then nothing should be executed when clicking inside of the editing field
+    return false;
+  } else {
+    //If there are "children" such as h1- or p-tags then the while loop will begin it´s two checks to see if the "placeholders" are displayed
+  while (editingField.firstChild.innerHTML == "Please add a title here" || 
+  editingField.firstChild.innerHTML == "Here is where you can write your cool note text") {
+      
+    //If they are then the innerHTML of the editor will be erased to BLANK
+    editingField.innerHTML = "";
+    //Then a h1 will be created and put in a variable
+    let h = document.createElement("H1");
+    //Then the h1 will be appended to the editor so the user can begin to write a title for their note
+    editingField.appendChild(h);
+  }
+  
+}});
 
 
 
