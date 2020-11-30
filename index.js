@@ -49,7 +49,6 @@ let newNoteButton = document.querySelector(".new-note-button");
 newNoteButton.addEventListener("click", function () {
   document.querySelector(".toolbar-and-editor-container").classList.remove("hidden");
   quill.setContents(initialContent);
-  console.log("Hej");
 });
 
 //unique identifyer for each note to act as a local storage key that is taken from local storage
@@ -159,6 +158,27 @@ function editToggle(e) {
     toolbar.classList.toggle('hide-toolbar');
   }
 }
+
+//Eventlistener for removing the "placeholder text" in the editor when creating a new note
+editingField.addEventListener('click', () => {
+  //First does a check to see if the editor has any "children"
+  if (editingField.firstChild.innerHTML == null) {
+    //If not then nothing should be executed when clicking inside of the editing field
+    return false;
+  } else {
+    //If there are "children" such as h1- or p-tags then the while loop will begin it´s two checks to see if the "placeholders" are displayed
+  while (editingField.firstChild.innerHTML == "Please add a title here" || 
+  editingField.firstChild.innerHTML == "Here is where you can write your cool note text") {
+      
+    //If they are then the innerHTML of the editor will be erased to BLANK
+    editingField.innerHTML = "";
+    //Then a h1 will be created and put in a variable
+    let h = document.createElement("H1");
+    //Then the h1 will be appended to the editor so the user can begin to write a title for their note
+    editingField.appendChild(h);
+  }
+  
+}});
 
 
 
