@@ -24,7 +24,6 @@ quill = new Quill('#editor', {
 // Saves the initial content of the editor. When one pushes on "Create new note" button, the content of the editor is set to this variable
 const initialContent = quill.getContents();
 
-
 //new user redirect
 let pageVisits = JSON.parse(localStorage.getItem('pageVisits'));
 
@@ -101,6 +100,27 @@ function loadNotes() {
 document.addEventListener('DOMContentLoaded', e => {
   loadNotes();
 })
+
+
+
+// print function
+let printBtn = document.querySelector('.printBtn');
+
+function printContent(){
+  var myWindow = window.open('','','width=800,height=600');
+    //open the window
+    myWindow.document.open();
+    myWindow.document.write('<html><head><title>Print it</title><link rel="stylesheet" type="text/css" href="reset.css"><link rel="stylesheet" type="text/css" href="style.css"></head><body>');
+    myWindow.document.write(document.querySelector(".ql-editor").innerHTML);
+    myWindow.document.write('</body></html>');
+    myWindow.document.close();
+    myWindow.focus();
+    setTimeout(function() {
+      myWindow.print();
+      myWindow.close();
+  }, 100);
+}
+
 
 
 
