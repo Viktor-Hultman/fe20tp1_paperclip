@@ -119,7 +119,6 @@ a {
 .saved-notes-list {
     /* list-style: none; */
     overflow: auto;
-    width: 85%;
     height: calc(100% - 50px);
 }
 
@@ -270,11 +269,13 @@ p {
 .note {
     border: var(--notes-border);
     border-radius: 3px;
-    margin-bottom: 20px;
     font-size: .8rem;
     font-family: Montserrat;
     padding: 8px;
     position: relative;
+    width: 85%;
+    margin: 0 auto 20px auto;
+    transition: width .2s;
 }
 
 .note.favorite .favorite-toggle svg {
@@ -290,6 +291,14 @@ p {
     font-size: 1.1rem;
     font-weight: 600;
 }
+
+.active-note {
+    background-color: var(--white-bg);
+    border-right: none;
+    border-left: none;
+    width: 100%;
+}
+
 
 
 /*large screen version*/

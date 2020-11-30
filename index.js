@@ -46,6 +46,7 @@ let saveNoteBtn = document.querySelector('.save-note-btn');
 let newNoteButton = document.querySelector(".new-note-button");
 let starButton = document.querySelector('#starred-button')
 let currentView = 'allNotes'
+let closeBtn = document.querySelector('body > main > section.toolbar-and-editor-container > div.close-btn > button');
 
 //function that opens the editor
 function openEditor() {
@@ -62,8 +63,6 @@ function closeEditor () {
 }
 
 //close the editor when clicking on close button with both save and close option
-let closeBtn = document.querySelector('body > main > section.toolbar-and-editor-container > div.close-btn > button');
-
 closeBtn.onclick = function confirmClose() {
   if (confirm("Do you want to save your note before closing?")) {
     saveNote();
@@ -150,7 +149,6 @@ saveNoteBtn.onclick = saveNote;
 
 //loading notes from local storage
 function loadNotes() {
-
   for (let i = notesNumber; i >= 1; i--) {
     //console.log(i);
     //console.log(localStorage.getItem(i));
@@ -210,6 +208,34 @@ document.addEventListener('DOMContentLoaded', e => {
   bindStarButton();
 })
 
+
+//add active class to note
+
+// function makeNoteActive(){
+  // myNotes.forEach(note => {
+    // console.log('one');
+    
+    let clickCount = 0
+    notesListContainer.addEventListener('click', e =>{
+      
+      if (!e.target.closest('.note')) {
+        return
+      } else {
+        let myNotes = document.querySelectorAll(".note");
+        myNotes.forEach(note => {
+          note.classList.remove('active-note');
+        });
+        e.target.closest('.note').classList.add('active-note');
+      }
+
+      
+    // if (e.target.tagName == 'LI' || e.target.parentElement.tagName == 'LI')
+    // console.log('target tag name is:' + e.target.tagName +'<br> target parent tag name is:' + e.target.parentElement.tagName);
+  });
+  // });
+  
+  
+// }
 
 
 // print function
