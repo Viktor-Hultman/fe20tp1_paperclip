@@ -291,6 +291,17 @@ p {
     font-weight: 600;
 }
 
+#searchInput {
+    margin: 10px;
+    padding: 5px;
+    height: 30px;
+    width: 205px;
+    font-size: 17px;
+    background-color: white;
+    border-radius: 5px;
+    letter-spacing: 1px;
+}
+
 
 /*large screen version*/
 @media screen and (min-width: 800px) {
