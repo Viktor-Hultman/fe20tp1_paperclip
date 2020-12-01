@@ -15,7 +15,7 @@ searchButton.addEventListener('click', function () {
     searchInput.addEventListener('keyup', searchNotes);
 
     // insert input element above the notes list
-    notesListContainer.insertAdjacentElement('beforebegin', searchInput);
+    notesListContainer.insertAdjacentElement('beforebegin', searchInput).focus();
     searchStatus = true;
   } else {
     const searchInput = document.getElementById('searchInput');

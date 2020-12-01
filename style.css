@@ -302,7 +302,6 @@ p {
     letter-spacing: 1px;
 }
 
-
 /*large screen version*/
 @media screen and (min-width: 800px) {
     .main {
