@@ -214,32 +214,19 @@ function removeFocus(notes) {
     note.classList.remove('active-note');
   });
 }
-//add active class to note
-
-// function makeNoteActive(){
-  // myNotes.forEach(note => {
-    // console.log('one');
-    
-    notesListContainer.addEventListener('click', e =>{
-      
-      if (!e.target.closest('.note')) {
-        return
-      } else {
-        let myNotes = document.querySelectorAll(".note");
-        removeFocus(myNotes);
-        e.target.closest('.note').classList.add('active-note');
-        openEditor();
-        editingField.innerHTML = e.target.closest('.note').innerHTML.trim();
-      }
-
-      
-    // if (e.target.tagName == 'LI' || e.target.parentElement.tagName == 'LI')
-    // console.log('target tag name is:' + e.target.tagName +'<br> target parent tag name is:' + e.target.parentElement.tagName);
-  });
-  // });
+//add active class to note    
+notesListContainer.addEventListener('click', e =>{
   
-  
-// }
+  if (!e.target.closest('.note')) {
+    return
+  } else {
+    let myNotes = document.querySelectorAll(".note");
+    removeFocus(myNotes);
+    e.target.closest('.note').classList.add('active-note');
+    openEditor();
+    editingField.innerHTML = e.target.closest('.note').innerHTML.trim();
+  }
+});
 
 
 // print function
