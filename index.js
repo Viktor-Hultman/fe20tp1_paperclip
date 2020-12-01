@@ -46,6 +46,7 @@ let saveNoteBtn = document.querySelector('.save-note-btn');
 let newNoteButton = document.querySelector(".new-note-button");
 let starButton = document.querySelector('#starred-button')
 let currentView = 'allNotes'
+let closeBtn = document.querySelector('body > main > section.toolbar-and-editor-container > div.close-btn > button');
 
 //function that opens the editor
 function openEditor() {
@@ -62,8 +63,6 @@ function closeEditor () {
 }
 
 //close the editor when clicking on close button with both save and close option
-let closeBtn = document.querySelector('body > main > section.toolbar-and-editor-container > div.close-btn > button');
-
 closeBtn.onclick = function confirmClose() {
   if (confirm("Do you want to save your note before closing?")) {
     saveNote();
@@ -150,7 +149,6 @@ saveNoteBtn.onclick = saveNote;
 
 //loading notes from local storage
 function loadNotes() {
-
   for (let i = notesNumber; i >= 1; i--) {
     //console.log(i);
     //console.log(localStorage.getItem(i));
@@ -210,6 +208,25 @@ document.addEventListener('DOMContentLoaded', e => {
   bindStarButton();
 })
 
+//remove focus from notes
+function removeFocus(notes) {
+  notes.forEach(note => {
+    note.classList.remove('active-note');
+  });
+}
+//add active class to note    
+notesListContainer.addEventListener('click', e =>{
+  
+  if (!e.target.closest('.note')) {
+    return
+  } else {
+    let myNotes = document.querySelectorAll(".note");
+    removeFocus(myNotes);
+    e.target.closest('.note').classList.add('active-note');
+    openEditor();
+    editingField.innerHTML = e.target.closest('.note').innerHTML.trim();
+  }
+});
 
 
 // print function
@@ -226,7 +243,7 @@ function printContent(){
     myWindow.focus();
     setTimeout(function() {
       myWindow.print();
-      myWindow.close();
+      // myWindow.close();
   }, 100);
 }
 
