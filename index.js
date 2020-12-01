@@ -229,7 +229,7 @@ function removeFocus(notes) {
         removeFocus(myNotes);
         e.target.closest('.note').classList.add('active-note');
         openEditor();
-        editingField.innerHTML = e.target.closest('.note').innerHTML;
+        editingField.innerHTML = e.target.closest('.note').innerHTML.trim();
       }
 
       
@@ -256,7 +256,7 @@ function printContent(){
     myWindow.focus();
     setTimeout(function() {
       myWindow.print();
-      myWindow.close();
+      // myWindow.close();
   }, 100);
 }
 
