@@ -214,7 +214,9 @@ function removeFocus(notes) {
     note.classList.remove('active-note');
   });
 }
-//add active class to note    
+
+
+//add active class to note and open it in editor
 notesListContainer.addEventListener('click', e =>{
   
   if (!e.target.closest('.note')) {
