@@ -274,6 +274,8 @@ li {
     position: relative;
     width: 85%;
     margin: 0 auto 20px auto;
+    max-height: 350px;
+    overflow: hidden;
     transition: width .2s;
 }
 
