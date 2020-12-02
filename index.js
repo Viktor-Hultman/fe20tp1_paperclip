@@ -68,15 +68,13 @@ function openEditor() {
   editorContainer.classList.remove("hidden");
   //set the initial content in the editor
   quill.setContents(initialContent);
-}
- 
-
-    
-   
-  
+} 
 
 //open editor when clicking on new note button
-newNoteButton.addEventListener("click", openEditor);
+newNoteButton.addEventListener("click", function (){
+  openEditor();
+  clickedNote = "";
+});
 
 //function that closes the editor
 function closeEditor () {
@@ -183,10 +181,14 @@ function saveNewNote() {
 /*This function was not called yet because it is dependant of making the notes content separated from the date and star content*/
 function saveNote() {
   if (hasTitle()) {
-    //updates the note in local storage for access
-    localStorage.setItem(clickedNoteId, editingField.innerHTML);
-    //creates the note
+    //creates the note 
     clickedNote.innerHTML = editingField.innerHTML;
+    //update the date
+    clickedNote.nextSibling.innerHTML = date();
+    //recreates the li item
+    let editedNote = `<li data-noteid=\"${clickedNoteId}\" class="note">${clickedNote.parentNode.innerHTML}</li>`;
+    //updates the note in local storage for access
+    localStorage.setItem(clickedNoteId, JSON.stringify(editedNote));
     //closes the editor
     closeEditor();
     //remove focus from list items
@@ -194,8 +196,14 @@ function saveNote() {
   } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
 }
 
+
+
 // saves and creates the note when clicking on the save button
-saveNoteBtn.addEventListener('click', saveNewNote);
+saveNoteBtn.addEventListener('click', function(){
+  if (clickedNote !== ""){
+    saveNote();
+  } else  saveNewNote();
+});
 
 //loading notes from local storage
 function loadNotes() {
