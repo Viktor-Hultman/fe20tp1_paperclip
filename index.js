@@ -50,7 +50,11 @@ let closeBtn = document.querySelector('body > main > section.toolbar-and-editor-
 
 //function that opens the editor
 function openEditor() {
-  document.querySelector(".toolbar-and-editor-container").classList.remove("hidden");
+  let editorContainer = document.querySelector(".toolbar-and-editor-container");
+  if (!editorContainer.classList.contains('hidden')){
+    confirmClose();
+  } 
+  editorContainer.classList.remove("hidden");
   quill.setContents(initialContent);
 }
 
@@ -62,12 +66,15 @@ function closeEditor () {
   document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
 }
 
-//close the editor when clicking on close button with both save and close option
-closeBtn.onclick = function confirmClose() {
+// function that asks whether to save the note or simply close the or  closes 
+ function confirmClose() {
   if (confirm("Do you want to save your note before closing?")) {
     saveNote();
   } else closeEditor();
 }
+
+// closes the editor when clicking on close button with both save and close option
+closeBtn.addEventListener('click', confirmClose);
 
 //unique identifyer for each note to act as a local storage key that is taken from local storage
 let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
