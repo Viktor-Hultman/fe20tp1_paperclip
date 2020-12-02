@@ -61,9 +61,9 @@ function openEditor() {
   editorContainer.addEventListener('keyup', function() {
       textWasEdited = true;
     })
-  if (textWasEdited){
+  
     confirmClose();
-  } 
+
   // make editor visible
   editorContainer.classList.remove("hidden");
   //set the initial content in the editor
@@ -84,8 +84,11 @@ function closeEditor () {
 
 // function that asks whether to save the note or simply close the or  closes 
  function confirmClose() {
-  if (confirm("Do you want to save your note before closing?")) {
-    saveNewNote();
+  if (textWasEdited){
+    confirm("Do you want to save your note before closing?")
+    if (clickedNote === ""){
+      saveNewNote();
+    } else saveNote();
   } else closeEditor();
 }
 
