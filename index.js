@@ -1,53 +1,4 @@
-// 
-let searchStatus = false;
 
-// Add click event to search button
-const searchButton = document.getElementById('search-button');
-
-searchButton.addEventListener('click', function () {
-  if (searchStatus === false) {
-    // create input element, add ID and placeholder
-    const searchInput = document.createElement('input');
-    searchInput.setAttribute('id', 'searchInput');
-    searchInput.setAttribute('placeholder', 'Search among notes...')
-
-    // Add event listener to inputElement
-    searchInput.addEventListener('keyup', searchNotes);
-
-    // insert input element above the notes list
-    notesListContainer.insertAdjacentElement('beforebegin', searchInput).focus();
-    searchStatus = true;
-  } else {
-    const searchInput = document.getElementById('searchInput');
-    searchInput.remove();
-    searchStatus = false;
-    loadNotes();
-  }
-})
-
-function searchNotes() {
-  // Get the value of the search input and make lower case
-  let searchValue = document.getElementById('searchInput').value.toLowerCase();
-  console.log(searchValue);
-
-  // Grab all notes and save them
-  let notes = notesListContainer.querySelectorAll('li.note');
-
-  // Loop through collection of LIs
-  for (let i = 0; i < notes.length; i++) {
-    // grab the inner text of each note, and make lower case
-    let content = notes[i].innerText.toLowerCase();
-
-    // if the content contains the search value, it is displayed. Else, it is not displayed
-    if (content.indexOf(searchValue) !== -1) {
-      notes[i].style.display = '';
-    } else {
-      notes[i].style.display = 'none';
-    }
-  }
-}
-
-///
 let toolbarOptions = [
   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
   [{ 'font': [] }],
@@ -95,6 +46,7 @@ let saveNoteBtn = document.querySelector('.save-note-btn');
 let newNoteButton = document.querySelector(".new-note-button");
 let starButton = document.querySelector('#starred-button')
 let currentView = 'allNotes'
+let closeBtn = document.querySelector('body > main > section.toolbar-and-editor-container > div.close-btn > button');
 
 //function that opens the editor
 function openEditor() {
@@ -111,8 +63,6 @@ function closeEditor() {
 }
 
 //close the editor when clicking on close button with both save and close option
-let closeBtn = document.querySelector('body > main > section.toolbar-and-editor-container > div.close-btn > button');
-
 closeBtn.onclick = function confirmClose() {
   if (confirm("Do you want to save your note before closing?")) {
     saveNote();
@@ -129,24 +79,24 @@ function createNote() {
   const buttonId = `favorite-button-${notesNumber}`
   //data-noteid is used in bindFavoriteButtons function
   let note = `<li data-noteid=${notesNumber} class="note">
-                ${editingField.innerHTML}<span>${date()}</span>
-                <button class="favorite-toggle" id="${buttonId}">
-                  <svg
-                    aria-hidden="true"
-                    focusable="false"
-                    data-prefix="fas"
-                    data-icon="star"
-                    class="svg-inline--fa fa-star fa-w-18"
-                    role="img"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 576 512">
-                    <path
-                      stroke="black" stroke-width="20" stroke-linecap="round"
-                      d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
-                    ></path>
-                  </svg>
-                </button>
-              </li>`;
+                  ${editingField.innerHTML}<span>${date()}</span>
+                  <button class="favorite-toggle" id="${buttonId}">
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="star"
+                      class="svg-inline--fa fa-star fa-w-18"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 576 512">
+                      <path
+                        stroke="black" stroke-width="20" stroke-linecap="round"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                      ></path>
+                    </svg>
+                  </button>
+                </li>`;
 
   notesListContainer.insertAdjacentHTML("afterbegin", note);
   //notesListContainer.innerHTML += note;
@@ -199,7 +149,6 @@ saveNoteBtn.onclick = saveNote;
 
 //loading notes from local storage
 function loadNotes() {
-
   for (let i = notesNumber; i >= 1; i--) {
     //console.log(i);
     //console.log(localStorage.getItem(i));
@@ -259,6 +208,25 @@ document.addEventListener('DOMContentLoaded', e => {
   bindStarButton();
 })
 
+//remove focus from notes
+function removeFocus(notes) {
+  notes.forEach(note => {
+    note.classList.remove('active-note');
+  });
+}
+//add active class to note    
+notesListContainer.addEventListener('click', e => {
+
+  if (!e.target.closest('.note')) {
+    return
+  } else {
+    let myNotes = document.querySelectorAll(".note");
+    removeFocus(myNotes);
+    e.target.closest('.note').classList.add('active-note');
+    openEditor();
+    editingField.innerHTML = e.target.closest('.note').innerHTML.trim();
+  }
+});
 
 
 // print function
@@ -275,11 +243,57 @@ function printContent() {
   myWindow.focus();
   setTimeout(function () {
     myWindow.print();
-    myWindow.close();
+    // myWindow.close();
   }, 100);
 }
 
+let searchStatus = false;
+const searchButton = document.getElementById('search-button');
 
+// Creates a search input field
+searchButton.addEventListener('click', function () {
+  searchButton.classList.toggle('selected');
+  if (searchStatus === false) {
+    // create input element, add ID and placeholder
+    const searchInput = document.createElement('input');
+    searchInput.setAttribute('id', 'searchInput');
+    searchInput.setAttribute('placeholder', 'Search among notes...')
+
+    // Add event listener with search function to input element
+    searchInput.addEventListener('keyup', searchNotes);
+
+    // insert input element above the notes list and focus on it
+    notesListContainer.insertAdjacentElement('beforebegin', searchInput).focus();
+    searchStatus = true;
+  } else {
+    // if the search input is already there, it is removed when one clicks on the search button
+    const searchInput = document.getElementById('searchInput');
+    searchInput.remove();
+    searchStatus = false;
+    loadNotes();
+  }
+})
+
+function searchNotes() {
+  // Get the value of the search input and make lower case
+  let searchValue = document.getElementById('searchInput').value.toLowerCase();
+  console.log(searchValue);
+
+  // Grab all notes and save them
+  const notes = notesListContainer.querySelectorAll('li.note');
+
+  // Loop through collection of LIs
+  for (let i = 0; i < notes.length; i++) {
+    // grab the inner text of each note, and make lower case
+    const content = notes[i].innerText.toLowerCase();
+    // if the content contains the search value, it is displayed. Else, it is not displayed
+    if (content.indexOf(searchValue) !== -1) {
+      notes[i].style.display = '';
+    } else {
+      notes[i].style.display = 'none';
+    }
+  }
+}
 
 
 /* ADDITIONAL FUNCTIONS NOT IMPLEMENTED */
@@ -389,4 +403,11 @@ quill = new Quill('#editor', {
     },
     theme: 'snow'
 });
+*/
+
+
+
+/*
+
+
 */
