@@ -120,6 +120,7 @@ a {
     list-style: none;
     overflow: auto;
     height: calc(100% - 50px);
+    width: 100%;
 }
 
 .toolbar-and-editor-container {
@@ -269,13 +270,10 @@ li {
     border: var(--notes-border);
     border-radius: 3px;
     font-size: .8rem;
-    font-family: Montserrat;
     padding: 5px 5px 5px 25px;
     position: relative;
     width: 85%;
     margin: 0 auto 20px auto;
-    max-height: 350px;
-    overflow: hidden;
     transition: width .2s;
 }
 
@@ -298,6 +296,11 @@ li {
     border-right: none;
     border-left: none;
     width: 100%;
+}
+
+.note-text {
+    max-height: 250px;
+    overflow: hidden;
 }
 
 
