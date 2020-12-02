@@ -83,7 +83,7 @@ newNoteButton.addEventListener("click", function (){
 });
 
 //function that closes the editor
-function closeEditor () {
+function closeEditor() {
   document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
   textWasEdited = false;
 }
@@ -130,34 +130,34 @@ let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
                   </button>
                 </li>`;
 
-    notesListContainer.insertAdjacentHTML("afterbegin", note);
-    //notesListContainer.innerHTML += note;
-    //saves the note html as a JSON string in Local Storage
-    localStorage.setItem(notesNumber, JSON.stringify(note))
-    bindFavoriteButtons()
-  }
+  notesListContainer.insertAdjacentHTML("afterbegin", note);
+  //notesListContainer.innerHTML += note;
+  //saves the note html as a JSON string in Local Storage
+  localStorage.setItem(notesNumber, JSON.stringify(note))
+  bindFavoriteButtons()
+}
 
-  function bindFavoriteButtons() {
-    //get all notes
-    const allNotes = document.querySelectorAll(".note")
-    //for each note 
-    allNotes.forEach(function(note){
-      //bind click event for all favorite buttons
-      note.querySelector(".favorite-toggle").addEventListener("click",function(){
-        const noteId = note.dataset.noteid
-        toggleFavorite(noteId)
-      })
+function bindFavoriteButtons() {
+  //get all notes
+  const allNotes = document.querySelectorAll(".note")
+  //for each note 
+  allNotes.forEach(function (note) {
+    //bind click event for all favorite buttons
+    note.querySelector(".favorite-toggle").addEventListener("click", function () {
+      const noteId = note.dataset.noteid
+      toggleFavorite(noteId)
     })
-  }
+  })
+}
 
-  function toggleFavorite(noteId){
-    //get note from localStorage
-    const listItem = document.querySelector(`[data-noteid="${noteId}"]`)
-    //toggle favorit class on listItem
-    listItem.classList.toggle("favorite")
-    //saving in localStorage
-    localStorage.setItem(noteId, JSON.stringify(listItem.outerHTML))
-  }
+function toggleFavorite(noteId) {
+  //get note from localStorage
+  const listItem = document.querySelector(`[data-noteid="${noteId}"]`)
+  //toggle favorit class on listItem
+  listItem.classList.toggle("favorite")
+  //saving in localStorage
+  localStorage.setItem(noteId, JSON.stringify(listItem.outerHTML))
+}
 
 //functionthat checks to see if you created a title
 function hasTitle (){
@@ -227,46 +227,46 @@ function loadNotes() {
 // NOTES LIST CONTAINER SHOW:
 function renderCurrentView() {
   notesListContainer.innerHTML = '';
-// show all notes
-    if (currentView == 'allNotes'){
-      renderAllNotes()
-    }
-// show favorit notes
-    else if (currentView == 'favorites'){
-      renderFavorites()
-    }
-    bindFavoriteButtons()
+  // show all notes
+  if (currentView == 'allNotes') {
+    renderAllNotes()
+  }
+  // show favorit notes
+  else if (currentView == 'favorites') {
+    renderFavorites()
+  }
+  bindFavoriteButtons()
 }
 
 
-function renderAllNotes(){
+function renderAllNotes() {
   loadNotes()
 }
 
-function renderFavorites(){
+function renderFavorites() {
   loadNotes()
   //get all non-favorite-listItem
   const nonFavoriteItems = notesListContainer.querySelectorAll('.note:not(.favorite)')
-  nonFavoriteItems.forEach(function(nonFavoriteItem){
-      nonFavoriteItem.remove()
+  nonFavoriteItems.forEach(function (nonFavoriteItem) {
+    nonFavoriteItem.remove()
   })
 }
 
-function bindStarButton(){
-  starButton.addEventListener('click', function(){
+function bindStarButton() {
+  starButton.addEventListener('click', function () {
     //when starButton is selected, it gets gold
     starButton.classList.toggle('selected')
     //when current view is "favorites", view insted all notes on click"
-    if (currentView == 'favorites'){
+    if (currentView == 'favorites') {
       currentView = 'allNotes'
     }
     //when current view is on all notes, view insted "favorites notes on click"
-    else if (currentView == 'allNotes'){
+    else if (currentView == 'allNotes') {
       currentView = 'favorites'
     }
     renderCurrentView()
   })
-  
+
 }
 
 document.addEventListener('DOMContentLoaded', e => {
@@ -308,22 +308,68 @@ notesListContainer.addEventListener('click', e =>{
 // print function
 let printBtn = document.querySelector('.printBtn');
 
-function printContent(){
-  var myWindow = window.open('','','width=800,height=600');
-    //open the window
-    myWindow.document.open();
-    myWindow.document.write('<html><head><title>Print it</title><link rel="stylesheet" type="text/css" href="reset.css"><link rel="stylesheet" type="text/css" href="style.css"></head><body>');
-    myWindow.document.write(document.querySelector(".ql-editor").innerHTML);
-    myWindow.document.write('</body></html>');
-    myWindow.document.close();
-    myWindow.focus();
-    setTimeout(function() {
-      myWindow.print();
-      // myWindow.close();
+function printContent() {
+  var myWindow = window.open('', '', 'width=800,height=600');
+  //open the window
+  myWindow.document.open();
+  myWindow.document.write('<html><head><title>Print it</title><link rel="stylesheet" type="text/css" href="reset.css"><link rel="stylesheet" type="text/css" href="style.css"></head><body>');
+  myWindow.document.write(document.querySelector(".ql-editor").innerHTML);
+  myWindow.document.write('</body></html>');
+  myWindow.document.close();
+  myWindow.focus();
+  setTimeout(function () {
+    myWindow.print();
+    // myWindow.close();
   }, 100);
 }
 
+let searchStatus = false;
+const searchButton = document.getElementById('search-button');
 
+// Creates a search input field
+searchButton.addEventListener('click', function () {
+  searchButton.classList.toggle('selected');
+  if (searchStatus === false) {
+    // create input element, add ID and placeholder
+    const searchInput = document.createElement('input');
+    searchInput.setAttribute('id', 'searchInput');
+    searchInput.setAttribute('placeholder', 'Search among notes...')
+
+    // Add event listener with search function to input element
+    searchInput.addEventListener('keyup', searchNotes);
+
+    // insert input element above the notes list and focus on it
+    notesListContainer.insertAdjacentElement('beforebegin', searchInput).focus();
+    searchStatus = true;
+  } else {
+    // if the search input is already there, it is removed when one clicks on the search button
+    const searchInput = document.getElementById('searchInput');
+    searchInput.remove();
+    searchStatus = false;
+    loadNotes();
+  }
+})
+
+function searchNotes() {
+  // Get the value of the search input and make lower case
+  let searchValue = document.getElementById('searchInput').value.toLowerCase();
+  console.log(searchValue);
+
+  // Grab all notes and save them
+  const notes = notesListContainer.querySelectorAll('li.note');
+
+  // Loop through collection of LIs
+  for (let i = 0; i < notes.length; i++) {
+    // grab the inner text of each note, and make lower case
+    const content = notes[i].innerText.toLowerCase();
+    // if the content contains the search value, it is displayed. Else, it is not displayed
+    if (content.indexOf(searchValue) !== -1) {
+      notes[i].style.display = '';
+    } else {
+      notes[i].style.display = 'none';
+    }
+  }
+}
 
 
 /* ADDITIONAL FUNCTIONS NOT IMPLEMENTED */
@@ -393,43 +439,17 @@ editingField.addEventListener('click', () => {
     return false;
   } else {
     //If there are "children" such as h1- or p-tags then the while loop will begin it´s two checks to see if the "placeholders" are displayed
-  while (editingField.firstChild.innerHTML == "Please add a title here" || 
-  editingField.firstChild.innerHTML == "Here is where you can write your cool note text") {
-      
-    //If they are then the innerHTML of the editor will be erased to BLANK
-    editingField.innerHTML = "";
-    //Then a h1 will be created and put in a variable
-    let h = document.createElement("H1");
-    //Then the h1 will be appended to the editor so the user can begin to write a title for their note
-    editingField.appendChild(h);
+    while (editingField.firstChild.innerHTML == "Please add a title here" ||
+      editingField.firstChild.innerHTML == "Here is where you can write your cool note text") {
+
+      //If they are then the innerHTML of the editor will be erased to BLANK
+      editingField.innerHTML = "";
+      //Then a h1 will be created and put in a variable
+      let h = document.createElement("H1");
+      //Then the h1 will be appended to the editor so the user can begin to write a title for their note
+      editingField.appendChild(h);
+    }
+
   }
-  
-}});
-
-
-
-
-/* // EXAMPLE OF TOOLBAR CUSTOMIZATION
-var toolbarOptions = [
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  [{ 'font': [] }],
-  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-  ['blockquote', 'code-block'],
-  [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }],
-  [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],          // outdent/indent
-  [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-  ['link', 'image'],
-  ['clean']                                         // remove formatting button
-]; */
-
-// IN ORDER TO WORK THE FOLLOWING NEEDS TO BE WRITTEN WHEN INITIALIZING THE EDITOR
-/*
-quill = new Quill('#editor', {
-    modules: {
-        toolbar: toolbarOptions
-    },
-    theme: 'snow'
 });
-*/
+

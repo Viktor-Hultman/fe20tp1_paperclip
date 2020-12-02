@@ -183,7 +183,8 @@ a {
     fill: var(--white-txt);
 }
 
-#starred-button.selected svg {
+#starred-button.selected svg,
+#search-button.selected svg {
     fill: gold;
 }
 
@@ -325,6 +326,16 @@ li {
     padding-left: 20px;
 }
 
+#searchInput {
+    margin: 10px;
+    padding: 5px;
+    height: 30px;
+    width: 205px;
+    font-size: 17px;
+    background-color: white;
+    border-radius: 5px;
+    letter-spacing: 1px;
+}
 
 
 /*large screen version*/
