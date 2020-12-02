@@ -138,10 +138,6 @@ a {
     flex-basis: 280px;
 }
 
-.ql-editor:first-child {
-    border: none;
-}
-
 .save-note-btn {
     align-self: center;
 }
@@ -185,12 +181,15 @@ h2 {
     font-variant: small-caps;
 }
 
-p {
+p,
+li {
     font-family: var(--text-font);
     color: var(--dark-txt);
     line-height: 1.8;
 }
 
+
+/* special classes*/
 .hidden {
     display: none !important;
 }
