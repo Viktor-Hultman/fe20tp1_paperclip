@@ -46,17 +46,30 @@ let saveNoteBtn = document.querySelector('.save-note-btn');
 let newNoteButton = document.querySelector(".new-note-button");
 let starButton = document.querySelector('#starred-button')
 let currentView = 'allNotes'
-let closeBtn = document.querySelector('body > main > section.toolbar-and-editor-container > div.close-btn > button');
+let closeBtn = document.querySelector('div.close-btn > button');
+let editorContainer = document.querySelector(".toolbar-and-editor-container");
+let textWasEdited = false; 
 
 //function that opens the editor
 function openEditor() {
-  let editorContainer = document.querySelector(".toolbar-and-editor-container");
-  if (!editorContainer.classList.contains('hidden')){
+  //variable that indicates when text will be edited
+  
+  //variable becomes true when a keyupp event is triggered
+  editorContainer.addEventListener('keyup', function() {
+      textWasEdited = true;
+    })
+
+  if (textWasEdited){
     confirmClose();
   } 
   editorContainer.classList.remove("hidden");
   quill.setContents(initialContent);
 }
+ 
+
+    
+   
+  
 
 //open editor when clicking on new note button
 newNoteButton.addEventListener("click", openEditor);
@@ -64,6 +77,7 @@ newNoteButton.addEventListener("click", openEditor);
 //function that closes the editor
 function closeEditor () {
   document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
+  textWasEdited = false;
 }
 
 // function that asks whether to save the note or simply close the or  closes 
