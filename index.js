@@ -1,7 +1,7 @@
 
 let toolbarOptions = [
   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  [{ 'font': [] }],
+  [{ 'font': ['sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu'] }],
   ['bold', 'italic', 'underline', 'strike'],
   [{ 'size': ['small', false, 'large', 'huge'] }],
   ['blockquote', 'code-block'],
@@ -12,6 +12,12 @@ let toolbarOptions = [
   ['link', 'image'],
   ['clean']                                         // remove formatting button
 ];
+
+var FontAttributor = Quill.import('attributors/class/font');
+FontAttributor.whitelist = [
+  'sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu'
+];
+Quill.register(FontAttributor, true);
 
 //Sets up the quill editor in the element with the id of "editor"
 quill = new Quill('#editor', {
@@ -46,30 +52,49 @@ let saveNoteBtn = document.querySelector('.save-note-btn');
 let newNoteButton = document.querySelector(".new-note-button");
 let starButton = document.querySelector('#starred-button')
 let currentView = 'allNotes'
-let closeBtn = document.querySelector('body > main > section.toolbar-and-editor-container > div.close-btn > button');
+let closeBtn = document.querySelector('div.close-btn > button');
+let editorContainer = document.querySelector(".toolbar-and-editor-container");
+//variable that indicates when text will be edited starts false and becomes true on key upp in editor
+let textWasEdited = false; 
+//variable to identify the clicked note for saving edited content
+let clickedNoteId = 0;
+//variable to identify the clicked element for saving edited content
+let clickedNote = "";
 
 //function that opens the editor
-function openEditor() {
-  let editorContainer = document.querySelector(".toolbar-and-editor-container");
-  if (!editorContainer.classList.contains('hidden')){
+function openEditor() { 
+  //text edit variable becomes true when a keyupp event is triggered
+  editorContainer.addEventListener('keyup', function() {
+      textWasEdited = true;
+    })
+  
     confirmClose();
-  } 
+
+  // make editor visible
   editorContainer.classList.remove("hidden");
+  //set the initial content in the editor
   quill.setContents(initialContent);
-}
+} 
 
 //open editor when clicking on new note button
-newNoteButton.addEventListener("click", openEditor);
+newNoteButton.addEventListener("click", function (){
+  openEditor();
+  clickedNote = "";
+});
 
 //function that closes the editor
 function closeEditor () {
   document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
+  textWasEdited = false;
 }
 
 // function that asks whether to save the note or simply close the or  closes 
  function confirmClose() {
-  if (confirm("Do you want to save your note before closing?")) {
-    saveNote();
+  if (textWasEdited){
+    confirm("Do you want to save your note before closing?")
+    if (clickedNote === ""){
+      saveNewNote();
+    } else saveNote();
   } else closeEditor();
 }
 
@@ -86,7 +111,7 @@ let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
     const buttonId = `favorite-button-${notesNumber}`
     //data-noteid is used in bindFavoriteButtons function
     let note = `<li data-noteid=${notesNumber} class="note">
-                  ${editingField.innerHTML}<span>${date()}</span>
+                  <div class="note-text">${editingField.innerHTML}</div><span class="date">${date()}</span>
                   <button class="favorite-toggle" id="${buttonId}">
                     <svg
                       aria-hidden="true"
@@ -134,12 +159,20 @@ let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
     localStorage.setItem(noteId, JSON.stringify(listItem.outerHTML))
   }
 
-//saving a note
-function saveNote() {
+//functionthat checks to see if you created a title
+function hasTitle (){
   //select the first element in the editing field
   let firstElement = editingField.firstChild;
-  //only creates a note if first element is a heading(h1, h2...h6) and it is not empty
   if (firstElement.tagName.startsWith('H') && firstElement.textContent.trim() != "") {
+    return true
+  } else return false
+}
+
+//saving a note
+function saveNewNote() {
+  
+  //only creates a note if first element is a heading(h1, h2...h6) and it is not empty
+  if (hasTitle()) {
     //the id increases by 1 for each created note
     notesNumber += 1;
     //saves the number in local storage for access
@@ -148,11 +181,38 @@ function saveNote() {
     createNote();
     //closes the editor
     closeEditor();
+    //remove focus from list items
+    removeFocus();
   } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
 }
 
+//function intended for updating a note already existent
+/*This function was not called yet because it is dependant of making the notes content separated from the date and star content*/
+function saveNote() {
+  if (hasTitle()) {
+    //creates the note 
+    clickedNote.innerHTML = editingField.innerHTML;
+    //update the date
+    clickedNote.nextSibling.innerHTML = date();
+    //recreates the li item
+    let editedNote = `<li data-noteid=\"${clickedNoteId}\" class="note">${clickedNote.parentNode.innerHTML}</li>`;
+    //updates the note in local storage for access
+    localStorage.setItem(clickedNoteId, JSON.stringify(editedNote));
+    //closes the editor
+    closeEditor();
+    //remove focus from list items
+    removeFocus();
+  } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
+}
+
+
+
 // saves and creates the note when clicking on the save button
-saveNoteBtn.onclick = saveNote;
+saveNoteBtn.addEventListener('click', function(){
+  if (clickedNote !== ""){
+    saveNote();
+  } else  saveNewNote();
+});
 
 //loading notes from local storage
 function loadNotes() {
@@ -216,7 +276,8 @@ document.addEventListener('DOMContentLoaded', e => {
 })
 
 //remove focus from notes
-function removeFocus(notes) {
+function removeFocus() {
+  let notes = document.querySelectorAll(".note");
   notes.forEach(note => {
     note.classList.remove('active-note');
   });
@@ -225,17 +286,21 @@ function removeFocus(notes) {
 
 //add active class to note and open it in editor
 notesListContainer.addEventListener('click', e =>{
-  
-  if (!e.target.closest('.note')) {
+  //check if the click taget was the actual note and return if it wasn't
+  if (!e.target.closest('.note-text')) {
     return
   } else {
-      let myNotes = document.querySelectorAll(".note");
-      removeFocus(myNotes);
+      removeFocus();
+      //store the clicked note into a variable
+      clickedNote = e.target.closest('.note-text');
+      //store the clicked notes id in the global variable clickedNoteId
+      clickedNoteId = clickedNote.parentElement.getAttribute('data-noteid');
+      
       if (window.innerWidth > 800) {
-        e.target.closest('.note').classList.add('active-note');
+        clickedNote.parentElement.classList.add('active-note');
       }   
       openEditor();
-      editingField.innerHTML = e.target.closest('.note').innerHTML.trim();
+      editingField.innerHTML = clickedNote.innerHTML.trim();
     }
 });
 
