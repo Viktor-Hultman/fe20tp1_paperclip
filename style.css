@@ -17,6 +17,10 @@
     font-family: 'Ubuntu', sans-serif;
 }
 
+.ql-font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
 
 /*
   ==============================================================================
@@ -71,7 +75,7 @@ a {
     --blue-bg: #005392;
     /* font */
     --title-font: 'Playfair Display', serif;
-    --text-font: Montserrat;
+    --text-font: 'Montserrat', sans-serif;
     /*borders*/
     --notes-border: 2.5px solid #D3D3D3;
     --links-border: 2.5px solid #005392;

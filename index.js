@@ -1,7 +1,7 @@
 
 let toolbarOptions = [
   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  [{ 'font': ['sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu'] }],
+  [{ 'font': ['sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu', 'montserrat'] }],
   ['bold', 'italic', 'underline', 'strike'],
   [{ 'size': ['small', false, 'large', 'huge'] }],
   ['blockquote', 'code-block'],
