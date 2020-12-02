@@ -222,12 +222,14 @@ notesListContainer.addEventListener('click', e =>{
   if (!e.target.closest('.note')) {
     return
   } else {
-    let myNotes = document.querySelectorAll(".note");
-    removeFocus(myNotes);
-    e.target.closest('.note').classList.add('active-note');
-    openEditor();
-    editingField.innerHTML = e.target.closest('.note').innerHTML.trim();
-  }
+      let myNotes = document.querySelectorAll(".note");
+      removeFocus(myNotes);
+      if (window.innerWidth > 800) {
+        e.target.closest('.note').classList.add('active-note');
+      }   
+      openEditor();
+      editingField.innerHTML = e.target.closest('.note').innerHTML.trim();
+    }
 });
 
 
