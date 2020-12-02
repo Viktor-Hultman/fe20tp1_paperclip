@@ -1,7 +1,7 @@
 
 let toolbarOptions = [
   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  [{ 'font': [] }],
+  [{ 'font': ['sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu'] }],
   ['bold', 'italic', 'underline', 'strike'],
   [{ 'size': ['small', false, 'large', 'huge'] }],
   ['blockquote', 'code-block'],
@@ -12,6 +12,12 @@ let toolbarOptions = [
   ['link', 'image'],
   ['clean']                                         // remove formatting button
 ];
+
+var FontAttributor = Quill.import('attributors/class/font');
+FontAttributor.whitelist = [
+  'sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu'
+];
+Quill.register(FontAttributor, true);
 
 //Sets up the quill editor in the element with the id of "editor"
 quill = new Quill('#editor', {

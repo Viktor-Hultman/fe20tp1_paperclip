@@ -1,4 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Montserrat&family=Playfair+Display:ital,wght@0,500;1,700&family=Roboto&family=Sofia&family=Ubuntu&display=swap');
+
+/*ql editor fonts*/
+.ql-font-roboto {
+    font-family: 'Roboto', sans-serif;
+}
+
+.ql-font-sofia {
+    font-family: 'Sofia', cursive;
+}
+
+.ql-font-inconsolata {
+    font-family: 'Inconsolata', monospace;
+}
+
+.ql-font-ubuntu {
+    font-family: 'Ubuntu', sans-serif;
+}
 
 
 /*
@@ -270,7 +287,7 @@ li {
     border: var(--notes-border);
     border-radius: 3px;
     font-size: .8rem;
-    padding: 5px 5px 5px 25px;
+    padding: 5px;
     position: relative;
     width: 85%;
     margin: 0 auto 20px auto;
@@ -301,6 +318,11 @@ li {
 .note-text {
     max-height: 250px;
     overflow: hidden;
+}
+
+.note-text ul,
+.note-text ol {
+    padding-left: 20px;
 }
 
 
