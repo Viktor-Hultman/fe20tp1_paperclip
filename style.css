@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Montserrat&family=Playfair+Display:ital,wght@0,500;1,700&family=Roboto&family=Sofia&family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Noto+Serif&family=Roboto&Montserrat&family=Playfair+Display:ital,wght@0,500;1,700&family=Roboto&family=Sofia&family=Ubuntu&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=family=Montserrat&family=Playfair+Display:wght@500;700&display=swap'); */
+
 
 /*ql editor fonts*/
 .ql-font-roboto {
@@ -273,6 +275,33 @@ li {
 .printBtn {
     position: absolute;
     right: 20px;
+}
+
+#playfair-display-btn {
+    position: absolute;
+    left: 20px;
+}
+
+.playfair-display-text {
+    font-family: 'Playfair Display', serif;
+}
+
+#roboto-btn {
+    position: absolute;
+    left: 150px;
+}
+
+.roboto-text {
+    font-family: 'Roboto', sans-serif;
+}
+
+#noto-btn {
+    position: absolute;
+    left: 220px;
+}
+
+.noto-text {
+    font-family: 'Noto Serif', serif;
 }
 
 .close-btn {

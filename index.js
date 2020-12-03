@@ -50,7 +50,7 @@ let editingField = document.querySelector(".ql-editor");
 let notesListContainer = document.querySelector('.saved-notes-list');
 let saveNoteBtn = document.querySelector('.save-note-btn');
 let newNoteButton = document.querySelector(".new-note-button");
-let starButton = document.querySelector('#starred-button')
+let starButton = document.querySelector('#starred-button');
 let currentView = 'allNotes'
 let closeBtn = document.querySelector('div.close-btn > button');
 let editorContainer = document.querySelector(".toolbar-and-editor-container");
@@ -60,6 +60,9 @@ let textWasEdited = false;
 let clickedNoteId = 0;
 //variable to identify the clicked element for saving edited content
 let clickedNote = "";
+let playfairBtn = document.querySelector('#playfair-display-btn');
+let robotoBtn = document.querySelector('#roboto-btn');
+let notoBtn = document.querySelector('#noto-btn');
 
 //function that opens the editor
 function openEditor() { 
@@ -439,17 +442,77 @@ editingField.addEventListener('click', () => {
     return false;
   } else {
     //If there are "children" such as h1- or p-tags then the while loop will begin it´s two checks to see if the "placeholders" are displayed
-    while (editingField.firstChild.innerHTML == "Please add a title here" ||
-      editingField.firstChild.innerHTML == "Here is where you can write your cool note text") {
-
-      //If they are then the innerHTML of the editor will be erased to BLANK
-      editingField.innerHTML = "";
-      //Then a h1 will be created and put in a variable
-      let h = document.createElement("H1");
-      //Then the h1 will be appended to the editor so the user can begin to write a title for their note
-      editingField.appendChild(h);
-    }
-
+  while (editingField.firstChild.innerHTML == "Please add a title here" || 
+  editingField.firstChild.innerHTML == "Here is where you can write your cool note text") {
+      
+    //If they are then the innerHTML of the editor will be erased to BLANK
+    editingField.innerHTML = "";
+    //Then a h1 will be created and put in a variable
+    let h = document.createElement("H1");
+    //Then the h1 will be appended to the editor so the user can begin to write a title for their note
+    editingField.appendChild(h);
   }
-});
+  
+}});
+
+//Eventlisteners for the "Mallar" buttons
+playfairBtn.addEventListener('click', () => {
+  //Targets all the children in the editor
+  let editorChildren = editingField.children;
+  //Loops through them to target each element
+  for (let i = 0; i < editorChildren.length; i++) {
+    //Removes previous classes
+    editorChildren[i].className = '';
+    //Adds the class corosponding to the "Mall" button
+    editorChildren[i].classList.add('playfair-display-text')
+  }
+  
+})
+
+robotoBtn.addEventListener('click', () => {
+  //Targets all the children in the editor
+  let editorChildren = editingField.children;
+  //Loops through them to target each element
+  for (let i = 0; i < editorChildren.length; i++) {
+    //Removes previous classes
+    editorChildren[i].className = '';
+    //Adds the class corosponding to the "Mall" button
+    editorChildren[i].classList.add('roboto-text')
+  }
+  
+})
+
+
+notoBtn.addEventListener('click', () => {
+  //Targets all the children in the editor
+  let editorChildren = editingField.children;
+  //Loops through them to target each element
+  for (let i = 0; i < editorChildren.length; i++) {
+    //Removes previous classes
+    editorChildren[i].className = '';
+    //Adds the class corosponding to the "Mall" button
+    editorChildren[i].classList.add('noto-text')
+  }
+  
+})
+
+
+
+
+/* // EXAMPLE OF TOOLBAR CUSTOMIZATION
+var toolbarOptions = [
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  [{ 'font': [] }],
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  ['blockquote', 'code-block'],
+  [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }],
+  [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],          // outdent/indent
+  [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  ['link', 'image'],
+  ['clean']                                         // remove formatting button
+]; */
+
+
 
