@@ -44,9 +44,12 @@ let editingField = document.querySelector(".ql-editor");
 let notesListContainer = document.querySelector('.saved-notes-list');
 let saveNoteBtn = document.querySelector('.save-note-btn');
 let newNoteButton = document.querySelector(".new-note-button");
-let starButton = document.querySelector('#starred-button')
+let starButton = document.querySelector('#starred-button');
 let currentView = 'allNotes'
 let closeBtn = document.querySelector('body > main > section.toolbar-and-editor-container > div.close-btn > button');
+let playfairBtn = document.querySelector('#playfair-display-btn');
+let robotoBtn = document.querySelector('#roboto-btn');
+let notoBtn = document.querySelector('#noto-btn');
 
 //function that opens the editor
 function openEditor() {
@@ -329,6 +332,47 @@ editingField.addEventListener('click', () => {
   }
   
 }});
+
+//Eventlisteners for the "Mallar" buttons
+playfairBtn.addEventListener('click', () => {
+  //Targets all the children in the editor
+  let editorChildren = editingField.children;
+  //Loops through them to target each element
+  for (let i = 0; i < editorChildren.length; i++) {
+    //Removes previous classes
+    editorChildren[i].className = '';
+    //Adds the class corosponding to the "Mall" button
+    editorChildren[i].classList.add('playfair-display-text')
+  }
+  
+})
+
+robotoBtn.addEventListener('click', () => {
+  //Targets all the children in the editor
+  let editorChildren = editingField.children;
+  //Loops through them to target each element
+  for (let i = 0; i < editorChildren.length; i++) {
+    //Removes previous classes
+    editorChildren[i].className = '';
+    //Adds the class corosponding to the "Mall" button
+    editorChildren[i].classList.add('roboto-text')
+  }
+  
+})
+
+
+notoBtn.addEventListener('click', () => {
+  //Targets all the children in the editor
+  let editorChildren = editingField.children;
+  //Loops through them to target each element
+  for (let i = 0; i < editorChildren.length; i++) {
+    //Removes previous classes
+    editorChildren[i].className = '';
+    //Adds the class corosponding to the "Mall" button
+    editorChildren[i].classList.add('noto-text')
+  }
+  
+})
 
 
 

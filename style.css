@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&family=Roboto&family=Montserrat&family=Playfair+Display:wght@500;700&display=swap');
 
 
 /*
@@ -251,6 +251,33 @@ p {
 .printBtn {
     position: absolute;
     right: 20px;
+}
+
+#playfair-display-btn {
+    position: absolute;
+    left: 20px;
+}
+
+.playfair-display-text {
+    font-family: 'Playfair Display', serif;
+}
+
+#roboto-btn {
+    position: absolute;
+    left: 150px;
+}
+
+.roboto-text {
+    font-family: 'Roboto', sans-serif;
+}
+
+#noto-btn {
+    position: absolute;
+    left: 220px;
+}
+
+.noto-text {
+    font-family: 'Noto Serif', serif;
 }
 
 .close-btn {
