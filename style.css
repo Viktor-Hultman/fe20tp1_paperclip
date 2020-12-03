@@ -75,6 +75,12 @@ a {
     --light-grey-bg: #EBEBEB;
     --dark-bg: #1C354C;
     --blue-bg: #005392;
+    --blue-bg-active: #0065b3;
+    /*fill color*/
+    --white-fill: #fff;
+    --dark-fill: #1C354C;
+    --blue-fill: #005392;
+    --selected-fill: gold;
     /* font */
     --title-font: 'Playfair Display', serif;
     --text-font: 'Montserrat', sans-serif;
@@ -124,8 +130,10 @@ a {
 
 .favorite-toggle svg {
     width: 20px;
-    fill: white;
+    fill: var(--white-fill);
 }
+
+
 
 .saved-notes-div {
     display: flex;
@@ -182,16 +190,31 @@ a {
 .nav-icon {
     display: inline-flex;
     min-width: 50px;
+    justify-content: center;
+    height: 50px;
+}
+
+.nav-icon button {
+    border: none;
+    width: 100%;
+    height: 50px;
+}
+
+.nav-icon button:active,
+.nav-icon button:hover,
+.nav-icon button:focus {
+    background-color: var(--blue-bg-active);
 }
 
 .nav-icon svg {
-    width: 20px;
+    height: 16px;
     fill: var(--white-txt);
+    color: var(--white-txt);
 }
 
 #starred-button.selected svg,
 #search-button.selected svg {
-    fill: gold;
+    fill: var(--selected-fill);
 }
 
 /*typography*/
@@ -316,6 +339,20 @@ li {
     background-color: var(--white-bg);
 }
 
+.delete-note-btn {
+    border: none;
+    cursor: pointer;
+    width: 30px;
+}
+
+.delete-note-btn svg {
+    height: 10px;
+    color: var(--dark-fill);
+}
+
+
+
+
 /* notes */
 .note {
     border: var(--notes-border);
@@ -329,7 +366,7 @@ li {
 }
 
 .note.favorite .favorite-toggle svg {
-    fill: gold;
+    fill: var(--selected-fill);
 }
 
 .note h1,
@@ -370,6 +407,18 @@ li {
     letter-spacing: 1px;
 }
 
+/*note toolbar*/
+.note-toolbar {
+    display: flex;
+    align-items: center;
+}
+
+/*date*/
+.date {
+    font-family: 'Inconsolata';
+    font-size: .7rem;
+    font-weight: 400;
+}
 
 /*large screen version*/
 @media screen and (min-width: 800px) {
