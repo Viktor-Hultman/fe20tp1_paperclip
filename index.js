@@ -312,6 +312,7 @@ notesListContainer.addEventListener('click', e =>{
     return
   } else {
       removeFocus();
+      openEditor();
       //store the clicked note into a variable
       clickedNote = e.target.closest('.note-text');
       //store the clicked notes id in the global variable clickedNoteId
@@ -320,7 +321,7 @@ notesListContainer.addEventListener('click', e =>{
       if (window.innerWidth > 800) {
         clickedNote.parentElement.classList.add('active-note');
       }   
-      openEditor();
+     
       editingField.innerHTML = clickedNote.innerHTML.trim();
     }
 });
