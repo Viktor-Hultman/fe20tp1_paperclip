@@ -79,6 +79,11 @@ function openEditor() {
   quill.setContents(initialContent);
 } 
 
+//function that checks if thext was edited
+function checkIfEdited () {
+  
+}
+
 //open editor when clicking on new note button
 newNoteButton.addEventListener("click", function (){
   openEditor();
@@ -94,10 +99,11 @@ function closeEditor() {
 // function that asks whether to save the note or simply close the or  closes 
  function confirmClose() {
   if (textWasEdited){
-    confirm("Do you want to save your note before closing?")
-    if (clickedNote === ""){
+   if (confirm("Do you want to save your note before closing?")){
+     if (clickedNote === ""){
       saveNewNote();
     } else saveNote();
+   } else closeEditor();  
   } else closeEditor();
 }
 
