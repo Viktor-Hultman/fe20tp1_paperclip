@@ -213,8 +213,10 @@ a {
 }
 
 #starred-button.selected svg,
-#search-button.selected svg {
+#search-button.selected svg,
+#trash-bin-button svg {
     fill: var(--selected-fill);
+    color: var(--selected-fill);
 }
 
 /*typography*/
@@ -339,18 +341,18 @@ li {
     background-color: var(--white-bg);
 }
 
-.delete-note-btn {
+.delete-note-btn,
+.restore-note-btn {
     border: none;
     cursor: pointer;
     width: 30px;
 }
 
-.delete-note-btn svg {
+.delete-note-btn svg,
+.restore-note-btn svg {
     height: 10px;
     color: var(--dark-fill);
 }
-
-
 
 
 /* notes */
