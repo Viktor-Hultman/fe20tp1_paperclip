@@ -237,8 +237,6 @@ saveNoteBtn.addEventListener('click', function(){
 //loading notes from local storage
 function loadAllNotes() {
   for (let i = notesNumber; i >= 1; i--) {
-    //console.log(i);
-    console.log(localStorage.getItem(i));
     let note = JSON.parse(localStorage.getItem(i));
     notesListContainer.innerHTML += note;
   }
@@ -374,7 +372,6 @@ function restoreDeleted(note){
    note.classList.remove('deleted');
    //change restore SVG with delete SVG
    let restoreBtn = note.querySelector('.restore-note-btn');
-   console.log(restoreBtn);
    restoreBtn.outerHTML = `<button class="delete-note-btn">
    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
    <title>Delete</title>
@@ -382,10 +379,6 @@ function restoreDeleted(note){
  </button>`;
    //add code to save new class in local storage before removing the note
    localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
-   loadNotes();
-   openEditor();
-   editingField.innerHTML = note.innerHTML.trim();
-   console.log(note);
 }
 
 /*almost all click functionalities in an if else statement based on the event target
@@ -398,7 +391,6 @@ notesListContainer.addEventListener('click', e =>{
   if(e.target.closest('.delete-note-btn')){
     let deleteNoteBtn = e.target.closest('.delete-note-btn');
     let note = deleteNoteBtn.closest('li');
-    console.log(note);
     deleteNote(note);
   } else if (e.target.closest('.restore-note-btn')){
       let note = e.target.closest('li');
@@ -406,19 +398,20 @@ notesListContainer.addEventListener('click', e =>{
   } else if (!e.target.closest('.note-text')) {
     return
   } else {
+      if (e.target.closest('.note-text').parentElement.classList.contains('deleted')) {
+        return
+      }
       removeFocus();
       openEditor();
       //store the clicked note into a variable
       clickedNote = e.target.closest('.note-text');
       //store the clicked notes id in the global variable clickedNoteId
       clickedNoteId = clickedNote.parentElement.getAttribute('data-noteid');
-      
       if (window.innerWidth > 800) {
-        clickedNote.parentElement.classList.add('active-note');
-      }   
-     
-      editingField.innerHTML = clickedNote.innerHTML.trim();
-    }
+          clickedNote.parentElement.classList.add('active-note');
+        }   
+     editingField.innerHTML = clickedNote.innerHTML.trim();     
+  }
 });
 
 
@@ -470,7 +463,7 @@ searchButton.addEventListener('click', function () {
 function searchNotes() {
   // Get the value of the search input and make lower case
   let searchValue = document.getElementById('searchInput').value.toLowerCase();
-  console.log(searchValue);
+  //console.log(searchValue);
 
   // Grab all notes and save them
   const notes = notesListContainer.querySelectorAll('li.note');
