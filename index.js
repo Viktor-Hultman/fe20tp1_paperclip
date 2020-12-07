@@ -1,23 +1,17 @@
 
 let toolbarOptions = [
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  [{ 'font': ['sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu', 'montserrat'] }],
-  ['bold', 'italic', 'underline', 'strike'],
-  [{ 'size': ['small', false, 'large', 'huge'] }],
+  [{ 'header': [1, 2,/* 3, 4, 5, 6,*/ false] }],
+  // [{ 'font': [] }],
+  ['bold'/*, 'italic', 'underline', 'strike'*/],
+  // [{ 'size': ['small', false, 'large', 'huge'] }],
   ['blockquote', 'code-block'],
-  [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }],
-  [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],
-  [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+[{ 'list': 'ordered' }, { 'list': 'bullet' }/*, { 'align': [] }*/],
+  // [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],
+  [/*{ 'script': 'sub' },*/ { 'script': 'super' }],      // superscript/subscript
+  // [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
   ['link', 'image'],
-  ['clean']                                         // remove formatting button
+  // ['clean']                                         // remove formatting button
 ];
-
-var FontAttributor = Quill.import('attributors/class/font');
-FontAttributor.whitelist = [
-  'sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu'
-];
-Quill.register(FontAttributor, true);
 
 //Sets up the quill editor in the element with the id of "editor"
 quill = new Quill('#editor', {
@@ -592,24 +586,4 @@ notoBtn.addEventListener('click', () => {
   }
   
 })
-
-
-
-
-/* // EXAMPLE OF TOOLBAR CUSTOMIZATION
-var toolbarOptions = [
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  [{ 'font': [] }],
-  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-  ['blockquote', 'code-block'],
-  [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }],
-  [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],          // outdent/indent
-  [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-  ['link', 'image'],
-  ['clean']                                         // remove formatting button
-]; */
-
-
 
