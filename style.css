@@ -88,6 +88,7 @@ a {
     --notes-border: 2.5px solid #D3D3D3;
     --links-border: 2.5px solid #005392;
     --button-border-dark: 1.5px solid #1C354C;
+    --editor-border: 1px solid #D3D3D3;
 }
 
 /*page layout*/
@@ -133,16 +134,11 @@ a {
     fill: var(--white-fill);
 }
 
-
-
 .saved-notes-div {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: var(--light-grey-bg);
-    border-left: var(--notes-border);
-    border-right: var(--notes-border);
-    box-shadow: 0 0 5px 1px #ccc;
     height: calc(100% - 50px);
     min-width: 250px;
 }
@@ -164,6 +160,10 @@ a {
     background-color: var(--white-bg);
     min-height: 100%;
     width: 100%;
+}
+
+.ql-container.ql-snow {
+    border: none;
 }
 
 .ql-editor {
@@ -436,6 +436,8 @@ li {
 
     .toolbar-and-editor-container {
         position: static;
+        margin-left: 8%;
+        max-width: 550px;
     }
 
     .navbar {
