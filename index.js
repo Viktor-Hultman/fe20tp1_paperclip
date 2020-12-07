@@ -263,8 +263,10 @@ function renderCurrentView() {
   else if (currentView == 'favorites') {
     renderFavorites()
   }
-  // // show deleted notes
-  // else if (currentView ==)
+  // show deleted notes
+  else if (currentView == 'deleted'){
+    renderDeleted('deleted')
+  }
   bindFavoriteButtons()
 }
 
@@ -342,8 +344,16 @@ function deleteNote(note){
 }
 
 trashBinBtn.addEventListener('click', function(){
-  renderDeleted('deleted');
   trashBinBtn.classList.toggle('selected')
+  //when current view is "favorites", view insted all notes on click"
+  if (currentView == 'deleted') {
+    currentView = 'allNotes'
+  }
+  //when current view is on all notes, view insted "favorites notes on click"
+  else if (currentView == 'allNotes') {
+    currentView = 'deleted'
+  }
+  renderCurrentView()
 });
 
  

@@ -214,7 +214,7 @@ a {
 
 #starred-button.selected svg,
 #search-button.selected svg,
-#trash-bin-button svg {
+#trash-bin-button.selected svg {
     fill: var(--selected-fill);
     color: var(--selected-fill);
 }
