@@ -302,6 +302,11 @@ function bindStarButton() {
     if (currentView == 'favorites') {
       currentView = 'allNotes'
     }
+    //when current view is "deleted", view will be set to favorites
+    else if (currentView == 'deleted'){
+      currentView = 'favorites'
+      trashBinBtn.classList.remove('selected')
+    }
     //when current view is on all notes, view insted "favorites notes on click"
     else if (currentView == 'allNotes') {
       currentView = 'favorites'
@@ -345,9 +350,14 @@ function deleteNote(note){
 
 trashBinBtn.addEventListener('click', function(){
   trashBinBtn.classList.toggle('selected')
-  //when current view is "favorites", view insted all notes on click"
+  //when current view is "deleted", view insted all notes on click"
   if (currentView == 'deleted') {
     currentView = 'allNotes'
+  }
+  //when current view is "favorites", view instead deleted on click
+  else if (currentView == 'favorites'){
+    currentView = 'deleted'
+    starButton.classList.remove('selected')
   }
   //when current view is on all notes, view insted "favorites notes on click"
   else if (currentView == 'allNotes') {
