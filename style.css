@@ -138,7 +138,7 @@ a {
     left: 0;
     background-color: var(--white-bg);
     min-height: 100%;
-    width: 100%;
+    width: 100%;;
 }
 
 .ql-container.ql-snow {
@@ -147,10 +147,6 @@ a {
 
 .ql-editor {
     flex-basis: 280px;
-}
-
-.save-note-btn {
-    align-self: center;
 }
 
 /* logo and navbar icons*/
@@ -240,12 +236,53 @@ li {
     border-bottom: var(--links-border);
 }
 
-/* editors bottom toolbar */
-.bottom-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Pop-up toolbar */
+
+.right-toolbar {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+
+    padding: 20px;
+    padding-bottom: 50px;
+    background-color: lightsteelblue;
+    transition: ;
+}
+
+.toolbar-menu {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    border: 1px solid lightblue;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: lightblue;
+    z-index: 1;
+}
+.toolbar-menu i {
     position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.right-toolbar div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.right-toolbar button {
+    margin-bottom: 5px;
+    padding: 10px 0;
+}
+
+.show {
+    display: flex !important; 
 }
 
 /* buttons */
@@ -270,38 +307,12 @@ li {
     padding: 6px;
 }
 
-.save-note-btn {
-    font-size: 1rem;
-    margin: 20px 0;
-    padding: 6px;
-}
-
-.printBtn {
-    position: absolute;
-    right: 20px;
-}
-
-#playfair-display-btn {
-    position: absolute;
-    left: 20px;
-}
-
 .playfair-display-text {
     font-family: 'Playfair Display', serif;
 }
 
-#roboto-btn {
-    position: absolute;
-    left: 150px;
-}
-
 .roboto-text {
     font-family: 'Roboto', sans-serif;
-}
-
-#noto-btn {
-    position: absolute;
-    left: 220px;
 }
 
 .noto-text {
@@ -366,7 +377,6 @@ li {
     border-right: none;
     border-left: none;
     width: 100%;
-    right: -10px;
 }
 
 .active-note button {
@@ -447,4 +457,38 @@ li {
         align-items: center;
         min-height: 50px;
     }
+
+    /* editors right toolbar */
+    .right-toolbar {
+        margin-left: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        position: relative;
+    }
+
+    .right-toolbar > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    .right-toolbar p {
+        text-align: center;
+        font-size: 1.2rem;
+        padding: 10px 0;
+    }
+
+    .right-toolbar  button {
+        width: 75px;
+        height: 75px;
+        margin-bottom: 10px;
+        border-width: 3px;
+    }
+
+    .printBtn {
+        font-size: 24px;
+    }
+
 }
