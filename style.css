@@ -2,27 +2,6 @@
 /* @import url('https://fonts.googleapis.com/css2?family=family=Montserrat&family=Playfair+Display:wght@500;700&display=swap'); */
 
 
-/*ql editor fonts*/
-.ql-font-roboto {
-    font-family: 'Roboto', sans-serif;
-}
-
-.ql-font-sofia {
-    font-family: 'Sofia', cursive;
-}
-
-.ql-font-inconsolata {
-    font-family: 'Inconsolata', monospace;
-}
-
-.ql-font-ubuntu {
-    font-family: 'Ubuntu', sans-serif;
-}
-
-.ql-font-montserrat {
-    font-family: 'Montserrat', sans-serif;
-}
-
 
 /*
   ==============================================================================
@@ -75,6 +54,12 @@ a {
     --light-grey-bg: #EBEBEB;
     --dark-bg: #1C354C;
     --blue-bg: #005392;
+    --blue-bg-active: #0065b3;
+    /*fill color*/
+    --white-fill: #fff;
+    --dark-fill: #1C354C;
+    --blue-fill: #005392;
+    --selected-fill: gold;
     /* font */
     --title-font: 'Playfair Display', serif;
     --text-font: 'Montserrat', sans-serif;
@@ -82,6 +67,7 @@ a {
     --notes-border: 2.5px solid #D3D3D3;
     --links-border: 2.5px solid #005392;
     --button-border-dark: 1.5px solid #1C354C;
+    --editor-border: 1px solid #D3D3D3;
 }
 
 /*page layout*/
@@ -124,7 +110,7 @@ a {
 
 .favorite-toggle svg {
     width: 20px;
-    fill: white;
+    fill: var(--white-fill);
 }
 
 .saved-notes-div {
@@ -132,9 +118,6 @@ a {
     flex-direction: column;
     align-items: center;
     background-color: var(--light-grey-bg);
-    border-left: var(--notes-border);
-    border-right: var(--notes-border);
-    box-shadow: 0 0 5px 1px #ccc;
     height: calc(100% - 50px);
     min-width: 250px;
 }
@@ -156,6 +139,10 @@ a {
     background-color: var(--white-bg);
     min-height: 100%;
     width: 100%;
+}
+
+.ql-container.ql-snow {
+    border: none;
 }
 
 .ql-editor {
@@ -182,16 +169,33 @@ a {
 .nav-icon {
     display: inline-flex;
     min-width: 50px;
+    justify-content: center;
+    height: 50px;
+}
+
+.nav-icon button {
+    border: none;
+    width: 100%;
+    height: 50px;
+}
+
+.nav-icon button:active,
+.nav-icon button:hover,
+.nav-icon button:focus {
+    background-color: var(--blue-bg-active);
 }
 
 .nav-icon svg {
-    width: 20px;
+    height: 16px;
     fill: var(--white-txt);
+    color: var(--white-txt);
 }
 
 #starred-button.selected svg,
-#search-button.selected svg {
-    fill: gold;
+#search-button.selected svg,
+#trash-bin-button.selected svg {
+    fill: var(--selected-fill);
+    color: var(--selected-fill);
 }
 
 /*typography*/
@@ -316,6 +320,20 @@ li {
     background-color: var(--white-bg);
 }
 
+.delete-note-btn,
+.restore-note-btn {
+    border: none;
+    cursor: pointer;
+    width: 30px;
+}
+
+.delete-note-btn svg,
+.restore-note-btn svg {
+    height: 10px;
+    color: var(--dark-fill);
+}
+
+
 /* notes */
 .note {
     border: var(--notes-border);
@@ -329,7 +347,7 @@ li {
 }
 
 .note.favorite .favorite-toggle svg {
-    fill: gold;
+    fill: var(--selected-fill);
 }
 
 .note h1,
@@ -376,6 +394,18 @@ li {
     letter-spacing: 1px;
 }
 
+/*note toolbar*/
+.note-toolbar {
+    display: flex;
+    align-items: center;
+}
+
+/*date*/
+.date {
+    font-family: 'Inconsolata';
+    font-size: .7rem;
+    font-weight: 400;
+}
 
 /*large screen version*/
 @media screen and (min-width: 800px) {
@@ -391,6 +421,13 @@ li {
 
     .toolbar-and-editor-container {
         position: static;
+        max-width: 800px;
+    }
+
+    #editor {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 550px;
     }
 
     .navbar {
