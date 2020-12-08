@@ -349,7 +349,8 @@ searchButton.addEventListener('click', function () {
     const searchInput = document.getElementById('searchInput');
     searchInput.remove();
     searchStatus = false;
-    loadNotes();
+    console.log()
+    renderCurrentView();
   }
 })
 
