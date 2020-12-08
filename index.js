@@ -2,12 +2,12 @@
 let toolbarOptions = [
   [{ 'header': [1, 2,/* 3, 4, 5, 6,*/ false] }],
   // [{ 'font': [] }],
-  ['bold'/*, 'italic', 'underline', 'strike'*/],
+  ['bold', 'italic', 'underline'/*, 'strike'*/],
   // [{ 'size': ['small', false, 'large', 'huge'] }],
-  ['blockquote', 'code-block'],
+  ['blockquote', /*'code-block'*/],
 [{ 'list': 'ordered' }, { 'list': 'bullet' }/*, { 'align': [] }*/],
   // [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],
-  [/*{ 'script': 'sub' },*/ { 'script': 'super' }],      // superscript/subscript
+  // [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
   // [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
   ['link', 'image'],
   // ['clean']                                         // remove formatting button
