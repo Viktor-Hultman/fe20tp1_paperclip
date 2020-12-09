@@ -20,7 +20,9 @@ for an element's width and height */
 
 /* styles the tab navigation links and buttons outline */
 *:focus {
-    outline: thin dotted #E0AD34;
+    outline:
+        /*thin dotted #E0AD34*/
+        none;
 }
 
 /* removes the text decoration from all navigation links */
@@ -64,10 +66,13 @@ a {
     --title-font: 'Playfair Display', serif;
     --text-font: 'Montserrat', sans-serif;
     /*borders*/
-    --notes-border: 2.5px solid #D3D3D3;
+    --notes-border: 1px solid #dadce0;
     --links-border: 2.5px solid #005392;
-    --button-border-dark: 1.5px solid #1C354C;
+    --button-border-dark: 1px solid #1C354C;
+    --button-border-blue: 1px solid #005392;
     --editor-border: 1px solid #D3D3D3;
+    /*shadows*/
+    --hover-note-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.30), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
 }
 
 /*page layout*/
@@ -255,7 +260,7 @@ li {
     background-color: var(--white-bg);
     color: var(--dark-txt);
     font-family: var(--title-font);
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .dark-blue-btn:active,
@@ -269,6 +274,17 @@ li {
     font-size: 1rem;
     margin: 20px 0;
     padding: 6px;
+    border: var(--button-border-blue);
+    color: var(--blue-txt);
+    font-family: var(--title-font);
+    border-radius: 8px;
+}
+
+.new-note-button:hover,
+.new-note-button:active,
+.new-note-button:focus {
+    background-color: var(--blue-bg);
+    color: var(--white-txt);
 }
 
 .save-note-btn {
@@ -346,6 +362,7 @@ li {
     width: 85%;
     margin: 0 auto 20px auto;
     transition: width .2s;
+    background-color: #fff;
 }
 
 .note.favorite .favorite-toggle svg {
@@ -367,6 +384,7 @@ li {
     border-right: none;
     border-left: none;
     width: 100%;
+    border-radius: 0;
 }
 
 .note-text {
@@ -377,6 +395,12 @@ li {
 .note-text ul,
 .note-text ol {
     padding-left: 20px;
+}
+
+.note:hover,
+.note:active,
+.note:focus {
+    box-shadow: var(--hover-note-shadow);
 }
 
 #searchInput {
