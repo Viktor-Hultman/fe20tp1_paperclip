@@ -236,53 +236,29 @@ li {
     border-bottom: var(--links-border);
 }
 
-/* Pop-up toolbar */
-
-.right-toolbar {
-    position: fixed;
-    display: none;
-    flex-direction: column;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-
-    padding: 20px;
-    padding-bottom: 50px;
-    background-color: lightsteelblue;
-    transition: ;
+/* Toolbar buttons */
+#playfair-display-btn, #roboto-btn, #noto-btn, #save-note-btn, #print-btn {
+    width: fit-content;
+    font-size: 0.8em;
+    margin-left: 10px;
 }
 
-.toolbar-menu {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    border: 1px solid lightblue;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    background-color: lightblue;
-    z-index: 1;
-}
-.toolbar-menu i {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+#playfair-display-btn {
+    background-color: yellow;
+    border: 1px solid black;
+    font-family: 'Playfair Display', serif;
 }
 
-.right-toolbar div {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+#roboto-btn {
+    background-color: pink;
+    border: 1px solid black;
+    font-family: 'Roboto', sans-serif;
 }
 
-.right-toolbar button {
-    margin-bottom: 5px;
-    padding: 10px 0;
-}
-
-.show {
-    display: flex !important; 
+#noto-btn {
+    background-color: greenyellow;
+    border: 1px solid black;
+    font-family: 'Noto Serif', serif;
 }
 
 /* buttons */
@@ -400,6 +376,7 @@ li {
     width: 205px;
     font-size: 17px;
     background-color: white;
+    border: 1px solid black;
     border-radius: 5px;
     letter-spacing: 1px;
 }
@@ -457,38 +434,4 @@ li {
         align-items: center;
         min-height: 50px;
     }
-
-    /* editors right toolbar */
-    .right-toolbar {
-        margin-left: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-        position: relative;
-    }
-
-    .right-toolbar > div {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-    }
-
-    .right-toolbar p {
-        text-align: center;
-        font-size: 1.2rem;
-        padding: 10px 0;
-    }
-
-    .right-toolbar  button {
-        width: 75px;
-        height: 75px;
-        margin-bottom: 10px;
-        border-width: 3px;
-    }
-
-    .printBtn {
-        font-size: 24px;
-    }
-
 }

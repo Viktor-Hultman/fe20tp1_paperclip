@@ -93,24 +93,28 @@
 
     <section class="toolbar-and-editor-container hidden">
       <div class="close-btn"><button>&times;</button></div>
+      <div id="toolbar">
+        <select class="ql-header">
+          <option value="1"></option>
+          <option value="2"></option>
+          <option selected></option>
+        </select>
+        <button class="ql-bold"></button>
+        <button class="ql-italic"></button>
+        <button class="ql-underline"></button>
+        <button class="ql-list" value="ordered"></button>
+        <button class="ql-list" value="bullet"></button>
+        <button class="ql-link"></button>
+        <button class="ql-image"></button>
+        <button id="playfair-display-btn">Playfair Display</button>
+        <button id="roboto-btn">Roboto</button>
+        <button id="noto-btn">Noto Serif</button>
+        <button id="save-note-btn" class="save-note-btn">Save</button>
+        <button id="print-btn" class="printBtn" onclick="printContent()"><i class="fas fa-print"></i></button>
+      </div>
       <div id="editor">
         <h1>Please add a title here</h1>
         <p>Here is where you can write your cool note text</p>
-      </div>
-    </section>
-
-
-    <span class="toolbar-menu"><i class="fas fa-ellipsis-v"></i></span>
-    <section class="right-toolbar hidden">
-      <div>
-        <p>Themes</p>
-        <button id="playfair-display-btn" class="dark-blue-btn">Playfair Display</button>
-        <button id="roboto-btn" class="dark-blue-btn">Roboto</button>
-        <button id="noto-btn" class="dark-blue-btn">Noto Serif</button>
-      </div>
-      <div>
-        <button class="save-note-btn dark-blue-btn">Save</button>
-        <button class="printBtn dark-blue-btn" onclick="printContent()"><i class="fas fa-print"></i></button>
       </div>
     </section>
 

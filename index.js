@@ -16,7 +16,7 @@ let toolbarOptions = [
 //Sets up the quill editor in the element with the id of "editor"
 quill = new Quill('#editor', {
   modules: {
-    toolbar: toolbarOptions
+    toolbar: '#toolbar'//toolbarOptions
   },
   theme: 'snow'
 });
@@ -58,7 +58,6 @@ let playfairBtn = document.querySelector('#playfair-display-btn');
 let robotoBtn = document.querySelector('#roboto-btn');
 let notoBtn = document.querySelector('#noto-btn');
 let trashBinBtn = document.querySelector('#trash-bin-button');
-const rightToolbar = document.querySelector('.right-toolbar')
 
 //function that opens the editor
 function openEditor() {
@@ -71,7 +70,6 @@ function openEditor() {
 
   // make editor visible
   editorContainer.classList.remove('hidden');
-  rightToolbar.classList.remove('hidden')
   //set the initial content in the editor
   quill.setContents(initialContent);
 }
@@ -90,7 +88,6 @@ newNoteButton.addEventListener("click", function () {
 //function that closes the editor
 function closeEditor() {
   editorContainer.classList.add('hidden');
-  rightToolbar.classList.add('hidden');
   textWasEdited = false;
 }
 
@@ -565,11 +562,4 @@ notoBtn.addEventListener('click', () => {
     editorChildren[i].classList.add('noto-text')
   }
 
-})
-
-const toolbarPopup = document.querySelector('.toolbar-menu');
-toolbarPopup.addEventListener('click', function () {
-  console.log('click');
-  const toolbar = document.querySelector('.right-toolbar');
-  toolbar.classList.toggle('show');
 })
