@@ -59,15 +59,15 @@ let robotoBtn = document.querySelector('#roboto-btn');
 let notoBtn = document.querySelector('#noto-btn');
 let trashBinBtn = document.querySelector('#trash-bin-button');
 
+editorContainer.addEventListener('keyup', function () {
+  textWasEdited = true;
+})
 //function that opens the editor
 function openEditor() {
+  console.log("Should be seen only once");
   //text edit variable becomes true when a keyupp event is triggered
-  editorContainer.addEventListener('keyup', function () {
-    textWasEdited = true;
-  })
-
+ 
   confirmClose();
-
   // make editor visible
   editorContainer.classList.remove('hidden');
   //set the initial content in the editor
@@ -403,6 +403,7 @@ notesListContainer.addEventListener('click', e => {
 let printBtn = document.querySelector('.printBtn');
 
 function printContent() {
+  // https://benfrain.com/create-print-styles-using-css3-media-queries/
   var myWindow = window.open('', '', 'width=800,height=600');
   //open the window
   myWindow.document.open();
