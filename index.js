@@ -88,6 +88,7 @@ newNoteButton.addEventListener("click", function () {
 //function that closes the editor
 function closeEditor() {
   document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
+  removeFocus();
   textWasEdited = false;
 }
 

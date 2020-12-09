@@ -106,6 +106,7 @@ a {
     right: 5px;
     bottom: 5px;
     cursor: pointer;
+    background-color: transparent;
 }
 
 .favorite-toggle svg {
@@ -325,6 +326,7 @@ li {
     border: none;
     cursor: pointer;
     width: 30px;
+    background-color: transparent;
 }
 
 .delete-note-btn svg,
