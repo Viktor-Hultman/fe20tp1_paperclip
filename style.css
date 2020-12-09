@@ -43,8 +43,34 @@ a {
     display: none;
 }
 
-/* main variables are used in order to be able to quickly change styles if needed or in case of rebranding */
 :root {
+        /* text color  */
+    --red-white-txt: #fff;
+    --red-dark-txt: #4c1c1c;
+    --red-blue-txt: #920000;
+    /* background color */
+    --red-white-bg: #fff;
+    --red-light-grey-bg: #EBEBEB;
+    --red-dark-bg: #4c1c1c;
+    --red-blue-bg: #920000;
+    --red-blue-bg-active: #b30000;
+    /*fill color*/
+    --red-white-fill: #fff;
+    --red-dark-fill: #4c1c1c;
+    --red-blue-fill: #920000;
+    --red-selected-fill: gold;
+    /* font */
+    --red-title-font: 'Playfair Display', serif;
+    --red-text-font: 'Montserrat', sans-serif;
+    /*borders*/
+    --red-notes-border: 2.5px solid #D3D3D3;
+    --red-links-border: 2.5px solid #920000;
+    --red-button-border-dark: 1.5px solid #4c1c1c;
+    --red-editor-border: 1px solid #D3D3D3;
+}
+
+/* main variables are used in order to be able to quickly change styles if needed or in case of rebranding */
+body {
     /* text color  */
     --white-txt: #fff;
     --dark-txt: #1C354C;
@@ -68,6 +94,40 @@ a {
     --links-border: 2.5px solid #005392;
     --button-border-dark: 1.5px solid #1C354C;
     --editor-border: 1px solid #D3D3D3;
+}
+body.theme-dark {
+        /* text color  */
+    --dark-txt: var(--red-dark-txt);
+    --blue-txt: var(--red-blue-txt);
+    /* background color */
+    --dark-bg: var(--red-dark-bg);
+    --blue-bg: var(--red-blue-bg);
+    --blue-bg-active: var(--red-blue-bg-active);
+    /*fill color*/
+    --dark-fill: var(--red-dark-fill);
+    --blue-fill: var(--red-blue-fill);
+
+    /*borders*/
+    --links-border: 2.5px solid var(--red-links-border);
+    --button-border-dark: 1.5px solid var(--red-button-border-dark);
+}
+
+@media (prefers-color-scheme: dark){
+    body.theme-auto{
+                /* text color  */
+    --dark-txt: var(--red-dark-txt);
+    --blue-txt: var(--red-blue-txt);
+    /* background color */
+    --dark-bg: var(--red-dark-bg);
+    --blue-bg: var(--red-blue-bg);
+    --blue-bg-active: var(--red-blue-bg-active);
+    /*fill color*/
+    --dark-fill: var(--red-dark-fill);
+    --blue-fill: var(--red-blue-fill);
+    /*borders*/
+    --links-border: 2.5px solid var(--red-links-border);
+    --button-border-dark: 1.5px solid var(--red-button-border-dark);
+    }
 }
 
 /*page layout*/
