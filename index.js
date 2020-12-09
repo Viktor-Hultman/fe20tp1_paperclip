@@ -310,6 +310,9 @@ function removeFocus() {
 
 //function that deletes a note
 function deleteNote(note){
+  let areYouSure = confirm('Are you sure you want to delete this note?');
+  console.log(areYouSure);
+  if(!areYouSure) { return }
   //get the note's id to be able to change it in local storage
   let noteId = note.dataset.noteid;
   //remove eventual active class
