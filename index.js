@@ -68,16 +68,18 @@ function openEditor() {
   //text edit variable becomes true when a keyupp event is triggered
  
   confirmClose();
-  // make editor visible
-  editorContainer.classList.remove("hidden");
   //set the initial content in the editor
   quill.setContents(initialContent);
+  // make editor visible after .3 seconds when note has expanded
+  setTimeout(() => { 
+    editorContainer.classList.remove("hidden"); 
+  }, 300); 
+  // slideInEditor()
 }
 
-//function that checks if thext was edited
-function checkIfEdited () {
-  
-}
+// function slideInEditor () {
+//   editorContainer.classList.add("visible");
+// }
 
 //open editor when clicking on new note button
 newNoteButton.addEventListener("click", function () {

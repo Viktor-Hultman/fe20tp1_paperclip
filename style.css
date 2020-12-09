@@ -125,7 +125,7 @@ a {
     align-items: center;
     background-color: var(--light-grey-bg);
     height: calc(100% - 50px);
-    min-width: 250px;
+    min-width: 300px;
 }
 
 .saved-notes-list {
@@ -143,16 +143,18 @@ a {
     top: 50px;
     left: 0;
     background-color: var(--white-bg);
-    min-height: 100%;
+    height: calc(100% - 50px);
     width: 100%;
+    overflow: auto;
 }
 
 .ql-container.ql-snow {
     border: none;
 }
 
-.ql-editor {
-    flex-basis: 280px;
+#editor {
+    height: calc(1fr - 50px);
+    overflow: auto;
 }
 
 .save-note-btn {
