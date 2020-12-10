@@ -308,7 +308,7 @@ function removeFocus() {
 //function that deletes a note
 function deleteNote(note){
   let areYouSure = confirm('Are you sure you want to delete this note?');
-  console.log(areYouSure);
+  //console.log(areYouSure);
   if(!areYouSure) { return }
   //get the note's id to be able to change it in local storage
   let noteId = note.dataset.noteid;
@@ -357,6 +357,16 @@ function restoreDeleted(note){
  </button>`;
    //add code to save new class in local storage before removing the note
    localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
+}
+
+//permanently delete items in trash bin
+function permanentlyDelete(note){
+  //get the note's id to be able to change it in local storage
+  let noteId = note.dataset.noteid;
+  //delete the note from local storage
+  localStorage.removeItem(noteId);
+  //delete the note from notes list
+  note.remove();
 }
 
 /*almost all click functionalities from the notes container in an if else statement based on the event target*/
