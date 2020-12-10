@@ -172,11 +172,13 @@ a {
     color: var(--selected-fill);
 }
 
+/* item cogwheel */
 .cogwheel-list-item {
     background: transparent url('./icons/cogwheel.svg') center calc(50% - 2.5px) no-repeat;
     background-size: 35%;
 }
 
+/* styling to make the cogwheel look like the other icons */
 .cogwheel-select {
     max-width: 50px;
     min-width: 50px;
@@ -184,6 +186,11 @@ a {
     color: transparent;
     border: none;
     background: transparent;
+}
+
+/* could't make it hover like the buttons with color, this is an other solution */
+.grow:hover { 
+transform: scale(1.3); 
 }
 
 

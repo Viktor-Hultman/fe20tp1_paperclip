@@ -291,7 +291,7 @@ function bindStarButton() {
   })
 
 }
-
+//function that chooses theme color
   function applyTheme(theme) {
     document.body.classList.remove("theme-auto", "theme-green", "theme-red", "theme-rainbow");
     document.body.classList.add(`theme-${theme}`);
@@ -300,17 +300,18 @@ function bindStarButton() {
 document.addEventListener('DOMContentLoaded', e => {
   renderCurrentView();
   bindStarButton();
-      const savedTheme = localStorage.getItem("theme") || "auto";
+  //saves theme color in localStorage
+  const savedTheme = localStorage.getItem("theme") || "auto";
 
-    applyTheme(savedTheme);
+  applyTheme(savedTheme);
 
-    for (const optionElement of document.querySelectorAll("#theme option")) {
+  for (const optionElement of document.querySelectorAll("#theme option")) {
         optionElement.selected = savedTheme === optionElement.value;
     }
 
     document.querySelector("#theme").addEventListener("change", function () {
-        localStorage.setItem("theme", this.value);
-        applyTheme(this.value);
+      localStorage.setItem("theme", this.value);
+      applyTheme(this.value);
     });
 })
 
