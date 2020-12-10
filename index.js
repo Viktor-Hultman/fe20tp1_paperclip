@@ -312,6 +312,15 @@ document.addEventListener('DOMContentLoaded', e => {
     document.querySelector("#theme").addEventListener("change", function () {
       localStorage.setItem("theme", this.value);
       applyTheme(this.value);
+      if (this.value === "rainbow") {
+        const confettiElement = document.querySelector(".logo")
+        confetti(confettiElement, {
+          angle: "10", 
+          spread: "150",
+          elementCount: "100",
+          startVelocity: window.innerWidth/20
+        })
+      }
     });
 })
 
