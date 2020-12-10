@@ -58,10 +58,15 @@ let playfairBtn = document.querySelector('#playfair-display-btn');
 let robotoBtn = document.querySelector('#roboto-btn');
 let notoBtn = document.querySelector('#noto-btn');
 let trashBinBtn = document.querySelector('#trash-bin-button');
+let emptyTrashBinBtn = document.querySelector('.clear-trash-bin');
 
 editorContainer.addEventListener('keyup', function () {
   textWasEdited = true;
 })
+
+//permanently deletes all deleted notes in the trash bin
+emptyTrashBinBtn.addEventListener('click', emptyTrashBin);
+
 //function that opens the editor
 function openEditor() {
   console.log("Should be seen only once");
@@ -275,6 +280,8 @@ function bindStarButton() {
   starButton.addEventListener('click', function () {
     //when starButton is selected, it gets gold
     starButton.classList.toggle('selected')
+    //mekes the delete all notes button hidden again
+    emptyTrashBinBtn.classList.add('hidden')
     //when current view is "favorites", view insted all notes on click"
     if (currentView == 'favorites') {
       currentView = 'allNotes'
@@ -335,7 +342,8 @@ function deleteNote(note){
 }
 
 trashBinBtn.addEventListener('click', function(){
-  trashBinBtn.classList.toggle('selected')
+  trashBinBtn.classList.toggle('selected');
+  emptyTrashBinBtn.classList.toggle('hidden');
   //when current view is "deleted", view insted all notes on click"
   if (currentView == 'deleted') {
     currentView = 'allNotes'
@@ -385,6 +393,26 @@ function permanentlyDelete(note){
   //delete the note from notes list
   note.remove();
 }
+
+//Clears the trash bin and permanently deletes all notes with delete class
+function emptyTrashBin(){
+  //make sure the user want's to permanently delete
+  let areYouSure = confirm('Are you sure you want to permanently delete all the notes in the trash bin?');
+  //stop running function if user does not want to permanently delete
+  if(!areYouSure) { return }
+  //select all notes with the class of deleted
+  let deletedNotes = document.querySelectorAll('.note.deleted');
+  //grab each note and delete it
+  deletedNotes.forEach(note =>{
+     //get the note's id to be able to change it in local storage
+    let noteId = note.dataset.noteid;
+    //delete the note from local storage
+    localStorage.removeItem(noteId);
+    //delete the note from notes list
+    note.remove();
+  })
+}
+
 
 /*almost all click functionalities from the notes container in an if else statement based on the event target*/
 notesListContainer.addEventListener('click', e =>{

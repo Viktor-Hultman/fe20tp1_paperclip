@@ -363,6 +363,16 @@ li {
     color: var(--dark-fill);
 }
 
+.clear-trash-bin {
+    margin: 10px;
+    border: none;
+    border-bottom: var(--links-border);
+    background-color: transparent;
+    font-size: .9rem;
+    font-family: var(--text-font);
+    color: var(--blue-txt);
+}
+
 
 /* notes */
 .note {
