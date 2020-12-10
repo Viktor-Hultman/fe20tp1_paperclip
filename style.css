@@ -20,7 +20,9 @@ for an element's width and height */
 
 /* styles the tab navigation links and buttons outline */
 *:focus {
-    outline: thin dotted #E0AD34;
+    outline:
+        /*thin dotted #E0AD34*/
+        none;
 }
 
 /* removes the text decoration from all navigation links */
@@ -80,6 +82,7 @@ a {
     right: 5px;
     bottom: 5px;
     cursor: pointer;
+    background-color: transparent;
 }
 
 .favorite-toggle svg {
@@ -93,7 +96,7 @@ a {
     align-items: center;
     background-color: var(--light-grey-bg);
     height: calc(100% - 50px);
-    min-width: 250px;
+    min-width: 300px;
 }
 
 .saved-notes-list {
@@ -111,20 +114,23 @@ a {
     top: 50px;
     left: 0;
     background-color: var(--white-bg);
-    min-height: 100%;
+    height: calc(100% - 50px);
     width: 100%;
+    overflow: auto;
 }
 
+.ql-toolbar.ql-snow,
 .ql-container.ql-snow {
     border: none;
 }
 
-.ql-editor {
-    flex-basis: 280px;
+.ql-toolbar {
+    box-shadow: var(--hover-note-shadow);
 }
 
-.save-note-btn {
-    align-self: center;
+#editor {
+    height: calc(1fr - 50px);
+    overflow: auto;
 }
 
 /* logo and navbar icons*/
@@ -235,12 +241,33 @@ li {
     border-bottom: var(--links-border);
 }
 
-/* editors bottom toolbar */
-.bottom-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+/* Toolbar buttons */
+#playfair-display-btn,
+#roboto-btn,
+#noto-btn,
+#save-note-btn,
+#print-btn {
+    width: fit-content;
+    font-size: 0.8em;
+    margin-left: 10px;
+}
+
+#playfair-display-btn {
+    background-color: yellow;
+    border: 1px solid black;
+    font-family: 'Playfair Display', serif;
+}
+
+#roboto-btn {
+    background-color: pink;
+    border: 1px solid black;
+    font-family: 'Roboto', sans-serif;
+}
+
+#noto-btn {
+    background-color: greenyellow;
+    border: 1px solid black;
+    font-family: 'Noto Serif', serif;
 }
 
 /* buttons */
@@ -249,7 +276,7 @@ li {
     background-color: var(--white-bg);
     color: var(--dark-txt);
     font-family: var(--title-font);
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .dark-blue-btn:active,
@@ -263,40 +290,25 @@ li {
     font-size: 1rem;
     margin: 20px 0;
     padding: 6px;
+    border: var(--button-border-blue);
+    color: var(--blue-txt);
+    font-family: var(--title-font);
+    border-radius: 8px;
 }
 
-.save-note-btn {
-    font-size: 1rem;
-    margin: 20px 0;
-    padding: 6px;
-}
-
-.printBtn {
-    position: absolute;
-    right: 20px;
-}
-
-#playfair-display-btn {
-    position: absolute;
-    left: 20px;
+.new-note-button:hover,
+.new-note-button:active,
+.new-note-button:focus {
+    background-color: var(--blue-bg);
+    color: var(--white-txt);
 }
 
 .playfair-display-text {
     font-family: 'Playfair Display', serif;
 }
 
-#roboto-btn {
-    position: absolute;
-    left: 150px;
-}
-
 .roboto-text {
     font-family: 'Roboto', sans-serif;
-}
-
-#noto-btn {
-    position: absolute;
-    left: 220px;
 }
 
 .noto-text {
@@ -304,30 +316,44 @@ li {
 }
 
 .close-btn {
-    text-align: right;
-    padding-right: 10px;
     font-size: 2rem;
     font-weight: bolder;
 }
 
 .close-btn button {
     border: none;
-    background-color: var(--white-bg);
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .delete-note-btn,
-.restore-note-btn {
+.restore-note-btn,
+.permanently-delete {
     border: none;
     cursor: pointer;
-    width: 30px;
+    background-color: transparent;
+    padding: 10px;
+    margin-right: 5px;
 }
 
 .delete-note-btn svg,
-.restore-note-btn svg {
-    height: 10px;
+.restore-note-btn svg,
+.permanently-delete svg {
+    height: 12px;
     color: var(--dark-fill);
 }
 
+.clear-trash-bin {
+    margin: 10px;
+    border: none;
+    border-bottom: var(--links-border);
+    background-color: transparent;
+    font-size: .9rem;
+    font-family: var(--text-font);
+    color: var(--blue-txt);
+}
 
 /* notes */
 .note {
@@ -337,8 +363,10 @@ li {
     padding: 5px;
     position: relative;
     width: 85%;
+    max-width: 400px;
     margin: 0 auto 20px auto;
     transition: width .2s;
+    background-color: #fff;
 }
 
 .note.favorite .favorite-toggle svg {
@@ -353,6 +381,7 @@ li {
 .note h6 {
     font-size: 1.1rem;
     font-weight: 600;
+    margin-top: 0;
 }
 
 .active-note {
@@ -360,16 +389,27 @@ li {
     border-right: none;
     border-left: none;
     width: 100%;
+    border-radius: 0;
+}
+
+.active-note button {
+    background-color: white;
 }
 
 .note-text {
-    max-height: 250px;
+    height: 60px;
     overflow: hidden;
 }
 
 .note-text ul,
 .note-text ol {
     padding-left: 20px;
+}
+
+.note:hover,
+.note:active,
+.note:focus {
+    box-shadow: var(--hover-note-shadow);
 }
 
 #searchInput {
@@ -379,6 +419,7 @@ li {
     width: 205px;
     font-size: 17px;
     background-color: white;
+    border: 1px solid black;
     border-radius: 5px;
     letter-spacing: 1px;
 }
@@ -394,6 +435,7 @@ li {
     font-family: 'Inconsolata';
     font-size: .7rem;
     font-weight: 400;
+    margin-right: 10px;
 }
 
 /*large screen version*/
@@ -411,6 +453,7 @@ li {
     .toolbar-and-editor-container {
         position: static;
         max-width: 800px;
+        height: 100%;
     }
 
     #editor {

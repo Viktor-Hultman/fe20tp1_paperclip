@@ -61,9 +61,14 @@
         </li>
         <li class="nav-icon">
           <button class="nav-button" id="trash-bin-button">
-            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash"
+              class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512">
               <title>Trash bin</title>
-              <path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+              <path fill="currentColor"
+                d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z">
+              </path>
+            </svg>
           </button>
         </li> 
         <li class="nav-icon cogwheel-list-item">
@@ -78,28 +83,39 @@
       </ul>
     </nav>
 
+    <section class="saved-notes-div">
+      <button class="new-note-button">Create new note</button>
+      <ul class="saved-notes-list">
 
-      <section class="saved-notes-div">
-        <button class="new-note-button dark-blue-btn">Create new note</button>
-        <ul class="saved-notes-list">
-         
-        </ul>
-      </section>
-      
-      <section class="toolbar-and-editor-container hidden">
-        <div class="close-btn"><button>&times;</button></div>
-        <div id="editor">
-            <h1>Please add a title here</h1>
-            <p>Here is where you can write your cool note text</p>
-        </div>
-        <section class="bottom-toolbar">
-            <button id="playfair-display-btn" class="dark-blue-btn">Playfair Display</button>
-            <button id="roboto-btn" class="dark-blue-btn">Roboto</button>
-            <button id="noto-btn" class="dark-blue-btn">Noto Serif</button>
-            <button class="save-note-btn dark-blue-btn">Save</button>
-            <button class="printBtn dark-blue-btn" onclick="printContent()"><i class="fas fa-print"></i></button>
-        </section>
-      </section>
+      </ul>
+      <button class="clear-trash-bin hidden">Delete all</button>
+    </section>
+
+    <section class="toolbar-and-editor-container hidden">
+      <div class="close-btn"><button>&times;</button></div>
+      <div id="toolbar">
+        <select class="ql-header">
+          <option value="1"></option>
+          <option value="2"></option>
+          <option selected></option>
+        </select>
+        <button class="ql-bold"></button>
+        <button class="ql-italic"></button>
+        <button class="ql-underline"></button>
+        <button class="ql-list" value="ordered"></button>
+        <button class="ql-list" value="bullet"></button>
+        <button class="ql-link"></button>
+        <button class="ql-image"></button>
+        <button id="playfair-display-btn">Playfair Display</button>
+        <button id="roboto-btn">Roboto</button>
+        <button id="noto-btn">Noto Serif</button>
+        <button id="save-note-btn" class="save-note-btn">Save</button>
+        <button id="print-btn" class="printBtn" onclick="printContent()"><i class="fas fa-print"></i></button>
+      </div>
+      <div id="editor">
+        <h1>Please add a title here</h1>
+        <p>Here is where you can write your cool note text</p>
+      </div>
     </section>
 
   </main>
