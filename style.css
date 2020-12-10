@@ -396,7 +396,7 @@ li {
 }
 
 .note-text {
-    max-height: 250px;
+    height: 60px;
     overflow: hidden;
 }
 
