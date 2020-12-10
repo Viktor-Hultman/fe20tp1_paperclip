@@ -346,16 +346,19 @@ li {
 }
 
 .delete-note-btn,
-.restore-note-btn {
+.restore-note-btn,
+.permanently-delete {
     border: none;
     cursor: pointer;
-    width: 30px;
     background-color: transparent;
+    padding: 10px;
+    margin-right: 5px;
 }
 
 .delete-note-btn svg,
-.restore-note-btn svg {
-    height: 10px;
+.restore-note-btn svg,
+.permanently-delete svg {
+    height: 12px;
     color: var(--dark-fill);
 }
 
@@ -368,6 +371,7 @@ li {
     padding: 5px;
     position: relative;
     width: 85%;
+    max-width: 400px;
     margin: 0 auto 20px auto;
     transition: width .2s;
     background-color: #fff;
@@ -433,6 +437,7 @@ li {
     font-family: 'Inconsolata';
     font-size: .7rem;
     font-weight: 400;
+    margin-right: 10px;
 }
 
 /*large screen version*/

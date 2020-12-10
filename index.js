@@ -318,7 +318,12 @@ function deleteNote(note){
   note.classList.add('deleted');
   //change delete SVG with restore SVG
   let deleteBtn = note.querySelector('.delete-note-btn');
-  deleteBtn.outerHTML = `<button class="restore-note-btn"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-restore" class="svg-inline--fa fa-trash-restore fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><title>Restore note</title><path fill="currentColor" d="M53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32zm70.11-175.8l89.38-94.26a15.41 15.41 0 0 1 22.62 0l89.38 94.26c10.08 10.62 2.94 28.8-11.32 28.8H256v112a16 16 0 0 1-16 16h-32a16 16 0 0 1-16-16V320h-57.37c-14.26 0-21.4-18.18-11.32-28.8zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg></button>`;
+  deleteBtn.outerHTML = `<button class="restore-note-btn"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-restore" class="svg-inline--fa fa-trash-restore fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><title>Restore note</title><path fill="currentColor" d="M53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32zm70.11-175.8l89.38-94.26a15.41 15.41 0 0 1 22.62 0l89.38 94.26c10.08 10.62 2.94 28.8-11.32 28.8H256v112a16 16 0 0 1-16 16h-32a16 16 0 0 1-16-16V320h-57.37c-14.26 0-21.4-18.18-11.32-28.8zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg></button> 
+  <button class="permanently-delete">
+  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <title>Permanently delete</title>
+  <path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+</button>`;
   //add code to save new class in local storage before removing the note
   localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
   note.remove();
@@ -382,16 +387,20 @@ notesListContainer.addEventListener('click', e =>{
       let note = e.target.closest('li');
       restoreDeleted(note);
   } 
-  //3. third if targets the favorite toggle button in the notes toolbar
+  // 3. targets the permanently delete button in the deleted notes toolbar
+  else if (e.target.closest('.permanently-delete')){
+    console.log('deleted for good');
+  }
+  // 4. targets the favorite toggle button in the notes toolbar
   else if (e.target.closest('.favorite-toggle')){
       const noteId = e.target.closest('li').dataset.noteid;       
       toggleFavorite(noteId);
   } 
-  //4. fourth if exits the function if clicked on everything else that is not a inside a note
+  // 5. exits the function if clicked on everything else that is not a inside a note
   else if (!e.target.closest('.note-text')) {
     return
   } 
-  // 5. last else adds active class to note and opens it in editor
+  // 6. last else adds active class to note and opens it in editor
   else {
       if (e.target.closest('.note-text').parentElement.classList.contains('deleted')) {
         return
