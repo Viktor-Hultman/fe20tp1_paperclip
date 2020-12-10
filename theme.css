@@ -58,7 +58,10 @@ body {
     --notes-border: 2.5px solid #D3D3D3;
     --links-border: 2.5px solid #005392;
     --button-border-dark: 1.5px solid #1C354C;
+    --button-border-blue: 1px solid #005392;
     --editor-border: 1px solid #D3D3D3;
+    /*shadows*/
+    --hover-note-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.30), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
 }
 
 body.theme-green {
