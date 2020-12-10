@@ -334,15 +334,16 @@ li {
 }
 
 .close-btn {
-    text-align: right;
-    padding-right: 10px;
     font-size: 2rem;
     font-weight: bolder;
 }
 
 .close-btn button {
     border: none;
-    background-color: var(--white-bg);
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .delete-note-btn,
