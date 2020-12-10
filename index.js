@@ -293,7 +293,7 @@ function bindStarButton() {
 }
 
   function applyTheme(theme) {
-    document.body.classList.remove("theme-auto", "theme-light", "theme-dark");
+    document.body.classList.remove("theme-auto", "theme-green", "theme-red", "theme-rainbow");
     document.body.classList.add(`theme-${theme}`);
 }
 
