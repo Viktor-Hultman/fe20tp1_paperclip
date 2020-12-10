@@ -58,10 +58,15 @@ let playfairBtn = document.querySelector('#playfair-display-btn');
 let robotoBtn = document.querySelector('#roboto-btn');
 let notoBtn = document.querySelector('#noto-btn');
 let trashBinBtn = document.querySelector('#trash-bin-button');
+let emptyTrashBinBtn = document.querySelector('.clear-trash-bin');
 
 editorContainer.addEventListener('keyup', function () {
   textWasEdited = true;
 })
+
+//permanently deletes all deleted notes in the trash bin
+emptyTrashBinBtn.addEventListener('click', emptyTrashBin);
+
 //function that opens the editor
 function openEditor() {
   console.log("Should be seen only once");
@@ -215,6 +220,9 @@ saveNoteBtn.addEventListener('click', function () {
 function loadAllNotes() {
   for (let i = notesNumber; i >= 1; i--) {
     let note = JSON.parse(localStorage.getItem(i));
+    if (note === null){
+    continue
+    }
     notesListContainer.innerHTML += note;
   }
 }
@@ -272,6 +280,8 @@ function bindStarButton() {
   starButton.addEventListener('click', function () {
     //when starButton is selected, it gets gold
     starButton.classList.toggle('selected')
+    //mekes the delete all notes button hidden again
+    emptyTrashBinBtn.classList.add('hidden')
     //when current view is "favorites", view insted all notes on click"
     if (currentView == 'favorites') {
       currentView = 'allNotes'
@@ -306,10 +316,7 @@ function removeFocus() {
 
 
 //function that deletes a note
-function deleteNote(note) {
-  let areYouSure = confirm('Are you sure you want to delete this note?');
-  console.log(areYouSure);
-  if (!areYouSure) { return }
+function deleteNote(note){
   //get the note's id to be able to change it in local storage
   let noteId = note.dataset.noteid;
   //remove eventual active class
@@ -318,14 +325,25 @@ function deleteNote(note) {
   note.classList.add('deleted');
   //change delete SVG with restore SVG
   let deleteBtn = note.querySelector('.delete-note-btn');
-  deleteBtn.outerHTML = `<button class="restore-note-btn"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-restore" class="svg-inline--fa fa-trash-restore fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><title>Restore note</title><path fill="currentColor" d="M53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32zm70.11-175.8l89.38-94.26a15.41 15.41 0 0 1 22.62 0l89.38 94.26c10.08 10.62 2.94 28.8-11.32 28.8H256v112a16 16 0 0 1-16 16h-32a16 16 0 0 1-16-16V320h-57.37c-14.26 0-21.4-18.18-11.32-28.8zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg></button>`;
+  deleteBtn.outerHTML = `<button class="restore-note-btn">
+  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-restore" class="svg-inline--fa fa-trash-restore fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <title>Restore note</title>
+  <path fill="currentColor" d="M53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32zm70.11-175.8l89.38-94.26a15.41 15.41 0 0 1 22.62 0l89.38 94.26c10.08 10.62 2.94 28.8-11.32 28.8H256v112a16 16 0 0 1-16 16h-32a16 16 0 0 1-16-16V320h-57.37c-14.26 0-21.4-18.18-11.32-28.8zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path>
+  </svg>
+  </button> 
+  <button class="permanently-delete">
+  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <title>Permanently delete</title>
+  <path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
+</button>`;
   //add code to save new class in local storage before removing the note
   localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
   note.remove();
 }
 
-trashBinBtn.addEventListener('click', function () {
-  trashBinBtn.classList.toggle('selected')
+trashBinBtn.addEventListener('click', function(){
+  trashBinBtn.classList.toggle('selected');
+  emptyTrashBinBtn.classList.toggle('hidden');
   //when current view is "deleted", view insted all notes on click"
   if (currentView == 'deleted') {
     currentView = 'allNotes'
@@ -355,9 +373,46 @@ function restoreDeleted(note) {
    <title>Delete</title>
    <path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
  </button>`;
-  //add code to save new class in local storage before removing the note
-  localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
+   //removes permanently delete button
+   let permDelBtn = note.querySelector('.permanently-delete');
+   permDelBtn.remove();
+   //add code to save new class in local storage before removing the note
+   localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
 }
+
+//permanently delete items in trash bin
+function permanentlyDelete(note){
+  //make sure the user want's to permanently delete
+  let areYouSure = confirm('Are you sure you want to permanently delete this note?');
+  //stop running function if user does not want to permanently delete
+  if(!areYouSure) { return }
+  //get the note's id to be able to change it in local storage
+  let noteId = note.dataset.noteid;
+  //delete the note from local storage
+  localStorage.removeItem(noteId);
+  //delete the note from notes list
+  note.remove();
+}
+
+//Clears the trash bin and permanently deletes all notes with delete class
+function emptyTrashBin(){
+  //make sure the user want's to permanently delete
+  let areYouSure = confirm('Are you sure you want to permanently delete all the notes in the trash bin?');
+  //stop running function if user does not want to permanently delete
+  if(!areYouSure) { return }
+  //select all notes with the class of deleted
+  let deletedNotes = document.querySelectorAll('.note.deleted');
+  //grab each note and delete it
+  deletedNotes.forEach(note =>{
+     //get the note's id to be able to change it in local storage
+    let noteId = note.dataset.noteid;
+    //delete the note from local storage
+    localStorage.removeItem(noteId);
+    //delete the note from notes list
+    note.remove();
+  })
+}
+
 
 /*almost all click functionalities from the notes container in an if else statement based on the event target*/
 notesListContainer.addEventListener('click', e => {
@@ -368,20 +423,25 @@ notesListContainer.addEventListener('click', e => {
     deleteNote(note);
   }
   // 2. second if targets the restore notes buttons in the notes toolbar
-  else if (e.target.closest('.restore-note-btn')) {
+  else if (e.target.closest('.restore-note-btn')){
+      let note = e.target.closest('li');
+      restoreDeleted(note);
+  } 
+  // 3. targets the permanently delete button in the deleted notes toolbar
+  else if (e.target.closest('.permanently-delete')){
     let note = e.target.closest('li');
-    restoreDeleted(note);
+    permanentlyDelete(note);
   }
-  //3. third if targets the favorite toggle button in the notes toolbar
-  else if (e.target.closest('.favorite-toggle')) {
-    const noteId = e.target.closest('li').dataset.noteid;
-    toggleFavorite(noteId);
-  }
-  //4. fourth if exits the function if clicked on everything else that is not a inside a note
+  // 4. targets the favorite toggle button in the notes toolbar
+  else if (e.target.closest('.favorite-toggle')){
+      const noteId = e.target.closest('li').dataset.noteid;       
+      toggleFavorite(noteId);
+  } 
+  // 5. exits the function if clicked on everything else that is not a inside a note
   else if (!e.target.closest('.note-text')) {
     return
-  }
-  // 5. last else adds active class to note and opens it in editor
+  } 
+  // 6. last else adds active class to note and opens it in editor
   else {
     if (e.target.closest('.note-text').parentElement.classList.contains('deleted')) {
       return
