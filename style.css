@@ -111,25 +111,25 @@ body.theme-dark {
     --links-border: 2.5px solid var(--red-links-border);
     --button-border-dark: 1.5px solid var(--red-button-border-dark);
 }
-
+/*
 @media (prefers-color-scheme: dark){
     body.theme-auto{
-                /* text color  */
+   
     --dark-txt: var(--red-dark-txt);
     --blue-txt: var(--red-blue-txt);
-    /* background color */
+    
     --dark-bg: var(--red-dark-bg);
     --blue-bg: var(--red-blue-bg);
     --blue-bg-active: var(--red-blue-bg-active);
-    /*fill color*/
+   
     --dark-fill: var(--red-dark-fill);
     --blue-fill: var(--red-blue-fill);
-    /*borders*/
+    
     --links-border: 2.5px solid var(--red-links-border);
     --button-border-dark: 1.5px solid var(--red-button-border-dark);
     }
 }
-
+*/
 /*page layout*/
 
 .main {
