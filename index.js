@@ -66,17 +66,14 @@ editorContainer.addEventListener('keyup', function () {
 function openEditor() {
   console.log("Should be seen only once");
   //text edit variable becomes true when a keyupp event is triggered
- 
+
   confirmClose();
-  // make editor visible
-  editorContainer.classList.remove('hidden');
   //set the initial content in the editor
   quill.setContents(initialContent);
-}
-
-//function that checks if thext was edited
-function checkIfEdited() {
-
+  // make editor visible after .3 seconds when note has expanded
+  setTimeout(() => {
+    editorContainer.classList.remove("hidden");
+  }, 300);
 }
 
 //open editor when clicking on new note button
@@ -87,7 +84,8 @@ newNoteButton.addEventListener("click", function () {
 
 //function that closes the editor
 function closeEditor() {
-  editorContainer.classList.add('hidden');
+  document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
+  removeFocus();
   textWasEdited = false;
 }
 
@@ -309,6 +307,9 @@ function removeFocus() {
 
 //function that deletes a note
 function deleteNote(note) {
+  let areYouSure = confirm('Are you sure you want to delete this note?');
+  console.log(areYouSure);
+  if (!areYouSure) { return }
   //get the note's id to be able to change it in local storage
   let noteId = note.dataset.noteid;
   //remove eventual active class

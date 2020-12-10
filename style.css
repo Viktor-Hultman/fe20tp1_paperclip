@@ -20,7 +20,9 @@ for an element's width and height */
 
 /* styles the tab navigation links and buttons outline */
 *:focus {
-    outline: thin dotted #E0AD34;
+    outline:
+        /*thin dotted #E0AD34*/
+        none;
 }
 
 /* removes the text decoration from all navigation links */
@@ -64,10 +66,13 @@ a {
     --title-font: 'Playfair Display', serif;
     --text-font: 'Montserrat', sans-serif;
     /*borders*/
-    --notes-border: 2.5px solid #D3D3D3;
+    --notes-border: 1px solid #dadce0;
     --links-border: 2.5px solid #005392;
-    --button-border-dark: 1.5px solid #1C354C;
+    --button-border-dark: 1px solid #1C354C;
+    --button-border-blue: 1px solid #005392;
     --editor-border: 1px solid #D3D3D3;
+    /*shadows*/
+    --hover-note-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.30), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
 }
 
 /*page layout*/
@@ -106,6 +111,7 @@ a {
     right: 5px;
     bottom: 5px;
     cursor: pointer;
+    background-color: transparent;
 }
 
 .favorite-toggle svg {
@@ -119,7 +125,7 @@ a {
     align-items: center;
     background-color: var(--light-grey-bg);
     height: calc(100% - 50px);
-    min-width: 250px;
+    min-width: 300px;
 }
 
 .saved-notes-list {
@@ -137,16 +143,23 @@ a {
     top: 50px;
     left: 0;
     background-color: var(--white-bg);
-    min-height: 100%;
-    width: 100%;;
+    height: calc(100% - 50px);
+    width: 100%;
+    overflow: auto;
 }
 
+.ql-toolbar.ql-snow,
 .ql-container.ql-snow {
     border: none;
 }
 
-.ql-editor {
-    flex-basis: 280px;
+.ql-toolbar {
+    box-shadow: var(--hover-note-shadow);
+}
+
+#editor {
+    height: calc(1fr - 50px);
+    overflow: auto;
 }
 
 /* logo and navbar icons*/
@@ -267,7 +280,7 @@ li {
     background-color: var(--white-bg);
     color: var(--dark-txt);
     font-family: var(--title-font);
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .dark-blue-btn:active,
@@ -281,6 +294,17 @@ li {
     font-size: 1rem;
     margin: 20px 0;
     padding: 6px;
+    border: var(--button-border-blue);
+    color: var(--blue-txt);
+    font-family: var(--title-font);
+    border-radius: 8px;
+}
+
+.new-note-button:hover,
+.new-note-button:active,
+.new-note-button:focus {
+    background-color: var(--blue-bg);
+    color: var(--white-txt);
 }
 
 .playfair-display-text {
@@ -312,6 +336,7 @@ li {
     border: none;
     cursor: pointer;
     width: 30px;
+    background-color: transparent;
 }
 
 .delete-note-btn svg,
@@ -331,6 +356,7 @@ li {
     width: 85%;
     margin: 0 auto 5px auto;
     transition: width .2s;
+    background-color: #fff;
 }
 
 .note.favorite .favorite-toggle svg {
@@ -353,6 +379,7 @@ li {
     border-right: none;
     border-left: none;
     width: 100%;
+    border-radius: 0;
 }
 
 .active-note button {
@@ -367,6 +394,12 @@ li {
 .note-text ul,
 .note-text ol {
     padding-left: 20px;
+}
+
+.note:hover,
+.note:active,
+.note:focus {
+    box-shadow: var(--hover-note-shadow);
 }
 
 #searchInput {
@@ -409,6 +442,7 @@ li {
     .toolbar-and-editor-container {
         position: static;
         max-width: 800px;
+        height: 100%;
     }
 
     #editor {
