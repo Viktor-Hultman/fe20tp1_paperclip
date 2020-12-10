@@ -148,8 +148,13 @@ a {
     overflow: auto;
 }
 
+.ql-toolbar.ql-snow,
 .ql-container.ql-snow {
     border: none;
+}
+
+.ql-toolbar {
+    box-shadow: var(--hover-note-shadow);
 }
 
 #editor {
@@ -254,6 +259,7 @@ li {
     align-items: center;
     justify-content: center;
     position: relative;
+    box-shadow: var(--hover-note-shadow);
 }
 
 /* buttons */
@@ -444,6 +450,7 @@ li {
     .toolbar-and-editor-container {
         position: static;
         max-width: 800px;
+        height: 100%;
     }
 
     #editor {

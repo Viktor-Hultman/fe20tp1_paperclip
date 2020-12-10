@@ -74,12 +74,7 @@ function openEditor() {
   setTimeout(() => { 
     editorContainer.classList.remove("hidden"); 
   }, 300); 
-  // slideInEditor()
 }
-
-// function slideInEditor () {
-//   editorContainer.classList.add("visible");
-// }
 
 //open editor when clicking on new note button
 newNoteButton.addEventListener("click", function () {
