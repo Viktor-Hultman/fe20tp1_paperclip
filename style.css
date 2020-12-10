@@ -172,6 +172,21 @@ a {
     color: var(--selected-fill);
 }
 
+.cogwheel-list-item {
+    background: transparent url('./icons/cogwheel.svg') center calc(50% - 2.5px) no-repeat;
+    background-size: 35%;
+}
+
+.cogwheel-select {
+    max-width: 50px;
+    min-width: 50px;
+    height: 50px;
+    color: transparent;
+    border: none;
+    background: transparent;
+}
+
+
 /*typography*/
 h1,
 h2 {
