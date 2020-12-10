@@ -45,35 +45,6 @@ a {
     display: none;
 }
 
-/* main variables are used in order to be able to quickly change styles if needed or in case of rebranding */
-:root {
-    /* text color  */
-    --white-txt: #fff;
-    --dark-txt: #1C354C;
-    --blue-txt: #005392;
-    /* background color */
-    --white-bg: #fff;
-    --light-grey-bg: #EBEBEB;
-    --dark-bg: #1C354C;
-    --blue-bg: #005392;
-    --blue-bg-active: #0065b3;
-    /*fill color*/
-    --white-fill: #fff;
-    --dark-fill: #1C354C;
-    --blue-fill: #005392;
-    --selected-fill: gold;
-    /* font */
-    --title-font: 'Playfair Display', serif;
-    --text-font: 'Montserrat', sans-serif;
-    /*borders*/
-    --notes-border: 1px solid #dadce0;
-    --links-border: 2.5px solid #005392;
-    --button-border-dark: 1px solid #1C354C;
-    --button-border-blue: 1px solid #005392;
-    --editor-border: 1px solid #D3D3D3;
-    /*shadows*/
-    --hover-note-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.30), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-}
 
 /*page layout*/
 
@@ -206,6 +177,27 @@ a {
     fill: var(--selected-fill);
     color: var(--selected-fill);
 }
+
+/* item cogwheel */
+.cogwheel-list-item {
+    background: transparent url('./icons/cogwheel.svg') center calc(50% - 2.5px) no-repeat;
+    background-size: 35%;
+}
+
+.cogwheel-list-item:hover {
+    background-color: var(--blue-bg-active);
+}
+
+/* styling to make the cogwheel look like the other icons */
+.cogwheel-select {
+    max-width: 50px;
+    min-width: 50px;
+    height: 50px;
+    color: transparent;
+    border: none;
+    background: transparent;
+}
+
 
 /*typography*/
 h1,
