@@ -215,6 +215,9 @@ saveNoteBtn.addEventListener('click', function () {
 function loadAllNotes() {
   for (let i = notesNumber; i >= 1; i--) {
     let note = JSON.parse(localStorage.getItem(i));
+    if (note === null){
+    continue
+    }
     notesListContainer.innerHTML += note;
   }
 }
@@ -307,9 +310,6 @@ function removeFocus() {
 
 //function that deletes a note
 function deleteNote(note){
-  let areYouSure = confirm('Are you sure you want to delete this note?');
-  //console.log(areYouSure);
-  if(!areYouSure) { return }
   //get the note's id to be able to change it in local storage
   let noteId = note.dataset.noteid;
   //remove eventual active class
@@ -360,12 +360,19 @@ function restoreDeleted(note){
    <title>Delete</title>
    <path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
  </button>`;
+   //removes permanently delete button
+   let permDelBtn = note.querySelector('.permanently-delete');
+   permDelBtn.remove();
    //add code to save new class in local storage before removing the note
    localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
 }
 
 //permanently delete items in trash bin
 function permanentlyDelete(note){
+  //make sure the user want's to permanently delete
+  let areYouSure = confirm('Are you sure you want to permanently delete this note?');
+  //stop running function if user does not want to permanently delete
+  if(!areYouSure) { return }
   //get the note's id to be able to change it in local storage
   let noteId = note.dataset.noteid;
   //delete the note from local storage
@@ -389,7 +396,8 @@ notesListContainer.addEventListener('click', e =>{
   } 
   // 3. targets the permanently delete button in the deleted notes toolbar
   else if (e.target.closest('.permanently-delete')){
-    console.log('deleted for good');
+    let note = e.target.closest('li');
+    permanentlyDelete(note);
   }
   // 4. targets the favorite toggle button in the notes toolbar
   else if (e.target.closest('.favorite-toggle')){
