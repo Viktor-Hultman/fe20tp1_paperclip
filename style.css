@@ -469,3 +469,14 @@ li {
         min-height: 50px;
     }
 }
+
+#themes {
+    width: fit-content;
+}
+
+.ql-snow #themes.ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+    position: relative;
+    margin-top: 0;
+    top: 0;
+    vertical-align: middle;
+}

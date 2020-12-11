@@ -526,7 +526,7 @@ editingField.addEventListener('click', () => {
 });
 
 //Eventlisteners for the "Mallar" buttons
-playfairBtn.addEventListener('click', () => {
+/* playfairBtn.addEventListener('click', () => {
   //Targets all the children in the editor
   let editorChildren = editingField.children;
   //Loops through them to target each element
@@ -537,9 +537,22 @@ playfairBtn.addEventListener('click', () => {
     editorChildren[i].classList.add('playfair-display-text')
   }
 
-})
+}) */
 
-robotoBtn.addEventListener('click', () => {
+function playfair() {
+  //Targets all the children in the editor
+  let editorChildren = editingField.children;
+  //Loops through them to target each element
+  for (let i = 0; i < editorChildren.length; i++) {
+    //Removes previous classes
+    editorChildren[i].className = '';
+    //Adds the class corosponding to the "Mall" button
+    editorChildren[i].classList.add('playfair-display-text')
+  }
+
+}
+
+/* robotoBtn.addEventListener('click', () => {
   //Targets all the children in the editor
   let editorChildren = editingField.children;
   //Loops through them to target each element
@@ -550,10 +563,22 @@ robotoBtn.addEventListener('click', () => {
     editorChildren[i].classList.add('roboto-text')
   }
 
-})
+}) */
 
+function roboto() {
+  //Targets all the children in the editor
+  let editorChildren = editingField.children;
+  //Loops through them to target each element
+  for (let i = 0; i < editorChildren.length; i++) {
+    //Removes previous classes
+    editorChildren[i].className = '';
+    //Adds the class corosponding to the "Mall" button
+    editorChildren[i].classList.add('roboto-text')
+  }
 
-notoBtn.addEventListener('click', () => {
+}
+
+/* notoBtn.addEventListener('click', () => {
   //Targets all the children in the editor
   let editorChildren = editingField.children;
   //Loops through them to target each element
@@ -564,4 +589,48 @@ notoBtn.addEventListener('click', () => {
     editorChildren[i].classList.add('noto-text')
   }
 
+}) */
+
+function noto() {
+  //Targets all the children in the editor
+  let editorChildren = editingField.children;
+  //Loops through them to target each element
+  for (let i = 0; i < editorChildren.length; i++) {
+    //Removes previous classes
+    editorChildren[i].className = '';
+    //Adds the class corosponding to the "Mall" button
+    editorChildren[i].classList.add('noto-text')
+  }
+
+}
+
+function standard() {
+  //Targets all the children in the editor
+  let editorChildren = editingField.children;
+  //Loops through them to target each element
+  for (let i = 0; i < editorChildren.length; i++) {
+    //Removes previous classes
+    editorChildren[i].className = '';
+  }
+}
+
+/* const spanTheme = document.querySelector('#themes');
+spanTheme.remove(); */
+// document.querySelector('#themes').children[0].dataset.value
+
+const selectTheme = document.querySelector('select#themes');
+selectTheme.addEventListener('change', function (event) {
+  const currentTheme = document.querySelector('#themes').children[0].dataset.value;
+  if (currentTheme === 'standard') {
+    standard();
+  }
+  if (currentTheme === 'playfair-display') {
+    playfair();
+  }
+  if (currentTheme === 'roboto') {
+    roboto();
+  }
+  if (currentTheme === 'noto') {
+    noto();
+  }
 })
