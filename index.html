@@ -16,6 +16,7 @@
   <script src="https://kit.fontawesome.com/94d4f6b5a1.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme.css">
 </head>
 
 <body onload="redirectNewUser()">
@@ -27,7 +28,7 @@
           <button class="nav-button" id="search-button">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search"
               class="svg-inline--fa fa-search fa-w-16" role="img" viewBox="0 0 512 512">
-              <title>Search icon</title>
+              <title>Search</title>
               <path
                 d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z">
               </path>
@@ -39,7 +40,7 @@
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
               class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 576 512">
-              <title>Starred icon</title>
+              <title>Favorite notes</title>
               <path
                 d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
               </path>
@@ -51,7 +52,7 @@
             <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="chart-bar"
               class="svg-inline--fa fa-chart-bar fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512">
-              <title>Chart bar icon</title>
+              <title>Graphics</title>
               <path
                 d="M396.8 352h22.4c6.4 0 12.8-6.4 12.8-12.8V108.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v230.4c0 6.4 6.4 12.8 12.8 12.8zm-192 0h22.4c6.4 0 12.8-6.4 12.8-12.8V140.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v198.4c0 6.4 6.4 12.8 12.8 12.8zm96 0h22.4c6.4 0 12.8-6.4 12.8-12.8V204.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v134.4c0 6.4 6.4 12.8 12.8 12.8zM496 400H48V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16zm-387.2-48h22.4c6.4 0 12.8-6.4 12.8-12.8v-70.4c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v70.4c0 6.4 6.4 12.8 12.8 12.8z">
               </path>
@@ -59,43 +60,66 @@
           </button>
         </li>
         <li class="nav-icon">
-          <button class="nav-button" id="settings-button">
-            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cog"
-              class="svg-inline--fa fa-cog fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <title>Settings icon</title>
-              <path
-                d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z">
+          <button class="nav-button" id="trash-bin-button">
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash"
+              class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512">
+              <title>Trash bin</title>
+              <path fill="currentColor"
+                d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z">
               </path>
             </svg>
           </button>
+        </li> 
+        <li class="nav-icon cogwheel-list-item">
+          <select class="nav-button cogwheel-select" id="theme">
+            <option value="auto">Auto</option>
+            <option value="green">Green</option>
+            <option value="red">Red</option>
+            <option value="rainbow">Rainbow</option>
+            <title>Color-theme</title>
+          </select>
         </li>
       </ul>
     </nav>
 
-      <section class="saved-notes-div">
-        <button class="new-note-button dark-blue-btn">Create new note</button>
-        <ul class="saved-notes-list">
-         
-        </ul>
-      </section>
-      
-      <section class="toolbar-and-editor-container hidden">
-        <div class="close-btn"><button>&times;</button></div>
-        <div id="editor">
-            <h1>Please add a title here</h1>
-            <p class=>Here is where you can write your cool note text</p>
-        </div>
-        <section class="bottom-toolbar">
-            <button id="academic-btn" class="dark-blue-btn">Academic</button>
-            <button id="playfull-btn" class="dark-blue-btn">Playfull</button>
-            <button id="reset-btn" class="dark-blue-btn">Reset</button>
-            <button class="save-note-btn dark-blue-btn">Save</button>
-            <button class="printBtn dark-blue-btn" onclick="printContent()"><i class="fas fa-print"></i></button>
-        </section>
-      </section>
+    <section class="saved-notes-div">
+      <button class="new-note-button">Create new note</button>
+      <ul class="saved-notes-list">
+
+      </ul>
+      <button class="clear-trash-bin hidden">Delete all</button>
+    </section>
+
+    <section class="toolbar-and-editor-container hidden">
+      <div class="close-btn"><button>&times;</button></div>
+      <div id="toolbar">
+        <select class="ql-header">
+          <option value="1"></option>
+          <option value="2"></option>
+          <option selected></option>
+        </select>
+        <button class="ql-bold"></button>
+        <button class="ql-italic"></button>
+        <button class="ql-underline"></button>
+        <button class="ql-list" value="ordered"></button>
+        <button class="ql-list" value="bullet"></button>
+        <button class="ql-link"></button>
+        <button class="ql-image"></button>
+        <button id="academic-btn" class="dark-blue-btn">Academic</button>
+        <button id="playfull-btn" class="dark-blue-btn">Playfull</button>
+        <button id="reset-btn" class="dark-blue-btn">Reset</button>
+        <button class="save-note-btn dark-blue-btn">Save</button>
+        <button id="print-btn" class="printBtn" onclick="printContent()"><i class="fas fa-print"></i></button>
+      </div>
+      <div id="editor">
+        <h1>Please add a title here</h1>
+        <p>Here is where you can write your cool note text</p>
+      </div>
     </section>
 
   </main>
+  <script src="confetti.js"></script>
   <script src="index.js"></script>
 </body>
 
