@@ -266,21 +266,6 @@ li {
 
 
 /* buttons */
-/* .dark-blue-btn {
-    border: var(--button-border-dark);
-    background-color: var(--white-bg);
-    color: var(--dark-txt);
-    font-family: var(--title-font);
-    border-radius: 2px;
-}
-
-.dark-blue-btn:active,
-.dark-blue-btn:hover,
-.dark-blue-btn:focus {
-    background-color: var(--dark-bg);
-    color: var(--white-txt);
-} */
-
 .new-note-button {
     font-size: 1rem;
     margin: 20px 0;
@@ -316,13 +301,6 @@ li {
     background: var(--dark-bg);
     color: var(--white-txt);
 }
-
-/* .printBtn {
-    position: absolute;
-    right: 20px;
-} */
-
-
 
 .close-btn {
     font-size: 2rem;
