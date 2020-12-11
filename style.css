@@ -218,7 +218,7 @@ h2 {
     color: var(--dark-txt);
 }
 
-h2 {
+.intro h2 {
     font-variant: small-caps;
 }
 
@@ -351,9 +351,17 @@ li {
 
 .delete-note-btn svg,
 .restore-note-btn svg,
-.permanently-delete svg {
+.permanently-delete svg,
+.save-note-btn svg,
+#print-btn svg {
     height: 12px;
     color: var(--dark-fill);
+    fill: var(--dark-fill);
+}
+
+.save-note-btn svg,
+#print-btn svg {
+    color: #444444;
 }
 
 .clear-trash-bin {
