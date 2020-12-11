@@ -128,6 +128,11 @@ a {
     box-shadow: var(--hover-note-shadow);
 }
 
+#toolbar {
+    /*makes sure toolbar buttons are never over close button*/
+    padding-right: 70px;
+}
+
 #editor {
     height: calc(1fr - 50px);
     overflow: auto;
