@@ -291,6 +291,13 @@ li {
     border-radius: 8px;
 }
 
+.new-note-button:hover,
+.new-note-button:active,
+.new-note-button:focus {
+    background-color: var(--blue-bg);
+    color: var(--white-txt);
+}
+
 .save-note-btn {
     width: 80px;
     align-self: center;
@@ -310,17 +317,11 @@ li {
     color: var(--white-txt);
 }
 
-.printBtn {
+/* .printBtn {
     position: absolute;
     right: 20px;
-}
+} */
 
-.new-note-button:hover,
-.new-note-button:active,
-.new-note-button:focus {
-    background-color: var(--blue-bg);
-    color: var(--white-txt);
-}
 
 
 .close-btn {
