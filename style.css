@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Noto+Serif&family=Roboto&Montserrat&family=Playfair+Display:ital,wght@0,500;1,700&family=Roboto&family=Sofia&family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Inconsolata&family=Noto+Serif&family=Roboto&Montserrat&family=Playfair+Display:ital,wght@0,500;1,700&family=Roboto&family=Sofia&family=Ubuntu&display=swap');
 /* @import url('https://fonts.googleapis.com/css2?family=family=Montserrat&family=Playfair+Display:wght@500;700&display=swap'); */
 
 
@@ -263,23 +263,6 @@ li {
     margin-left: 10px;
 }
 
-#playfair-display-btn {
-    background-color: yellow;
-    border: 1px solid black;
-    font-family: 'Playfair Display', serif;
-}
-
-#roboto-btn {
-    background-color: pink;
-    border: 1px solid black;
-    font-family: 'Roboto', sans-serif;
-}
-
-#noto-btn {
-    background-color: greenyellow;
-    border: 1px solid black;
-    font-family: 'Noto Serif', serif;
-}
 
 /* buttons */
 .dark-blue-btn {
@@ -307,6 +290,17 @@ li {
     border-radius: 8px;
 }
 
+.save-note-btn {
+    font-size: 1rem;
+    margin: 20px 0;
+    padding: 6px;
+}
+
+.printBtn {
+    position: absolute;
+    right: 20px;
+}
+
 .new-note-button:hover,
 .new-note-button:active,
 .new-note-button:focus {
@@ -314,17 +308,6 @@ li {
     color: var(--white-txt);
 }
 
-.playfair-display-text {
-    font-family: 'Playfair Display', serif;
-}
-
-.roboto-text {
-    font-family: 'Roboto', sans-serif;
-}
-
-.noto-text {
-    font-family: 'Noto Serif', serif;
-}
 
 .close-btn {
     font-size: 2rem;
@@ -443,6 +426,86 @@ li {
     letter-spacing: 1px;
 }
 
+/* Start of academic classes */
+#academic-btn {
+    position: absolute;
+    left: 50px;
+}
+
+.academic-note {
+    background-color: 	#ffffff;
+}
+
+.academic-note > h1 {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-size: 26px !important; 
+}
+
+.academic-note > h2 {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-size: 20px !important; 
+}
+
+.academic-note > h3 {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-size: 16px !important; 
+}
+
+.academic-note > p {
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+    font-size: 14px !important;
+}
+/* Targets all unordered and ordered list items */
+.academic-note > ul > li, .academic-note > ol > li {
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+    font-size: 14px !important;
+}
+/*End of academic classes*/
+
+/* Start of playfull classes */
+#playfull-btn {
+    position: absolute;
+    left: 150px;
+}
+.playfull-note {
+    background-color: 	#feff9c;
+}
+
+.playfull-note > h1 {
+    font-family: 'Caveat', cursive;
+    color: #2a4e44;
+    font-size: 30px !important; 
+}
+
+.playfull-note > h2 {
+    font-family: 'Caveat', cursive;
+    color: #2a4e44;
+    font-size: 24px !important; 
+}
+
+.playfull-note > h3 {
+    font-family: 'Caveat', cursive;
+    color: #2a4e44;
+    font-size: 20px !important; 
+}
+
+.playfull-note > p {
+    font-family: 'Indie Flower', cursive;
+    color: #6dadab;
+    font-size: 16px !important;
+}
+/* Targets all unordered and ordered list items */
+.playfull-note > ul > li, .playfull-note > ol > li {
+    font-family: 'Indie Flower', cursive;
+    color: #ff65a3;
+    font-size: 16px !important;
+}
+/*End of playfull classes*/
 /*note toolbar*/
 .note-toolbar {
     display: flex;
