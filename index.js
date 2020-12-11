@@ -1,16 +1,11 @@
 
 let toolbarOptions = [
-  [{ 'header': [1, 2, 3,/*, 4, 5, 6,*/ false] }],
-  // [{ 'font': [] }],
-  ['bold', 'italic', 'underline'/*, 'strike'*/],
-  // [{ 'size': ['small', false, 'large', 'huge'] }],
-  ['blockquote', /*'code-block'*/],
-  [{ 'list': 'ordered' }, { 'list': 'bullet' }/*, { 'align': [] }*/],
-  // [{ 'indent': '-1' }, { 'indent': '+1' }, { 'direction': 'rtl' }],
-  // [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-  // [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'header': [1, 2, 3, false] }],
+  ['bold', 'italic', 'underline'],
+  ['blockquote'],
+  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
   ['link', 'image'],
-  [{ 'style': ['Playfair', 'Roboto', 'Noto Serif'] }], // my custom dropdown
+   // [{ 'style': ['Playfair', 'Roboto', 'Noto Serif'] }], // my custom dropdown
   // ['clean']                                         // remove formatting button
 ];
 
@@ -23,9 +18,9 @@ quill = new Quill('#editor', {
 });
 
 //sets custom style dropdown in quill editor
-const stylePickerItems = Array.prototype.slice.call(document.querySelectorAll('.ql-style .ql-picker-item'));
+// const stylePickerItems = Array.prototype.slice.call(document.querySelectorAll('.ql-style .ql-picker-item'));
 
-stylePickerItems.forEach(item => item.textContent = item.dataset.value);
+// stylePickerItems.forEach(item => item.textContent = item.dataset.value);
 
 // document.querySelector('.ql-style .ql-picker-label').innerHTML
 //     = document.querySelector('.ql-style .ql-picker-label').innerHTML;

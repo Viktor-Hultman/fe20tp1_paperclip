@@ -131,6 +131,7 @@ a {
 #toolbar {
     /*makes sure toolbar buttons are never over close button*/
     padding-right: 70px;
+    margin-bottom: 10px;
 }
 
 #editor {
@@ -265,7 +266,7 @@ li {
 
 
 /* buttons */
-.dark-blue-btn {
+/* .dark-blue-btn {
     border: var(--button-border-dark);
     background-color: var(--white-bg);
     color: var(--dark-txt);
@@ -278,7 +279,7 @@ li {
 .dark-blue-btn:focus {
     background-color: var(--dark-bg);
     color: var(--white-txt);
-}
+} */
 
 .new-note-button {
     font-size: 1rem;
@@ -291,9 +292,22 @@ li {
 }
 
 .save-note-btn {
-    font-size: 1rem;
+    width: 80px;
+    align-self: center;
+    font-size: 1.1rem;
+    font-family: 'Montserrat';
     margin: 20px 0;
     padding: 6px;
+    color: var(--white-txt);
+    background: var(--blue-bg);
+    border: none;
+}
+
+.save-note-btn:hover,
+.save-note-btn:active,
+.save-note-btn:focus {
+    background: var(--dark-bg);
+    color: var(--white-txt);
 }
 
 .printBtn {
@@ -433,38 +447,41 @@ li {
 }
 
 .academic-note {
-    background-color: 	#ffffff;
+    background-color: #ffffff;
 }
 
-.academic-note > h1 {
+.academic-note>h1 {
     font-family: 'Roboto', sans-serif;
     color: black;
-    font-size: 26px !important; 
+    font-size: 26px !important;
 }
 
-.academic-note > h2 {
+.academic-note>h2 {
     font-family: 'Roboto', sans-serif;
     color: black;
-    font-size: 20px !important; 
+    font-size: 20px !important;
 }
 
-.academic-note > h3 {
+.academic-note>h3 {
     font-family: 'Roboto', sans-serif;
     color: black;
-    font-size: 16px !important; 
+    font-size: 16px !important;
 }
 
-.academic-note > p {
+.academic-note>p {
     font-family: 'Times New Roman', Times, serif;
     color: black;
     font-size: 14px !important;
 }
+
 /* Targets all unordered and ordered list items */
-.academic-note > ul > li, .academic-note > ol > li {
+.academic-note>ul>li,
+.academic-note>ol>li {
     font-family: 'Times New Roman', Times, serif;
     color: black;
     font-size: 14px !important;
 }
+
 /*End of academic classes*/
 
 /* Start of playfull classes */
@@ -472,39 +489,43 @@ li {
     position: absolute;
     left: 150px;
 }
+
 .playfull-note {
-    background-color: 	#feff9c;
+    background-color: #feff9c;
 }
 
-.playfull-note > h1 {
+.playfull-note>h1 {
     font-family: 'Caveat', cursive;
     color: #2a4e44;
-    font-size: 30px !important; 
+    font-size: 30px !important;
 }
 
-.playfull-note > h2 {
+.playfull-note>h2 {
     font-family: 'Caveat', cursive;
     color: #2a4e44;
-    font-size: 24px !important; 
+    font-size: 24px !important;
 }
 
-.playfull-note > h3 {
+.playfull-note>h3 {
     font-family: 'Caveat', cursive;
     color: #2a4e44;
-    font-size: 20px !important; 
+    font-size: 20px !important;
 }
 
-.playfull-note > p {
+.playfull-note>p {
     font-family: 'Indie Flower', cursive;
     color: #6dadab;
     font-size: 16px !important;
 }
+
 /* Targets all unordered and ordered list items */
-.playfull-note > ul > li, .playfull-note > ol > li {
+.playfull-note>ul>li,
+.playfull-note>ol>li {
     font-family: 'Indie Flower', cursive;
     color: #ff65a3;
     font-size: 16px !important;
 }
+
 /*End of playfull classes*/
 /*note toolbar*/
 .note-toolbar {
