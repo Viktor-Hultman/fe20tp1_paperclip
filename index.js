@@ -502,19 +502,8 @@ notesListContainer.addEventListener('click', e => {
 let printBtn = document.querySelector('.printBtn');
 
 function printContent() {
+  window.print();
   // https://benfrain.com/create-print-styles-using-css3-media-queries/
-  var myWindow = window.open('', '', 'width=800,height=600');
-  //open the window
-  myWindow.document.open();
-  myWindow.document.write('<html><head><title>Print it</title><link rel="stylesheet" type="text/css" href="reset.css"><link rel="stylesheet" type="text/css" href="style.css"></head><body>');
-  myWindow.document.write(document.querySelector(".ql-editor").innerHTML);
-  myWindow.document.write('</body></html>');
-  myWindow.document.close();
-  myWindow.focus();
-  setTimeout(function () {
-    myWindow.print();
-    // myWindow.close();
-  }, 100);
 }
 
 let searchStatus = false;

@@ -499,3 +499,13 @@ li {
         min-height: 50px;
     }
 }
+
+@media print {
+
+    .navbar,
+    .saved-notes-div,
+    .toolbar-and-editor-container .close-btn,
+    .toolbar-and-editor-container .ql-toolbar {
+        display: none;
+    }
+}
