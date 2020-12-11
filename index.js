@@ -10,6 +10,7 @@ let toolbarOptions = [
   // [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
   // [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
   ['link', 'image'],
+  [{ 'style': ['Playfair', 'Roboto', 'Noto Serif'] }], // my custom dropdown
   // ['clean']                                         // remove formatting button
 ];
 
@@ -20,6 +21,14 @@ quill = new Quill('#editor', {
   },
   theme: 'snow'
 });
+
+//sets custom dropdown in quill editor
+const stylePickerItems = Array.prototype.slice.call(document.querySelectorAll('.ql-style .ql-picker-item'));
+
+stylePickerItems.forEach(item => item.textContent = item.dataset.value);
+
+document.querySelector('.ql-style .ql-picker-label').innerHTML
+    = document.querySelector('.ql-style .ql-picker-label').innerHTML;
 
 // Saves the initial content of the editor. When one pushes on "Create new note" button, the content of the editor is set to this variable
 const initialContent = quill.getContents();
@@ -54,9 +63,10 @@ let textWasEdited = false;
 let clickedNoteId = 0;
 //variable to identify the clicked element for saving edited content
 let clickedNote = "";
-let playfairBtn = document.querySelector('#playfair-display-btn');
-let robotoBtn = document.querySelector('#roboto-btn');
-let notoBtn = document.querySelector('#noto-btn');
+let playfairBtn = document.querySelector('[data-value="Playfair"]');
+// let robotoBtn = document.querySelector('#roboto-btn');
+let robotoBtn = document.querySelector("[data-value='Roboto']");
+let notoBtn = document.querySelector("[data-value='Noto']");
 let trashBinBtn = document.querySelector('#trash-bin-button');
 let emptyTrashBinBtn = document.querySelector('.clear-trash-bin');
 
