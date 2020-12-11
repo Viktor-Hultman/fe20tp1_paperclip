@@ -22,13 +22,14 @@ quill = new Quill('#editor', {
   theme: 'snow'
 });
 
-//sets custom dropdown in quill editor
+//sets custom style dropdown in quill editor
 const stylePickerItems = Array.prototype.slice.call(document.querySelectorAll('.ql-style .ql-picker-item'));
 
 stylePickerItems.forEach(item => item.textContent = item.dataset.value);
 
 document.querySelector('.ql-style .ql-picker-label').innerHTML
     = document.querySelector('.ql-style .ql-picker-label').innerHTML;
+
 
 // Saves the initial content of the editor. When one pushes on "Create new note" button, the content of the editor is set to this variable
 const initialContent = quill.getContents();
@@ -195,7 +196,7 @@ function saveNewNote() {
     closeEditor();
     //remove focus from list items
     removeFocus();
-  } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
+  } else alert("Please add a title or a subtitle at the begining of your note");
 }
 
 //function intended for updating a note already existent
