@@ -1,4 +1,8 @@
 
+//=========================
+//quill editor setup section
+//=========================
+//sets up the options available in the toolbar
 let toolbarOptions = [
   [{ 'header': [1, 2, 3, false] }],
   ['bold', 'italic', 'underline'],
@@ -6,9 +10,7 @@ let toolbarOptions = [
   [{ 'list': 'ordered' }, { 'list': 'bullet' }],
   ['link', 'image'],
    // [{ 'style': ['Playfair', 'Roboto', 'Noto Serif'] }], // my custom dropdown
-  // ['clean']                                         // remove formatting button
 ];
-
 //Sets up the quill editor in the element with the id of "editor"
 quill = new Quill('#editor', {
   modules: {
@@ -17,6 +19,7 @@ quill = new Quill('#editor', {
   theme: 'snow'
 });
 
+//just in case dropdown does not work
 //sets custom style dropdown in quill editor
 // const stylePickerItems = Array.prototype.slice.call(document.querySelectorAll('.ql-style .ql-picker-item'));
 
@@ -26,12 +29,93 @@ quill = new Quill('#editor', {
 //     = document.querySelector('.ql-style .ql-picker-label').innerHTML;
 
 
+
+//=========================
+//global variables section
+//=========================
+//constants can come first, they do not change their value(cannot be reasigned new values)
 // Saves the initial content of the editor. When one pushes on "Create new note" button, the content of the editor is set to this variable
 const initialContent = quill.getContents();
+const editingField = document.querySelector(".ql-editor");
+const notesListContainer = document.querySelector('.saved-notes-list');
+const saveNoteBtn = document.querySelector('.save-note-btn');
+const newNoteButton = document.querySelector(".new-note-button");
+const starButton = document.querySelector('#starred-button');
+const closeBtn = document.querySelector('div.close-btn > button');
+const editorContainer = document.querySelector(".toolbar-and-editor-container");
+const trashBinBtn = document.querySelector('#trash-bin-button');
+const emptyTrashBinBtn = document.querySelector('.clear-trash-bin');
+const resetBtn = document.querySelector('#reset-btn');
+const playfullBtn = document.querySelector('#playfull-btn');
+const academicBtn = document.querySelector('#academic-btn');
+const changeListButton = document.querySelectorAll('.ql-list');
+//kept old dropdown variables in case we need them (if not delete them)
+// const playfairBtn = document.querySelector('[data-value="Playfair"]');
+// const robotoBtn = document.querySelector('#roboto-btn');
+// const robotoBtn = document.querySelector("[data-value='Roboto']");
+// const notoBtn = document.querySelector("[data-value='Noto']");
 
-//new user redirect
+//we declare variables that change their value throughout the code with let
+//unique identifyer for each note to act as a local storage key that is taken from local storage
+let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
+//variable that indicates when text will be edited starts false and becomes true on key upp in editor
+let textWasEdited = false;
+//variable to identify the clicked note for saving edited content
+let clickedNoteId = 0;
+//variable to identify the clicked element for saving edited content
+let clickedNote = "";
+let currentView = 'allNotes';
+//if the user has visited the page before page visit variable will load from local storage, otherwise it will be null
 let pageVisits = JSON.parse(localStorage.getItem('pageVisits'));
+let templateData = "undefined";
+//not very sure if it should be a constant, i think so though
+let headingsPicker = document.querySelector('.ql-picker-options');
 
+
+
+//=========================
+//event listeners section
+//=========================
+//open editor when clicking on new note button
+newNoteButton.addEventListener("click", function () {
+  openEditor(); 
+  
+  clickedNote = "";
+});
+
+// closes the editor when clicking on close button with both save and close option
+closeBtn.addEventListener('click', confirmClose);
+
+//track all thext changes in the editor
+editorContainer.addEventListener('keyup', function () {
+  textWasEdited = true;
+})
+
+//permanently deletes all deleted notes in the trash bin
+emptyTrashBinBtn.addEventListener('click', emptyTrashBin);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//=========================
+//functions section
+//=========================
+//new user redirect
 function redirectToInfo() {
   window.location = "intro.html";
 }
@@ -43,44 +127,6 @@ function redirectNewUser() {
     redirectToInfo();
   }
 }
-
-//global variables
-let editingField = document.querySelector(".ql-editor");
-let notesListContainer = document.querySelector('.saved-notes-list');
-let saveNoteBtn = document.querySelector('.save-note-btn');
-let newNoteButton = document.querySelector(".new-note-button");
-let starButton = document.querySelector('#starred-button');
-let currentView = 'allNotes'
-let closeBtn = document.querySelector('div.close-btn > button');
-let editorContainer = document.querySelector(".toolbar-and-editor-container");
-//variable that indicates when text will be edited starts false and becomes true on key upp in editor
-let textWasEdited = false;
-//variable to identify the clicked note for saving edited content
-let clickedNoteId = 0;
-//variable to identify the clicked element for saving edited content
-let clickedNote = "";
-// let playfairBtn = document.querySelector('[data-value="Playfair"]');
-// // let robotoBtn = document.querySelector('#roboto-btn');
-// let robotoBtn = document.querySelector("[data-value='Roboto']");
-// let notoBtn = document.querySelector("[data-value='Noto']");
-
-let trashBinBtn = document.querySelector('#trash-bin-button');
-let emptyTrashBinBtn = document.querySelector('.clear-trash-bin');
-let resetBtn = document.querySelector('#reset-btn');
-let playfullBtn = document.querySelector('#playfull-btn');
-let academicBtn = document.querySelector('#academic-btn');
-let headingsPicker = document.querySelector('.ql-picker-options')
-let changeListButton = document.querySelectorAll('.ql-list')
-
-let templateData = "undefined"
-
-editorContainer.addEventListener('keyup', function () {
-  textWasEdited = true;
-})
-
-
-//permanently deletes all deleted notes in the trash bin
-emptyTrashBinBtn.addEventListener('click', emptyTrashBin);
 
 //function that opens the editor
 function openEditor() {
@@ -101,12 +147,7 @@ function openEditor() {
   // }, 3000);
 }
 
-//open editor when clicking on new note button
-newNoteButton.addEventListener("click", function () {
-  openEditor(); 
-  
-  clickedNote = "";
-});
+
 
 //function that closes the editor
 function closeEditor() {
@@ -127,11 +168,9 @@ function confirmClose() {
     } else closeEditor();
 }
 
-// closes the editor when clicking on close button with both save and close option
-closeBtn.addEventListener('click', confirmClose);
 
-//unique identifyer for each note to act as a local storage key that is taken from local storage
-let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
+
+
 
 
 //creating a note
