@@ -87,7 +87,7 @@ a {
 
 .favorite-toggle svg {
     width: 20px;
-    fill: var(--white-fill);
+    fill: var(--dark-fill);
 }
 
 .saved-notes-div {
@@ -149,7 +149,7 @@ a {
 .logo {
     font-family: 'Playfair Display', serif;
     font-size: 30px;
-    color: var(--white-txt);
+    color: var(--white-fill);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -179,8 +179,8 @@ a {
 
 .nav-icon svg {
     height: 16px;
-    fill: var(--white-txt);
-    color: var(--white-txt);
+    fill: var(--white-fill);
+    color: var(--white-fill);
 }
 
 #starred-button.selected svg,
@@ -204,10 +204,16 @@ a {
 .cogwheel-select {
     max-width: 50px;
     min-width: 50px;
-    height: 50px;
+    height: auto;
     color: transparent;
     border: none;
     background: transparent;
+}
+
+.cogwheel-select option {
+    background: var(--blue-bg);
+    color: var(--white-txt);
+    height: 100%;
 }
 
 
@@ -254,6 +260,28 @@ li {
 }
 
 /* Toolbar buttons */
+
+
+.ql-snow.ql-toolbar button,
+.printBtn svg {
+    color: var(--dark-txt);
+    fill: var(--dark-fill) !important;
+}
+
+.ql-toolbar .ql-stroke {
+    fill: none;
+    stroke: var(--dark-fill);
+}
+
+.ql-toolbar .ql-fill {
+    fill: var(--dark-fill);
+    stroke: none;
+}
+
+.ql-toolbar .ql-picker {
+    color: var(--dark-fill);
+}
+
 #playfair-display-btn,
 #roboto-btn,
 #noto-btn,
@@ -315,10 +343,6 @@ li {
     fill: var(--dark-fill);
 }
 
-#print-btn svg {
-    color: #444444;
-}
-
 .clear-trash-bin {
     margin: 10px;
     border: none;
@@ -340,7 +364,7 @@ li {
     max-width: 400px;
     margin: 0 auto 20px auto;
     transition: width .2s;
-    background-color: #fff;
+    background-color: var(--white-bg);
 }
 
 .note.favorite .favorite-toggle svg {
@@ -364,10 +388,6 @@ li {
     border-left: none;
     width: 100%;
     border-radius: 0;
-}
-
-.active-note button {
-    background-color: white;
 }
 
 .note-text {

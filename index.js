@@ -264,11 +264,13 @@ function saveNote() {
 
 
 // saves and creates the note when clicking on the save button
-saveNoteBtn.addEventListener('click', function () {
+saveNoteBtn.addEventListener('click', chooseSaveType);
+
+function chooseSaveType() {
   if (clickedNote !== "") {
     saveNote();
   } else saveNewNote();
-});
+}
 
 //loading notes from local storage
 function loadAllNotes() {
@@ -355,7 +357,7 @@ function bindStarButton() {
 }
 //function that chooses theme color
   function applyTheme(theme) {
-    document.body.classList.remove("theme-auto", "theme-green", "theme-red", "theme-rainbow");
+    document.body.classList.remove("theme-auto", "theme-green", "theme-red", "theme-rainbow", "theme-dark");
     document.body.classList.add(`theme-${theme}`);
 }
 
