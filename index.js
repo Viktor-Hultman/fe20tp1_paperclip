@@ -98,6 +98,7 @@ function openEditor() {
 
 //open editor when clicking on new note button
 newNoteButton.addEventListener("click", function () {
+  templateData = "undefined"
   openEditor();
   clickedNote = "";
 });
