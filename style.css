@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Noto+Serif&family=Roboto&Montserrat&family=Playfair+Display:ital,wght@0,500;1,700&family=Roboto&family=Sofia&family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Inconsolata&family=Noto+Serif&family=Roboto&Montserrat&family=Playfair+Display:ital,wght@0,500;1,700&family=Roboto&family=Sofia&family=Ubuntu&display=swap');
 /* @import url('https://fonts.googleapis.com/css2?family=family=Montserrat&family=Playfair+Display:wght@500;700&display=swap'); */
 
 
@@ -45,35 +45,6 @@ a {
     display: none;
 }
 
-/* main variables are used in order to be able to quickly change styles if needed or in case of rebranding */
-:root {
-    /* text color  */
-    --white-txt: #fff;
-    --dark-txt: #1C354C;
-    --blue-txt: #005392;
-    /* background color */
-    --white-bg: #fff;
-    --light-grey-bg: #EBEBEB;
-    --dark-bg: #1C354C;
-    --blue-bg: #005392;
-    --blue-bg-active: #0065b3;
-    /*fill color*/
-    --white-fill: #fff;
-    --dark-fill: #1C354C;
-    --blue-fill: #005392;
-    --selected-fill: gold;
-    /* font */
-    --title-font: 'Playfair Display', serif;
-    --text-font: 'Montserrat', sans-serif;
-    /*borders*/
-    --notes-border: 1px solid #dadce0;
-    --links-border: 2.5px solid #005392;
-    --button-border-dark: 1px solid #1C354C;
-    --button-border-blue: 1px solid #005392;
-    --editor-border: 1px solid #D3D3D3;
-    /*shadows*/
-    --hover-note-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.30), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-}
 
 /*page layout*/
 
@@ -157,9 +128,21 @@ a {
     box-shadow: var(--hover-note-shadow);
 }
 
+#toolbar {
+    /*makes sure toolbar buttons are never over close button*/
+    padding-right: 70px;
+    margin-bottom: 10px;
+}
+
 #editor {
     height: calc(1fr - 50px);
     overflow: auto;
+}
+
+/*adding custom picker label*/
+.ql-style .ql-picker-label::before {
+    content: "Custom styles";
+    padding-right: 20px;
 }
 
 /* logo and navbar icons*/
@@ -207,6 +190,27 @@ a {
     color: var(--selected-fill);
 }
 
+/* item cogwheel */
+.cogwheel-list-item {
+    background: transparent url('./icons/cogwheel.svg') center calc(50% - 2.5px) no-repeat;
+    background-size: 35%;
+}
+
+.cogwheel-list-item:hover {
+    background-color: var(--blue-bg-active);
+}
+
+/* styling to make the cogwheel look like the other icons */
+.cogwheel-select {
+    max-width: 50px;
+    min-width: 50px;
+    height: 50px;
+    color: transparent;
+    border: none;
+    background: transparent;
+}
+
+
 /*typography*/
 h1,
 h2 {
@@ -215,7 +219,7 @@ h2 {
     color: var(--dark-txt);
 }
 
-h2 {
+.intro h2 {
     font-variant: small-caps;
 }
 
@@ -250,46 +254,18 @@ li {
 }
 
 /* Toolbar buttons */
-#playfair-display-btn, #roboto-btn, #noto-btn, #save-note-btn, #print-btn {
+#playfair-display-btn,
+#roboto-btn,
+#noto-btn,
+#save-note-btn,
+#print-btn {
     width: fit-content;
     font-size: 0.8em;
     margin-left: 10px;
 }
 
-#playfair-display-btn {
-    background-color: yellow;
-    border: 1px solid black;
-    font-family: 'Playfair Display', serif;
-}
-
-#roboto-btn {
-    background-color: pink;
-    border: 1px solid black;
-    font-family: 'Roboto', sans-serif;
-}
-
-#noto-btn {
-    background-color: greenyellow;
-    border: 1px solid black;
-    font-family: 'Noto Serif', serif;
-}
 
 /* buttons */
-.dark-blue-btn {
-    border: var(--button-border-dark);
-    background-color: var(--white-bg);
-    color: var(--dark-txt);
-    font-family: var(--title-font);
-    border-radius: 2px;
-}
-
-.dark-blue-btn:active,
-.dark-blue-btn:hover,
-.dark-blue-btn:focus {
-    background-color: var(--dark-bg);
-    color: var(--white-txt);
-}
-
 .new-note-button {
     font-size: 1rem;
     margin: 20px 0;
@@ -306,45 +282,73 @@ li {
     background-color: var(--blue-bg);
     color: var(--white-txt);
 }
+/* 
+.save-note-btn {
+    width: 80px;
+    align-self: center;
+    font-size: 1.1rem;
+    font-family: 'Montserrat';
+    margin: 20px 0;
+    padding: 6px;
+    color: var(--white-txt);
+    background: var(--blue-bg);
+    border: none;
+} */
 
-.playfair-display-text {
-    font-family: 'Playfair Display', serif;
-}
-
-.roboto-text {
-    font-family: 'Roboto', sans-serif;
-}
-
-.noto-text {
-    font-family: 'Noto Serif', serif;
+.save-note-btn:hover,
+.save-note-btn:active,
+.save-note-btn:focus {
+    background: var(--dark-bg);
+    color: var(--white-txt);
 }
 
 .close-btn {
-    text-align: right;
-    padding-right: 10px;
     font-size: 2rem;
     font-weight: bolder;
 }
 
 .close-btn button {
     border: none;
-    background-color: var(--white-bg);
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .delete-note-btn,
-.restore-note-btn {
+.restore-note-btn,
+.permanently-delete {
     border: none;
     cursor: pointer;
-    width: 30px;
     background-color: transparent;
+    padding: 10px;
+    margin-right: 5px;
 }
 
 .delete-note-btn svg,
-.restore-note-btn svg {
-    height: 10px;
+.restore-note-btn svg,
+.permanently-delete svg,
+.save-note-btn svg,
+#print-btn svg {
+    height: 12px;
     color: var(--dark-fill);
+    fill: var(--dark-fill);
 }
 
+.save-note-btn svg,
+#print-btn svg {
+    color: #444444;
+}
+
+.clear-trash-bin {
+    margin: 10px;
+    border: none;
+    border-bottom: var(--links-border);
+    background-color: transparent;
+    font-size: .9rem;
+    font-family: var(--text-font);
+    color: var(--blue-txt);
+}
 
 /* notes */
 .note {
@@ -354,6 +358,7 @@ li {
     padding: 5px;
     position: relative;
     width: 85%;
+    max-width: 400px;
     margin: 0 auto 5px auto;
     transition: width .2s;
     background-color: #fff;
@@ -387,7 +392,7 @@ li {
 }
 
 .note-text {
-    max-height: 250px;
+    height: 60px;
     overflow: hidden;
 }
 
@@ -414,6 +419,93 @@ li {
     letter-spacing: 1px;
 }
 
+/* Start of academic classes */
+/* #academic-btn {
+    position: absolute;
+    left: 50px;
+} */
+
+.academic-note {
+    background-color: #ffffff;
+}
+
+.academic-note>h1 {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-size: 26px !important;
+}
+
+.academic-note>h2 {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-size: 20px !important;
+}
+
+.academic-note>h3 {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-size: 16px !important;
+}
+
+.academic-note>p {
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+    font-size: 14px !important;
+}
+
+/* Targets all unordered and ordered list items */
+.academic-note>ul>li,
+.academic-note>ol>li {
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+    font-size: 14px !important;
+}
+
+/*End of academic classes*/
+
+/* Start of playfull classes */
+/* #playfull-btn {
+    position: absolute;
+    left: 150px;
+} */
+
+.playfull-note {
+    background-color: #feff9c;
+}
+
+.playfull-note>h1 {
+    font-family: 'Caveat', cursive;
+    color: #2a4e44;
+    font-size: 30px !important;
+}
+
+.playfull-note>h2 {
+    font-family: 'Caveat', cursive;
+    color: #2a4e44;
+    font-size: 24px !important;
+}
+
+.playfull-note>h3 {
+    font-family: 'Caveat', cursive;
+    color: #2a4e44;
+    font-size: 20px !important;
+}
+
+.playfull-note>p {
+    font-family: 'Indie Flower', cursive;
+    color: #6dadab;
+    font-size: 16px !important;
+}
+
+/* Targets all unordered and ordered list items */
+.playfull-note>ul>li,
+.playfull-note>ol>li {
+    font-family: 'Indie Flower', cursive;
+    color: #ff65a3;
+    font-size: 16px !important;
+}
+
+/*End of playfull classes*/
 /*note toolbar*/
 .note-toolbar {
     display: flex;
@@ -425,6 +517,7 @@ li {
     font-family: 'Inconsolata';
     font-size: .7rem;
     font-weight: 400;
+    margin-right: 10px;
 }
 
 /*large screen version*/
@@ -470,8 +563,26 @@ li {
     }
 }
 
+@media print {
+    .navbar,
+    .saved-notes-div,
+    .toolbar-and-editor-container .close-btn,
+    .toolbar-and-editor-container .ql-toolbar {
+        display: none;
+    }
+}
 
 #themes {
+    display: inline-block !important;
+    float: left;
+    border: none;
+    cursor: pointer;
+    height: 24px;
+    width: fit-content;
+    font-size: 0.8em;
+}
+
+/* #themes {
     width: fit-content;
 }
 
@@ -480,4 +591,4 @@ li {
     margin-top: 0;
     top: 0;
     vertical-align: middle;
-}
+} */

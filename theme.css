@@ -1,0 +1,131 @@
+:root {
+            /* GREEN */
+    /* green text color  */
+    --green-dark-txt: #1c4c1c;
+    --green-blue-txt: #009207;
+    /* green background color */
+    --green-dark-bg: #1c4c1c;
+    --green-blue-bg: #009207;
+    --green-blue-bg-active: #00b30f;
+    /* green fill color */
+    --green-dark-fill: #1c4c1c;
+    --green-blue-fill: #009207;
+    /* green borders */
+    --green-notes-border: 2.5px solid #bad6ba;
+    --green-links-border: 2.5px solid #009207;
+    --green-button-border-dark: 1.5px solid #1c4c1c;
+    --green-editor-border: 1px solid #bad6ba;
+
+        /* RED */
+    /* red text color  */
+    --red-dark-txt: #4c1c1c;
+    --red-blue-txt: #920000;
+    /* red background color */
+    --red-dark-bg: #4c1c1c;
+    --red-blue-bg: #920000;
+    --red-blue-bg-active: #b30000;
+    /* red fill color */
+    --red-dark-fill: #4c1c1c;
+    --red-blue-fill: #920000;
+    /* red borders */
+    --red-notes-border: 2.5px solid #d6baba;
+    --red-links-border: 2.5px solid #920000;
+    --red-button-border-dark: 1.5px solid #4c1c1c;
+    --red-editor-border: 1px solid #d6baba;
+}
+
+/* main variables are used in order to be able to quickly change styles if needed or in case of rebranding */
+body {
+    /* text color  */
+    --white-txt: #fff;
+    --dark-txt: #1C354C;
+    --blue-txt: #005392;
+    /* background color */
+    --white-bg: #fff;
+    --light-grey-bg: #EBEBEB;
+    --dark-bg: #1C354C;
+    --blue-bg: #005392;
+    --blue-bg-active: #0065b3;
+    /*fill color*/
+    --white-fill: #fff;
+    --dark-fill: #1C354C;
+    --blue-fill: #005392;
+    --selected-fill: gold;
+    /* font */
+    --title-font: 'Playfair Display', serif;
+    --text-font: 'Montserrat', sans-serif;
+    /*borders*/
+    --notes-border: 2.5px solid #D3D3D3;
+    --links-border: 2.5px solid #005392;
+    --button-border-dark: 1.5px solid #1C354C;
+    --button-border-blue: 1px solid #005392;
+    --editor-border: 1px solid #D3D3D3;
+    /*shadows*/
+    --hover-note-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.30), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+}
+
+body.theme-green {
+        /* text color  */
+    --dark-txt: var(--green-dark-txt);
+    --blue-txt: var(--green-blue-txt);
+    /* background color */
+    --dark-bg: var(--green-dark-bg);
+    --blue-bg: var(--green-blue-bg);
+    --blue-bg-active: var(--green-blue-bg-active);
+    /*fill color*/
+    --dark-fill: var(--green-dark-fill);
+    --blue-fill: var(--green-blue-fill);
+
+    /*borders*/
+    --notes-border: var(--green-notes-border);
+    --links-border: 2.5px solid var(--green-links-border);
+    /*--button-border-dark: 1.5px solid var(--green-button-border-dark);  FUNKAR INTE??*/
+    --editor-border: var(--green-editor-border);
+}
+
+body.theme-red {
+        /* text color  */
+    --dark-txt: var(--red-dark-txt);
+    --blue-txt: var(--red-blue-txt);
+    /* background color */
+    --dark-bg: var(--red-dark-bg);
+    --blue-bg: var(--red-blue-bg);
+    --blue-bg-active: var(--red-blue-bg-active);
+    /*fill color*/
+    --dark-fill: var(--red-dark-fill);
+    --blue-fill: var(--red-blue-fill);
+
+    /*borders*/
+    --notes-border: var(--red-notes-border);
+    --links-border: 2.5px solid var(--red-links-border);
+    /*--button-border-dark: 1.5px solid var(--red-button-border-dark);  FUNKAR INTE??*/
+    --editor-border: var(--red-editor-border);
+}
+
+body.theme-rainbow {
+    --dark-bg: none;
+    --blue-bg: none;
+    --blue-bg-active: #4357c9f1;
+background-color: #4158D0;
+background-image: linear-gradient(135deg, #4158D0 0%, #C850C0 35%, #FFCC70 73%, #ffffff 100%);       
+}
+
+/* IF WE HAVE TIME TO MAKE DARKMODE
+@media (prefers-color-scheme: dark){
+    body.theme-auto{
+   
+    --dark-txt: var(--red-dark-txt);
+    --blue-txt: var(--red-blue-txt);
+    
+    --dark-bg: var(--red-dark-bg);
+    --blue-bg: var(--red-blue-bg);
+    --blue-bg-active: var(--red-blue-bg-active);
+   
+    --dark-fill: var(--red-dark-fill);
+    --blue-fill: var(--red-blue-fill);
+    
+    --links-border: 2.5px solid var(--red-links-border);
+    --button-border-dark: 1.5px solid var(--red-button-border-dark);
+    }
+}
+*/

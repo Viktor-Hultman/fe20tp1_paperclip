@@ -13,9 +13,9 @@
   <link rel="manifest" href="/favicon/site.webmanifest" />
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
   <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-  <script src="https://kit.fontawesome.com/94d4f6b5a1.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme.css">
 </head>
 
 <body onload="redirectNewUser()">
@@ -70,16 +70,14 @@
             </svg>
           </button>
         </li>
-        <li class="nav-icon">
-          <button class="nav-button" id="settings-button">
-            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cog"
-              class="svg-inline--fa fa-cog fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <title>Settings</title>
-              <path
-                d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z">
-              </path>
-            </svg>
-          </button>
+        <li class="nav-icon cogwheel-list-item">
+          <select class="nav-button cogwheel-select" id="theme">
+            <option value="auto">Auto</option>
+            <option value="green">Green</option>
+            <option value="red">Red</option>
+            <option value="rainbow">Rainbow</option>
+            <title>Color-theme</title>
+          </select>
         </li>
       </ul>
     </nav>
@@ -89,15 +87,16 @@
       <ul class="saved-notes-list">
 
       </ul>
+      <button class="clear-trash-bin hidden">Delete all</button>
     </section>
 
     <section class="toolbar-and-editor-container hidden">
       <div class="close-btn"><button>&times;</button></div>
       <div id="toolbar">
         <select class="ql-header">
-          <option value="1"></option>
-          <option value="2"></option>
-          <option selected></option>
+          <option value="1">Title</option>
+          <option value="2">Subtitle</option>
+          <option selected>Text</option>
         </select>
         <button class="ql-bold"></button>
         <button class="ql-italic"></button>
@@ -106,17 +105,27 @@
         <button class="ql-list" value="bullet"></button>
         <button class="ql-link"></button>
         <button class="ql-image"></button>
+
         <select id="themes">
-          <option value="standard">Select theme</option>
-          <option value="playfair-display">Playfair Display</option>
-          <option value="roboto">Roboto</option>
-          <option value="noto">Noto</option>
+          <option id="reset-btn" value="reset">Standard</option>
+          <option id="academic-btn" value="academic">Academic</option>
+          <option id="playfull-btn" value="playfull">Playfull</option>
         </select>
-        <!--         <button id="playfair-display-btn">Playfair Display</button>
-        <button id="roboto-btn">Roboto</button>
-        <button id="noto-btn">Noto Serif</button>  -->
+
+        <!--         <button id="academic-btn">Academic</button>
+        <button id="playfull-btn">Playfull</button>
+        <button id="reset-btn">Reset</button> -->
+
         <button id="save-note-btn" class="save-note-btn">Save</button>
-        <button id="print-btn" class="printBtn" onclick="printContent()"><i class="fas fa-print"></i></button>
+        <button id="print-btn" class="printBtn" onclick="printContent()">
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="print"
+            class="svg-inline--fa fa-print fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <title>Print note</title>
+            <path fill="currentColor"
+              d="M448 192V77.25c0-8.49-3.37-16.62-9.37-22.63L393.37 9.37c-6-6-14.14-9.37-22.63-9.37H96C78.33 0 64 14.33 64 32v160c-35.35 0-64 28.65-64 64v112c0 8.84 7.16 16 16 16h48v96c0 17.67 14.33 32 32 32h320c17.67 0 32-14.33 32-32v-96h48c8.84 0 16-7.16 16-16V256c0-35.35-28.65-64-64-64zm-64 256H128v-96h256v96zm0-224H128V64h192v48c0 8.84 7.16 16 16 16h48v96zm48 72c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24z">
+            </path>
+          </svg>
+        </button>
       </div>
       <div id="editor">
         <h1>Please add a title here</h1>
@@ -125,6 +134,7 @@
     </section>
 
   </main>
+  <script src="confetti.js"></script>
   <script src="index.js"></script>
 </body>
 
