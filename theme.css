@@ -1,20 +1,21 @@
 :root {
     /* GREEN */
     /* green text color  */
-    --green-dark-txt: #1c4c1c;
-    --green-blue-txt: #009207;
+    --green-dark-txt: #067302;
+    --green-blue-txt: #97BF04;
     /* green background color */
-    --green-dark-bg: #1c4c1c;
-    --green-blue-bg: #009207;
-    --green-blue-bg-active: #00b30f;
+    --green-dark-bg: #067302;
+    --green-blue-bg: #97BF04;
+    --green-blue-bg-active: #aec462;
+    --green-gray-bg: #EDF2C2;
     /* green fill color */
-    --green-dark-fill: #4c614c;
-    --green-blue-fill: #009207;
+    --green-dark-fill: #067302;
+    --green-blue-fill: #97BF04;
     /* green borders */
-    --green-notes-border: 2.5px solid #bad6ba;
-    --green-links-border: 2.5px solid #009207;
-    --green-button-border-dark: 1.5px solid #009207;
-    --green-editor-border: 1px solid #bad6ba;
+    --green-notes-border: 2.5px solid #E7F294;
+    --green-links-border: 2.5px solid #95D904;
+    --green-button-border-dark: 1.5px solid #97BF04;
+    --green-editor-border: 1px solid #E7F294;
 
     /* RED */
     /* red text color  */
@@ -72,6 +73,7 @@ body.theme-green {
     --dark-bg: var(--green-dark-bg);
     --blue-bg: var(--green-blue-bg);
     --blue-bg-active: var(--green-blue-bg-active);
+    --light-grey-bg: var(--green-gray-bg);
     /*fill color*/
     --dark-fill: var(--green-dark-fill);
     --blue-fill: var(--green-blue-fill);
@@ -136,10 +138,10 @@ body.theme-dark {
     --light-grey-bg: #080808;
     --dark-bg: #2E2E2E;
     --blue-bg: #121212;
-    --blue-bg-active: #292929;
+    --blue-bg-active: #0c0c0c;
     /*fill color*/
     --white-fill: #fff;
-    --dark-fill: #84D6DB;
+    --dark-fill: #97dbdf;
     --blue-fill: #EEC186;
     --selected-fill: gold;
     /* font */
