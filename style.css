@@ -264,7 +264,7 @@ li {
 
 .ql-snow.ql-toolbar button,
 .printBtn svg {
-    color: var(--dark-txt);
+    color: var(--dark-fill);
     fill: var(--dark-fill) !important;
 }
 

@@ -52,7 +52,7 @@ body {
     --blue-fill: #005392;
     --selected-fill: gold;
     /* font */
-    --title-font: 'Playfair Display', serif;
+    --title-font: 'Montserrat', serif;
     --text-font: 'Montserrat', sans-serif;
     /*borders*/
     --notes-border: 2.5px solid #D3D3D3;
@@ -126,33 +126,33 @@ body.theme-rainbow {
 }
 
 body.theme-dark {
-    background: #0D0706;
+    background: #121212;
     /* text color  */
-    --white-txt: #0D0706;
-    --dark-txt: #5E9ABF;
-    --blue-txt: #3A5D8C;
+    --white-txt: #4B3620;
+    --dark-txt: #f1efef;
+    --blue-txt: #4B3620;
     /* background color */
-    --white-bg: #0D0706;
-    --light-grey-bg: #253C59;
-    --dark-bg: #5E9ABF;
-    --blue-bg: #3A5D8C;
-    --blue-bg-active: #20334d;
+    --white-bg: #2E2E2E;
+    --light-grey-bg: #080808;
+    --dark-bg: #2E2E2E;
+    --blue-bg: #121212;
+    --blue-bg-active: #588e91;
     /*fill color*/
-    --white-fill: #0D0706;
-    --dark-fill: #5E9ABF;
-    --blue-fill: #3A5D8C;
+    --white-fill: #84D6DB;
+    --dark-fill: #EEC186;
+    --blue-fill: #EEC186;
     --selected-fill: gold;
     /* font */
     --title-font: 'Playfair Display', serif;
     --text-font: 'Montserrat', sans-serif;
     /*borders*/
-    --notes-border: 2.5px solid #253C59;
+    --notes-border: 2.5px solid #111b27;
     --links-border: 2.5px solid #3A5D8C;
     --button-border-dark: 1.5px solid #5E9ABF;
-    --button-border-blue: 1px solid #3A5D8C;
+    --button-border-blue: 1px solid #EEC186;
     --editor-border: 1px solid #253C59;
     /*shadows*/
-    --hover-note-shadow: 0 1px 2px 0 rgba(176, 188, 197, 0.3), 0 1px 3px 1px rgba(188, 200, 209, 0.15);
+    --hover-note-shadow: 0 3px 20px 0 #000, 0 3px 20px 1px #000;
 }
 
 /* IF WE HAVE TIME TO MAKE DARKMODE
