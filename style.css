@@ -128,9 +128,21 @@ a {
     box-shadow: var(--hover-note-shadow);
 }
 
+#toolbar {
+    /*makes sure toolbar buttons are never over close button*/
+    padding-right: 70px;
+    margin-bottom: 10px;
+}
+
 #editor {
     height: calc(1fr - 50px);
     overflow: auto;
+}
+
+/*adding custom picker label*/
+.ql-style .ql-picker-label::before {
+    content: "Custom styles";
+    padding-right: 20px;
 }
 
 /* logo and navbar icons*/
@@ -207,7 +219,7 @@ h2 {
     color: var(--dark-txt);
 }
 
-h2 {
+.intro h2 {
     font-variant: small-caps;
 }
 
@@ -254,21 +266,6 @@ li {
 
 
 /* buttons */
-.dark-blue-btn {
-    border: var(--button-border-dark);
-    background-color: var(--white-bg);
-    color: var(--dark-txt);
-    font-family: var(--title-font);
-    border-radius: 2px;
-}
-
-.dark-blue-btn:active,
-.dark-blue-btn:hover,
-.dark-blue-btn:focus {
-    background-color: var(--dark-bg);
-    color: var(--white-txt);
-}
-
 .new-note-button {
     font-size: 1rem;
     margin: 20px 0;
@@ -279,24 +276,31 @@ li {
     border-radius: 8px;
 }
 
-.save-note-btn {
-    font-size: 1rem;
-    margin: 20px 0;
-    padding: 6px;
-}
-
-.printBtn {
-    position: absolute;
-    right: 20px;
-}
-
 .new-note-button:hover,
 .new-note-button:active,
 .new-note-button:focus {
     background-color: var(--blue-bg);
     color: var(--white-txt);
 }
+/* 
+.save-note-btn {
+    width: 80px;
+    align-self: center;
+    font-size: 1.1rem;
+    font-family: 'Montserrat';
+    margin: 20px 0;
+    padding: 6px;
+    color: var(--white-txt);
+    background: var(--blue-bg);
+    border: none;
+} */
 
+.save-note-btn:hover,
+.save-note-btn:active,
+.save-note-btn:focus {
+    background: var(--dark-bg);
+    color: var(--white-txt);
+}
 
 .close-btn {
     font-size: 2rem;
@@ -323,9 +327,17 @@ li {
 
 .delete-note-btn svg,
 .restore-note-btn svg,
-.permanently-delete svg {
+.permanently-delete svg,
+.save-note-btn svg,
+#print-btn svg {
     height: 12px;
     color: var(--dark-fill);
+    fill: var(--dark-fill);
+}
+
+.save-note-btn svg,
+#print-btn svg {
+    color: #444444;
 }
 
 .clear-trash-bin {
@@ -347,7 +359,7 @@ li {
     position: relative;
     width: 85%;
     max-width: 400px;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 5px auto;
     transition: width .2s;
     background-color: #fff;
 }
@@ -439,84 +451,91 @@ li {
 /*End of big size classes*/
 
 /* Start of academic classes */
-#academic-btn {
+/* #academic-btn {
     position: absolute;
     left: 50px;
-}
+} */
 
 .academic-note {
-    background-color: 	#ffffff;
+    background-color: #ffffff;
 }
 
-.academic-note > h1 {
+.academic-note>h1 {
     font-family: 'Roboto', sans-serif;
     color: black;
-    font-size: 26px !important; 
+    font-size: 26px !important;
 }
 
-.academic-note > h2 {
+.academic-note>h2 {
     font-family: 'Roboto', sans-serif;
     color: black;
-    font-size: 20px !important; 
+    font-size: 20px !important;
 }
 
-.academic-note > h3 {
+.academic-note>h3 {
     font-family: 'Roboto', sans-serif;
     color: black;
-    font-size: 16px !important; 
+    font-size: 16px !important;
 }
 
-.academic-note > p {
+.academic-note>p {
     font-family: 'Times New Roman', Times, serif;
     color: black;
     font-size: 14px !important;
 }
+
 /* Targets all unordered and ordered list items */
-.academic-note > ul > li, .academic-note > ol > li {
+.academic-note>ul>li,
+.academic-note>ol>li {
     font-family: 'Times New Roman', Times, serif;
     color: black;
     font-size: 14px !important;
 }
+
 /*End of academic classes*/
 
 /* Start of playfull classes */
-#playfull-btn {
+/* #playfull-btn {
     position: absolute;
     left: 150px;
-}
+} */
+
 .playfull-note {
-    background-color: 	#feff9c;
+    background-color: #feff9c;
 }
 
-.playfull-note > h1 {
+.playfull-note>h1 {
     font-family: 'Caveat', cursive;
     color: #2a4e44;
-    font-size: 30px !important; 
+    font-size: 30px !important;
 }
 
-.playfull-note > h2 {
+.playfull-note>h2 {
     font-family: 'Caveat', cursive;
     color: #2a4e44;
-    font-size: 24px !important; 
+    font-size: 24px !important;
 }
 
-.playfull-note > h3 {
+.playfull-note>h3 {
     font-family: 'Caveat', cursive;
     color: #2a4e44;
-    font-size: 20px !important; 
+    font-size: 20px !important;
 }
 
-.playfull-note > p {
+.playfull-note>p {
     font-family: 'Indie Flower', cursive;
     color: #6dadab;
     font-size: 16px !important;
 }
+
 /* Targets all unordered and ordered list items */
-.playfull-note > ul > li, .playfull-note > ol > li {
+.playfull-note>ul>li,
+.playfull-note>ol>li {
     font-family: 'Indie Flower', cursive;
     color: #ff65a3;
     font-size: 16px !important;
 }
+
 /*End of playfull classes*/
 /*note toolbar*/
 .note-toolbar {
@@ -574,3 +593,33 @@ li {
         min-height: 50px;
     }
 }
+
+@media print {
+    .navbar,
+    .saved-notes-div,
+    .toolbar-and-editor-container .close-btn,
+    .toolbar-and-editor-container .ql-toolbar {
+        display: none;
+    }
+}
+
+#themes {
+    display: inline-block !important;
+    float: left;
+    border: none;
+    cursor: pointer;
+    height: 24px;
+    width: fit-content;
+    font-size: 0.8em;
+}
+
+/* #themes {
+    width: fit-content;
+}
+
+.ql-snow #themes.ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+    position: relative;
+    margin-top: 0;
+    top: 0;
+    vertical-align: middle;
+} */
