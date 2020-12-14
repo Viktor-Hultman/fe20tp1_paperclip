@@ -33,6 +33,7 @@ quill = new Quill('#editor', {
 //=========================
 //global variables section
 //=========================
+
 //constants can come first, they do not change their value(cannot be reasigned new values)
 // Saves the initial content of the editor. When one pushes on "Create new note" button, the content of the editor is set to this variable
 const initialContent = quill.getContents();
@@ -45,6 +46,8 @@ const closeBtn = document.querySelector('div.close-btn > button');
 const editorContainer = document.querySelector(".toolbar-and-editor-container");
 const trashBinBtn = document.querySelector('#trash-bin-button');
 const emptyTrashBinBtn = document.querySelector('.clear-trash-bin');
+const printBtn = document.querySelector('.printBtn');
+const searchButton = document.getElementById('search-button');
 const resetBtn = document.querySelector('#reset-btn');
 const playfullBtn = document.querySelector('#playfull-btn');
 const academicBtn = document.querySelector('#academic-btn');
@@ -54,6 +57,9 @@ const changeListButton = document.querySelectorAll('.ql-list');
 // const robotoBtn = document.querySelector('#roboto-btn');
 // const robotoBtn = document.querySelector("[data-value='Roboto']");
 // const notoBtn = document.querySelector("[data-value='Noto']");
+
+
+
 
 //we declare variables that change their value throughout the code with let
 //unique identifyer for each note to act as a local storage key that is taken from local storage
@@ -70,16 +76,43 @@ let pageVisits = JSON.parse(localStorage.getItem('pageVisits'));
 let templateData = "undefined";
 //not very sure if it should be a constant, i think so though
 let headingsPicker = document.querySelector('.ql-picker-options');
-
+let searchStatus = false;
 
 
 //=========================
 //event listeners section
 //=========================
+//on load event
+document.addEventListener('DOMContentLoaded', e => {
+  renderCurrentView();
+  bindStarButton();
+  //saves theme color in localStorage
+  const savedTheme = localStorage.getItem("theme") || "auto";
+
+  applyTheme(savedTheme);
+
+  for (const optionElement of document.querySelectorAll("#theme option")) {
+        optionElement.selected = savedTheme === optionElement.value;
+    }
+
+    document.querySelector("#theme").addEventListener("change", function () {
+      localStorage.setItem("theme", this.value);
+      applyTheme(this.value);
+      if (this.value === "rainbow") {
+        const confettiElement = document.querySelector(".logo")
+        confetti(confettiElement, {
+          angle: "10", 
+          spread: "150",
+          elementCount: "100",
+          startVelocity: window.innerWidth/20
+        })
+      }
+    });
+})
+
 //open editor when clicking on new note button
 newNoteButton.addEventListener("click", function () {
   openEditor(); 
-  
   clickedNote = "";
 });
 
@@ -91,24 +124,184 @@ editorContainer.addEventListener('keyup', function () {
   textWasEdited = true;
 })
 
+/*almost all click functionalities from the notes container in an if else statement based on the event target*/
+notesListContainer.addEventListener('click', e => {
+  //1. first if targets the delete note buttons in the notes toolbar
+  if (e.target.closest('.delete-note-btn')) {
+    let deleteNoteBtn = e.target.closest('.delete-note-btn');
+    let note = deleteNoteBtn.closest('li');
+    deleteNote(note);
+  }
+  // 2. second if targets the restore notes buttons in the notes toolbar
+  else if (e.target.closest('.restore-note-btn')){
+      let note = e.target.closest('li');
+      restoreDeleted(note);
+  } 
+  // 3. targets the permanently delete button in the deleted notes toolbar
+  else if (e.target.closest('.permanently-delete')){
+    let note = e.target.closest('li');
+    permanentlyDelete(note);
+  }
+  // 4. targets the favorite toggle button in the notes toolbar
+  else if (e.target.closest('.favorite-toggle')){
+      const noteId = e.target.closest('li').dataset.noteid;       
+      toggleFavorite(noteId);
+  } 
+  // 5. exits the function if clicked on everything else that is not a inside a note
+  else if (!e.target.closest('.note-text')) {
+    return
+  } 
+  // 6. last else adds active class to note and opens it in editor
+  else {
+    if (e.target.closest('.note-text').parentElement.classList.contains('deleted')) {
+      return
+    }
+    openEditor();
+    removeFocus();
+  
+    //store the clicked note into a variable
+    clickedNote = e.target.closest('.note-text');
+    //store the clicked notes id in the global variable clickedNoteId
+    clickedNoteId = clickedNote.parentElement.getAttribute('data-noteid');
+    templateData = clickedNote.parentElement.getAttribute('data-template');
+    if (window.innerWidth > 800) {
+      if(templateData == "playfull") {
+        changeToPlayfull();
+
+      } else if(templateData == "academic") {
+        changeToAcademic();
+
+      } else {
+        removePlayfull();
+        removeAcademic();
+      }
+    
+      clickedNote.parentElement.classList.add('active-note');
+    }
+    editingField.innerHTML = clickedNote.innerHTML.trim();
+  }
+});
+
+// Creates a search input field
+searchButton.addEventListener('click', function () {
+  searchButton.classList.toggle('selected');
+  if (searchStatus === false) {
+    // create input element, add ID and placeholder
+    const searchInput = document.createElement('input');
+    searchInput.setAttribute('id', 'searchInput');
+    searchInput.setAttribute('placeholder', 'Search among notes...')
+
+    // Add event listener with search function to input element
+    searchInput.addEventListener('keyup', searchNotes);
+
+    // insert input element above the notes list and focus on it
+    notesListContainer.insertAdjacentElement('beforebegin', searchInput).focus();
+    searchStatus = true;
+  } else {
+    // if the search input is already there, it is removed when one clicks on the search button
+    const searchInput = document.getElementById('searchInput');
+    searchInput.remove();
+    searchStatus = false;
+    console.log()
+    renderCurrentView();
+  }
+})
+
+//Eventlistener for removing the "placeholder text" in the editor when creating a new note
+editingField.addEventListener('click', () => {
+  //First does a check to see if the editor has any "children"
+  if (editingField.firstChild.innerHTML == null) {
+    //If not then nothing should be executed when clicking inside of the editing field
+    return false;
+  } else {
+    //If there are "children" such as h1- or p-tags then the while loop will begin it´s two checks to see if the "placeholders" are displayed
+    while (editingField.firstChild.innerHTML == "Please add a title here" ||
+      editingField.firstChild.innerHTML == "Here is where you can write your cool note text") {
+
+      //If they are then the innerHTML of the editor will be erased to BLANK
+      editingField.innerHTML = "";
+      //Then a h1 will be created and put in a variable
+      let h = document.createElement("H1");
+      //Then the h1 will be appended to the editor so the user can begin to write a title for their note
+      editingField.appendChild(h);
+    }
+
+  }
+});
+
+//toggle seen notes when navbar trash bin is clicked
+trashBinBtn.addEventListener('click', function(){
+  trashBinBtn.classList.toggle('selected');
+  emptyTrashBinBtn.classList.toggle('hidden');
+  //when current view is "deleted", view insted all notes on click"
+  if (currentView == 'deleted') {
+    currentView = 'allNotes'
+  }
+  //when current view is "favorites", view instead deleted on click
+  else if (currentView == 'favorites') {
+    currentView = 'deleted'
+    starButton.classList.remove('selected')
+  }
+  //when current view is on all notes, view insted "favorites notes on click"
+  else if (currentView == 'allNotes') {
+    currentView = 'deleted'
+  }
+  renderCurrentView()
+});
+
 //permanently deletes all deleted notes in the trash bin
 emptyTrashBinBtn.addEventListener('click', emptyTrashBin);
 
+// saves and creates the note when clicking on the save button
+saveNoteBtn.addEventListener('click', chooseSaveType);
 
+// Eventlistener for when academic button is clicked
+academicBtn.addEventListener('click',function(){
+  changeToAcademic();
+  textWasEdited = true;
+});
 
+// Eventlistener for when playfull button is clicked
+playfullBtn.addEventListener('click', function () {
+  changeToPlayfull();
+  textWasEdited = true;
+});
 
+// Eventlistener when headings are selected or changed
+headingsPicker.addEventListener('click', checkTemplate);
 
+// Listener for the 1,2,3 list button that changes text to an ordered list
+changeListButton[0].addEventListener('click', checkTemplate);
 
+// Listener for the list button that changes text to an unordered list
+changeListButton[1].addEventListener('click', checkTemplate);
 
+// Eventlistener when any key is pressed
+document.addEventListener('keydown', (event) => {
+  // Stores the value in a variable for further use
+  let keyName = event.key;
+  // Checks if both the enter key is pressed and the playfull template is "active"
+  if (keyName === 'Enter' && editingField.classList.contains("playfull-note")) {
+    // If they both are true then the playfull template function is executed
+    changeToPlayfull();
+  } else if (keyName === 'Enter' && editingField.classList.contains("academic-note")) {
+    changeToAcademic();
 
+  } else {
+      return;
+  }
+  // Checks if both the backspace key is pressed and the playfull template is "active"
+  if (keyName === 'Backspace' && editingField.classList.contains("playfull-note")) {
+    // If they both are true then the playfull template function is executed
+    changeToPlayfull();
 
+  } else if (keyName === 'Backspace' && editingField.classList.contains("academic-note")) {
+    changeToAcademic();
 
-
-
-
-
-
-
+  } else {
+      return;
+  }
+})
 
 
 
@@ -147,8 +340,6 @@ function openEditor() {
   // }, 3000);
 }
 
-
-
 //function that closes the editor
 function closeEditor() {
   document.querySelector(".toolbar-and-editor-container").classList.add("hidden");
@@ -167,11 +358,6 @@ function confirmClose() {
       saveNote();
     } else closeEditor();
 }
-
-
-
-
-
 
 //creating a note
 function createNote() {
@@ -233,7 +419,6 @@ function hasTitle() {
 
 //saving a note
 function saveNewNote() {
-
   //only creates a note if first element is a heading(h1, h2...h6) and it is not empty
   if (hasTitle()) {
     //Checks if the note editor has the playfull template "active" when saving note
@@ -306,17 +491,14 @@ function saveNote() {
   removePlayfull();
 }
 
-
-// saves and creates the note when clicking on the save button
-saveNoteBtn.addEventListener('click', chooseSaveType);
-
+//function that identyfies wether the note needs to be saved over an existing one or a new note should be created
 function chooseSaveType() {
   if (clickedNote !== "") {
     saveNote();
   } else saveNewNote();
 }
 
-//loading notes from local storage
+//loading all notes from local storage
 function loadAllNotes() {
   for (let i = notesNumber; i >= 1; i--) {
     let note = JSON.parse(localStorage.getItem(i));
@@ -327,6 +509,7 @@ function loadAllNotes() {
   }
 }
 
+//render only notes that are not deleted
 function loadNotes() {
   loadAllNotes();
   const deletedItems = notesListContainer.querySelectorAll('.deleted')
@@ -335,7 +518,7 @@ function loadNotes() {
   })
 }
 
-// NOTES LIST CONTAINER SHOW:
+// changes the types of notes that you see based on your choices (favorite, deleted and saved)
 function renderCurrentView() {
   notesListContainer.innerHTML = '';
   // show all notes
@@ -352,11 +535,12 @@ function renderCurrentView() {
   }
 }
 
-
+//fills the notes container with all saved notes
 function renderAllNotes() {
   loadNotes()
 }
 
+//fills the notes container with all deleted notes
 function renderDeleted(classNameAsString) {
   loadAllNotes()
   //get all listItem that do not contain specified class name
@@ -366,6 +550,7 @@ function renderDeleted(classNameAsString) {
   })
 }
 
+//fills the notes container with all favorite notes
 function renderFavorites() {
   loadNotes()
   //get all non-favorite-listItem
@@ -374,7 +559,6 @@ function renderFavorites() {
     nonFavoriteItem.remove()
   })
 }
-
 
 function bindStarButton() {
   starButton.addEventListener('click', function () {
@@ -397,40 +581,13 @@ function bindStarButton() {
     }
     renderCurrentView()
   })
-
 }
+
 //function that chooses theme color
   function applyTheme(theme) {
     document.body.classList.remove("theme-auto", "theme-green", "theme-red", "theme-rainbow", "theme-dark");
     document.body.classList.add(`theme-${theme}`);
 }
-
-document.addEventListener('DOMContentLoaded', e => {
-  renderCurrentView();
-  bindStarButton();
-  //saves theme color in localStorage
-  const savedTheme = localStorage.getItem("theme") || "auto";
-
-  applyTheme(savedTheme);
-
-  for (const optionElement of document.querySelectorAll("#theme option")) {
-        optionElement.selected = savedTheme === optionElement.value;
-    }
-
-    document.querySelector("#theme").addEventListener("change", function () {
-      localStorage.setItem("theme", this.value);
-      applyTheme(this.value);
-      if (this.value === "rainbow") {
-        const confettiElement = document.querySelector(".logo")
-        confetti(confettiElement, {
-          angle: "10", 
-          spread: "150",
-          elementCount: "100",
-          startVelocity: window.innerWidth/20
-        })
-      }
-    });
-})
 
 //remove focus from notes
 function removeFocus() {
@@ -439,8 +596,6 @@ function removeFocus() {
     note.classList.remove('active-note');
   });
 }
-
-
 
 //function that deletes a note
 function deleteNote(note){
@@ -467,26 +622,6 @@ function deleteNote(note){
   localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
   note.remove();
 }
-
-trashBinBtn.addEventListener('click', function(){
-  trashBinBtn.classList.toggle('selected');
-  emptyTrashBinBtn.classList.toggle('hidden');
-  //when current view is "deleted", view insted all notes on click"
-  if (currentView == 'deleted') {
-    currentView = 'allNotes'
-  }
-  //when current view is "favorites", view instead deleted on click
-  else if (currentView == 'favorites') {
-    currentView = 'deleted'
-    starButton.classList.remove('selected')
-  }
-  //when current view is on all notes, view insted "favorites notes on click"
-  else if (currentView == 'allNotes') {
-    currentView = 'deleted'
-  }
-  renderCurrentView()
-});
-
 
 function restoreDeleted(note) {
   //get the note's id to be able to change it in local storage
@@ -540,100 +675,11 @@ function emptyTrashBin(){
   })
 }
 
-
-/*almost all click functionalities from the notes container in an if else statement based on the event target*/
-notesListContainer.addEventListener('click', e => {
-  //1. first if targets the delete note buttons in the notes toolbar
-  if (e.target.closest('.delete-note-btn')) {
-    let deleteNoteBtn = e.target.closest('.delete-note-btn');
-    let note = deleteNoteBtn.closest('li');
-    deleteNote(note);
-  }
-  // 2. second if targets the restore notes buttons in the notes toolbar
-  else if (e.target.closest('.restore-note-btn')){
-      let note = e.target.closest('li');
-      restoreDeleted(note);
-  } 
-  // 3. targets the permanently delete button in the deleted notes toolbar
-  else if (e.target.closest('.permanently-delete')){
-    let note = e.target.closest('li');
-    permanentlyDelete(note);
-  }
-  // 4. targets the favorite toggle button in the notes toolbar
-  else if (e.target.closest('.favorite-toggle')){
-      const noteId = e.target.closest('li').dataset.noteid;       
-      toggleFavorite(noteId);
-  } 
-  // 5. exits the function if clicked on everything else that is not a inside a note
-  else if (!e.target.closest('.note-text')) {
-    return
-  } 
-  // 6. last else adds active class to note and opens it in editor
-  else {
-    if (e.target.closest('.note-text').parentElement.classList.contains('deleted')) {
-      return
-    }
-    openEditor();
-    removeFocus();
-  
-    //store the clicked note into a variable
-    clickedNote = e.target.closest('.note-text');
-    //store the clicked notes id in the global variable clickedNoteId
-    clickedNoteId = clickedNote.parentElement.getAttribute('data-noteid');
-    templateData = clickedNote.parentElement.getAttribute('data-template');
-    if (window.innerWidth > 800) {
-      if(templateData == "playfull") {
-        changeToPlayfull();
-
-      } else if(templateData == "academic") {
-        changeToAcademic();
-
-      } else {
-        removePlayfull();
-        removeAcademic();
-      }
-    
-      clickedNote.parentElement.classList.add('active-note');
-    }
-    editingField.innerHTML = clickedNote.innerHTML.trim();
-  }
-});
-
 // print function
-let printBtn = document.querySelector('.printBtn');
-
 function printContent() {
   window.print();
   // https://benfrain.com/create-print-styles-using-css3-media-queries/
 }
-
-let searchStatus = false;
-const searchButton = document.getElementById('search-button');
-
-// Creates a search input field
-searchButton.addEventListener('click', function () {
-  searchButton.classList.toggle('selected');
-  if (searchStatus === false) {
-    // create input element, add ID and placeholder
-    const searchInput = document.createElement('input');
-    searchInput.setAttribute('id', 'searchInput');
-    searchInput.setAttribute('placeholder', 'Search among notes...')
-
-    // Add event listener with search function to input element
-    searchInput.addEventListener('keyup', searchNotes);
-
-    // insert input element above the notes list and focus on it
-    notesListContainer.insertAdjacentElement('beforebegin', searchInput).focus();
-    searchStatus = true;
-  } else {
-    // if the search input is already there, it is removed when one clicks on the search button
-    const searchInput = document.getElementById('searchInput');
-    searchInput.remove();
-    searchStatus = false;
-    console.log()
-    renderCurrentView();
-  }
-})
 
 function searchNotes() {
   // Get the value of the search input and make lower case
@@ -656,62 +702,11 @@ function searchNotes() {
   }
 }
 
-
-/* ADDITIONAL FUNCTIONS NOT IMPLEMENTED */
 /* Date Function */
 function date() {
   let date = new Date();
   return date.toLocaleString();
 }
-
-
-
-/* Read only mode */
-// To turn the editor into "read-only-mode" - the toolbar is hidden and the content of the editor is non-editable. When clcked on again, it is made into "edit-mode" and the toolbar is shown again.
-// Activate function from e.g. a button with a event listener that activates the function
-// Also need to create a class of "hide-toolbar" with a "display: none; property"
-function editToggle(e) {
-  // Add the class "edit-button" to the html element that activates this function
-  if (!e.target.classList.contains('edit-button')) {
-    return;
-  }
-
-  const editor = document.querySelector('.ql-editor');
-  const toolbar = document.querySelector('.ql-toolbar.ql-snow');
-
-  if (editor.getAttribute('contenteditable') === 'true') {
-    // makes the editor non-editable
-    editor.setAttribute('contenteditable', false);
-    // adds the class "hide-toolbar" containing a "dsplay: none;" to hide the toolbar
-    toolbar.classList.toggle('hide-toolbar');
-  } else {
-    // the opposite
-    editor.setAttribute('contenteditable', true);
-    toolbar.classList.toggle('hide-toolbar');
-  }
-}
-
-//Eventlistener for removing the "placeholder text" in the editor when creating a new note
-editingField.addEventListener('click', () => {
-  //First does a check to see if the editor has any "children"
-  if (editingField.firstChild.innerHTML == null) {
-    //If not then nothing should be executed when clicking inside of the editing field
-    return false;
-  } else {
-    //If there are "children" such as h1- or p-tags then the while loop will begin it´s two checks to see if the "placeholders" are displayed
-    while (editingField.firstChild.innerHTML == "Please add a title here" ||
-      editingField.firstChild.innerHTML == "Here is where you can write your cool note text") {
-
-      //If they are then the innerHTML of the editor will be erased to BLANK
-      editingField.innerHTML = "";
-      //Then a h1 will be created and put in a variable
-      let h = document.createElement("H1");
-      //Then the h1 will be appended to the editor so the user can begin to write a title for their note
-      editingField.appendChild(h);
-    }
-
-  }
-});
 
 //Function for adding the academic template
 function changeToAcademic() {
@@ -723,12 +718,6 @@ function removeAcademic() {
   editingField.classList.remove('academic-note')
   templateData = "undefined";
 }
-// Eventlistener for when academic button is clicked
-academicBtn.addEventListener('click',function(){
-  changeToAcademic();
-  textWasEdited = true;
-});
-
 
 //Function for adding the playfull template
 function changeToPlayfull() {
@@ -740,12 +729,6 @@ function removePlayfull() {
   editingField.classList.remove('playfull-note')
   templateData = "undefined";
 }
-// Eventlistener for when playfull button is clicked
-playfullBtn.addEventListener('click', function () {
-  changeToPlayfull();
-  textWasEdited = true;
-});
-
 
 //Eventlistener for the reset button
 resetBtn.addEventListener('click', function () {
@@ -759,15 +742,6 @@ function resetAllTemplates() {
   editingField.classList.remove('playfull-note')
   editingField.classList.remove('academic-note')
 };
-
-// Eventlistener when headings are selected or changed
-headingsPicker.addEventListener('click', checkTemplate);
-
-// Listener for the 1,2,3 list button that changes text to an ordered list
-changeListButton[0].addEventListener('click', checkTemplate);
-
-// Listener for the list button that changes text to an unordered list
-changeListButton[1].addEventListener('click', checkTemplate);
 
 //Function for checking after witch template is active
 function  checkTemplate() {
@@ -783,32 +757,3 @@ function  checkTemplate() {
     return;
   }
 };
-
-
-// Eventlistener when any key is pressed
-document.addEventListener('keydown', (event) => {
-  // Stores the value in a variable for further use
-  let keyName = event.key;
-  // Checks if both the enter key is pressed and the playfull template is "active"
-  if (keyName === 'Enter' && editingField.classList.contains("playfull-note")) {
-    // If they both are true then the playfull template function is executed
-    changeToPlayfull();
-  } else if (keyName === 'Enter' && editingField.classList.contains("academic-note")) {
-    changeToAcademic();
-
-  } else {
-      return;
-  }
-  // Checks if both the backspace key is pressed and the playfull template is "active"
-  if (keyName === 'Backspace' && editingField.classList.contains("playfull-note")) {
-    // If they both are true then the playfull template function is executed
-    changeToPlayfull();
-
-  } else if (keyName === 'Backspace' && editingField.classList.contains("academic-note")) {
-    changeToAcademic();
-
-  } else {
-      return;
-  }
-})
-
