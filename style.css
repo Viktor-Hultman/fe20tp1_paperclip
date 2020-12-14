@@ -288,6 +288,7 @@ li {
     color: var(--dark-txt);
     font-weight: bold;
     border-bottom: var(--links-border);
+    border-top: var(--links-border);
     background-color: var(--white-bg);
     text-align: center;
     padding: 3px 4px;
