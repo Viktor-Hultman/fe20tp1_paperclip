@@ -407,6 +407,37 @@ li {
     letter-spacing: 1px;
 }
 
+/* Start of big size classes */
+#big-size-btn {
+    position: absolute;
+    left: 250px;
+}
+
+.big-size-note {
+    background-color: 	#ffffff;
+}
+
+.big-size-note > h1 {
+    font-size: 45px !important; 
+}
+
+.big-size-note > h2 {
+    font-size: 38px !important; 
+}
+
+.big-size-note > h3 {
+    font-size: 30px !important; 
+}
+
+.big-size-note > p {
+    font-size: 24px !important;
+}
+/* Targets all unordered and ordered list items */
+.big-size-note > ul > li, .big-size-note > ol > li {
+    font-size: 24px !important;
+}
+/*End of big size classes*/
+
 /* Start of academic classes */
 #academic-btn {
     position: absolute;

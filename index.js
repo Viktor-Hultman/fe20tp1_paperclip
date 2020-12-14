@@ -60,6 +60,7 @@ let emptyTrashBinBtn = document.querySelector('.clear-trash-bin');
 let resetBtn = document.querySelector('#reset-btn');
 let playfullBtn = document.querySelector('#playfull-btn');
 let academicBtn = document.querySelector('#academic-btn');
+let bigSizeBtn = document.querySelector('#big-size-btn');
 let headingsPicker = document.querySelector('.ql-picker-options')
 let changeListButton = document.querySelectorAll('.ql-list')
 
@@ -189,6 +190,9 @@ function saveNewNote() {
     } else if(editingField.classList.contains("academic-note")) {
       templateData = "academic"
 
+    } else if(editingField.classList.contains("big-size-note")) {
+      templateData = "big-size"
+
     } else {
       //If none of the templates are "active" sets the data-template to "undefined"
       templateData = "undefined"
@@ -225,7 +229,12 @@ function saveNote() {
     //Checks if the user has clicked the academic button
   } else if (editingField.classList.contains("academic-note")) {
     //If they have then the data template atribute sets to academic
-    activeNote.setAttribute('data-template', "academic"); 
+    activeNote.setAttribute('data-template', "academic");
+
+    //Checks if the user has clicked the bigsize button
+  } else if (editingField.classList.contains("big-size-note")) {
+    //If they have then the data template atribute sets to bigsize
+    activeNote.setAttribute('data-template', "big-size"); 
 
   } else {
     //If the user clicked a note without a template then the note will get the "standard" atribute of "undefined"
@@ -531,9 +540,13 @@ notesListContainer.addEventListener('click', e => {
       } else if(templateData == "academic") {
         changeToAcademic();
 
+      } else if(templateData == "big-size") {
+        changeToBigSize();
+
       } else {
         removePlayfull();
         removeAcademic();
+        removeBigSize();
       }
     
       clickedNote.parentElement.classList.add('active-note');
@@ -694,6 +707,19 @@ function removePlayfull() {
 // Eventlistener for when playfull button is clicked
 playfullBtn.addEventListener('click', changeToPlayfull);
 
+//Function for adding the bigsize template
+function changeToBigSize() {
+  resetAllTemplates();
+  editingField.classList.add('big-size-note')
+};
+//Function for removing the bigsize template
+function removeBigSize() {
+  editingField.classList.remove('big-size-note')
+  templateData = "undefined";
+}
+// Eventlistener for when bigsize button is clicked
+bigSizeBtn.addEventListener('click', changeToBigSize);
+
 
 //Eventlistener for the reset button
 resetBtn.addEventListener('click', resetAllTemplates);
@@ -703,6 +729,7 @@ function resetAllTemplates() {
   templateData = "undefined";
   editingField.classList.remove('playfull-note')
   editingField.classList.remove('academic-note')
+  editingField.classList.remove('big-size-note')
 };
 
 // Eventlistener when headings are selected or changed
@@ -720,10 +747,17 @@ function  checkTemplate() {
   if (editingField.classList.contains("playfull-note")) {
     //If the playfull template is "active" then the playfull template function is executed
     changeToPlayfull();
+
     //If the active template is academic
   } else if (editingField.classList.contains("academic-note")){
     //The academic template function runs
     changeToAcademic();
+
+    //If the active template is bigsize
+  } else if (editingField.classList.contains("big-size-note")){
+    //The academic template function runs
+    changeToBigSize();
+
   } else {
     return;
   }
@@ -740,6 +774,8 @@ document.addEventListener('keydown', (event) => {
     changeToPlayfull();
   } else if (keyName === 'Enter' && editingField.classList.contains("academic-note")) {
     changeToAcademic();
+  } else if (keyName === 'Enter' && editingField.classList.contains("big-size-note")) {
+    changeToBigSize();
 
   } else {
       return;
@@ -751,6 +787,9 @@ document.addEventListener('keydown', (event) => {
 
   } else if (keyName === 'Backspace' && editingField.classList.contains("academic-note")) {
     changeToAcademic();
+
+  } else if (keyName === 'Backspace' && editingField.classList.contains("big-size-note")) {
+    changeToBigSize();
 
   } else {
       return;
