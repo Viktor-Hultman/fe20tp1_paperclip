@@ -257,7 +257,7 @@ li {
 #playfair-display-btn,
 #roboto-btn,
 #noto-btn,
-#save-note-btn,
+.save-note-btn,
 #print-btn {
     width: fit-content;
     font-size: 0.8em;
@@ -280,25 +280,6 @@ li {
 .new-note-button:active,
 .new-note-button:focus {
     background-color: var(--blue-bg);
-    color: var(--white-txt);
-}
-
-.save-note-btn {
-    width: 80px;
-    align-self: center;
-    font-size: 1.1rem;
-    font-family: 'Montserrat';
-    margin: 20px 0;
-    padding: 6px;
-    color: var(--white-txt);
-    background: var(--blue-bg);
-    border: none;
-}
-
-.save-note-btn:hover,
-.save-note-btn:active,
-.save-note-btn:focus {
-    background: var(--dark-bg);
     color: var(--white-txt);
 }
 
@@ -328,14 +309,12 @@ li {
 .delete-note-btn svg,
 .restore-note-btn svg,
 .permanently-delete svg,
-.save-note-btn svg,
 #print-btn svg {
     height: 12px;
     color: var(--dark-fill);
     fill: var(--dark-fill);
 }
 
-.save-note-btn svg,
 #print-btn svg {
     color: #444444;
 }
