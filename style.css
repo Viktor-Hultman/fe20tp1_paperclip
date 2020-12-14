@@ -75,18 +75,13 @@ a {
 }
 
 .favorite-toggle {
-    padding: 0;
-    margin: 0;
     border: 0;
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
     cursor: pointer;
     background-color: transparent;
 }
 
 .favorite-toggle svg {
-    width: 20px;
+    width: 17px;
     fill: var(--dark-fill);
 }
 
@@ -225,9 +220,7 @@ h2 {
     color: var(--dark-txt);
 }
 
-.intro h2 {
-    font-variant: small-caps;
-}
+
 
 p,
 li {
@@ -243,20 +236,73 @@ li {
 }
 
 /*intro section*/
+.main-on-intro .logo {
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    padding-bottom: 5px;
+    font-size: 2.1rem;
+}
+
 .intro {
+    width: 100%;
+    margin: 0 auto;
+    background: url(images/sticky-notes.png) no-repeat center fixed;
+    background-size: cover;
+    color: var(--white-txt);
+    font-weight: 700;
+    min-height: 100vh;
+}
+
+.intro h1 {
+    color: var(--white-txt);
+    background-color: rgba(89, 89, 90, 0.71);
     width: 90%;
     margin: 0 auto;
-    overflow: auto;
+    margin-top: 15px;
+    padding: 5px;
+}
+
+.intro h2 {
+    font-variant: small-caps;
+    color: var(--white-txt);
+    background-color: rgba(89, 89, 90, 0.71);
+    width: 90%;
+    margin: 0 auto;
+    padding: 5px;
 }
 
 .intro p {
     margin-bottom: 50px;
+    color: var(--white-txt);
+    background-color: rgba(89, 89, 90, 0.71);
+    width: 90%;
+    margin: 0 auto;
+    padding: 5px;
 }
 
 .intro p a {
-    color: var(--blue-txt);
+    color: var(--dark-txt);
     font-weight: bold;
     border-bottom: var(--links-border);
+    background-color: var(--white-bg);
+    text-align: center;
+    padding: 3px 4px;
+    border-radius: 6px;
+    display: block;
+    width: 120px;
+    margin: 15px auto 0 auto;
+    font-size: 1.3rem;
+}
+
+.intro p a:hover,
+.intro p a:active,
+.intro p a:focus {
+    color: var(--white-txt);
+    background-color: transparent;
 }
 
 /* Toolbar buttons */
@@ -377,8 +423,8 @@ li {
 .note h4,
 .note h5,
 .note h6 {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 500;
     margin-top: 0;
 }
 
@@ -509,6 +555,7 @@ li {
 .note-toolbar {
     display: flex;
     align-items: center;
+    justify-content: space-around;
 }
 
 /*date*/

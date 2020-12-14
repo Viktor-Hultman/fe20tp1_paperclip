@@ -93,6 +93,12 @@ function openEditor() {
   setTimeout(() => {
     editorContainer.classList.remove("hidden");
   }, 300);
+  //autosave needs separation of the save and close editor functionalities which might need a lot of changes and end upp with a lot of bugs
+  // setInterval(function(){ 
+  //   if (textWasEdited){
+  //     chooseSaveType();
+  //   }
+  // }, 3000);
 }
 
 //open editor when clicking on new note button
@@ -212,7 +218,7 @@ function saveNewNote() {
     //closes the editor
     closeEditor();
     //remove focus from list items
-    removeFocus();
+    //removeFocus();
 
     // Resets template buttons to "deactivated"
     removeAcademic();
@@ -260,7 +266,6 @@ function saveNote() {
   removeAcademic();
   removePlayfull();
 }
-
 
 
 // saves and creates the note when clicking on the save button

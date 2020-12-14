@@ -8,7 +8,7 @@
     --green-blue-bg: #009207;
     --green-blue-bg-active: #00b30f;
     /* green fill color */
-    --green-dark-fill: #1c4c1c;
+    --green-dark-fill: #4c614c;
     --green-blue-fill: #009207;
     /* green borders */
     --green-notes-border: 2.5px solid #bad6ba;
@@ -25,7 +25,7 @@
     --red-blue-bg: #920000;
     --red-blue-bg-active: #b30000;
     /* red fill color */
-    --red-dark-fill: #4c1c1c;
+    --red-dark-fill: #695252;
     --red-blue-fill: #920000;
     /* red borders */
     --red-notes-border: 2.5px solid #d6baba;
@@ -48,7 +48,7 @@ body {
     --blue-bg-active: #0065b3;
     /*fill color*/
     --white-fill: #fff;
-    --dark-fill: #1C354C;
+    --dark-fill: #495663;
     --blue-fill: #005392;
     --selected-fill: gold;
     /* font */
@@ -136,10 +136,10 @@ body.theme-dark {
     --light-grey-bg: #080808;
     --dark-bg: #2E2E2E;
     --blue-bg: #121212;
-    --blue-bg-active: #588e91;
+    --blue-bg-active: #292929;
     /*fill color*/
-    --white-fill: #84D6DB;
-    --dark-fill: #EEC186;
+    --white-fill: #fff;
+    --dark-fill: #84D6DB;
     --blue-fill: #EEC186;
     --selected-fill: gold;
     /* font */
