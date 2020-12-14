@@ -525,20 +525,6 @@ editingField.addEventListener('click', () => {
   }
 });
 
-//Eventlisteners for the "Mallar" buttons
-/* playfairBtn.addEventListener('click', () => {
-  //Targets all the children in the editor
-  let editorChildren = editingField.children;
-  //Loops through them to target each element
-  for (let i = 0; i < editorChildren.length; i++) {
-    //Removes previous classes
-    editorChildren[i].className = '';
-    //Adds the class corosponding to the "Mall" button
-    editorChildren[i].classList.add('playfair-display-text')
-  }
-
-}) */
-
 function playfair() {
   //Targets all the children in the editor
   let editorChildren = editingField.children;
@@ -552,19 +538,6 @@ function playfair() {
 
 }
 
-/* robotoBtn.addEventListener('click', () => {
-  //Targets all the children in the editor
-  let editorChildren = editingField.children;
-  //Loops through them to target each element
-  for (let i = 0; i < editorChildren.length; i++) {
-    //Removes previous classes
-    editorChildren[i].className = '';
-    //Adds the class corosponding to the "Mall" button
-    editorChildren[i].classList.add('roboto-text')
-  }
-
-}) */
-
 function roboto() {
   //Targets all the children in the editor
   let editorChildren = editingField.children;
@@ -575,21 +548,7 @@ function roboto() {
     //Adds the class corosponding to the "Mall" button
     editorChildren[i].classList.add('roboto-text')
   }
-
 }
-
-/* notoBtn.addEventListener('click', () => {
-  //Targets all the children in the editor
-  let editorChildren = editingField.children;
-  //Loops through them to target each element
-  for (let i = 0; i < editorChildren.length; i++) {
-    //Removes previous classes
-    editorChildren[i].className = '';
-    //Adds the class corosponding to the "Mall" button
-    editorChildren[i].classList.add('noto-text')
-  }
-
-}) */
 
 function noto() {
   //Targets all the children in the editor
@@ -621,6 +580,7 @@ spanTheme.remove(); */
 const selectTheme = document.querySelector('select#themes');
 selectTheme.addEventListener('change', function (event) {
   const currentTheme = document.querySelector('#themes').children[0].dataset.value;
+  console.log(currentTheme);
   if (currentTheme === 'standard') {
     standard();
   }
