@@ -78,13 +78,13 @@ editorContainer.addEventListener('keyup', function () {
   textWasEdited = true;
 })
 
+
 //permanently deletes all deleted notes in the trash bin
 emptyTrashBinBtn.addEventListener('click', emptyTrashBin);
 
 //function that opens the editor
 function openEditor() {
   console.log("Should be seen only once");
-  //text edit variable becomes true when a keyupp event is triggered
 
   confirmClose();
   //set the initial content in the editor
@@ -97,8 +97,8 @@ function openEditor() {
 
 //open editor when clicking on new note button
 newNoteButton.addEventListener("click", function () {
-  removePlayfull()
-  openEditor();
+  openEditor(); 
+  
   clickedNote = "";
 });
 
@@ -111,13 +111,14 @@ function closeEditor() {
 
 // function that asks whether to save the note or simply close the or  closes 
 function confirmClose() {
-  if (textWasEdited) {
-    if (confirm("Do you want to save your note before closing?")) {
-      if (clickedNote === "") {
+  //console.log(styleWhenNoteWasOpened, editingField.classList)
+  if (clickedNote === "") {
+      if (textWasEdited) {
         saveNewNote();
-      } else saveNote();
+      } else closeEditor();
+    } else if (clickedNote.innerHTML != editingField.innerHTML || textWasEdited) { 
+      saveNote();
     } else closeEditor();
-  } else closeEditor();
 }
 
 // closes the editor when clicking on close button with both save and close option
@@ -526,8 +527,9 @@ notesListContainer.addEventListener('click', e => {
     if (e.target.closest('.note-text').parentElement.classList.contains('deleted')) {
       return
     }
-    removeFocus();
     openEditor();
+    removeFocus();
+  
     //store the clicked note into a variable
     clickedNote = e.target.closest('.note-text');
     //store the clicked notes id in the global variable clickedNoteId
@@ -676,7 +678,10 @@ function removeAcademic() {
   templateData = "undefined";
 }
 // Eventlistener for when academic button is clicked
-academicBtn.addEventListener('click', changeToAcademic);
+academicBtn.addEventListener('click',function(){
+  changeToAcademic();
+  textWasEdited = true;
+});
 
 
 //Function for adding the playfull template
@@ -690,11 +695,17 @@ function removePlayfull() {
   templateData = "undefined";
 }
 // Eventlistener for when playfull button is clicked
-playfullBtn.addEventListener('click', changeToPlayfull);
+playfullBtn.addEventListener('click', function () {
+  changeToPlayfull();
+  textWasEdited = true;
+});
 
 
 //Eventlistener for the reset button
-resetBtn.addEventListener('click', resetAllTemplates);
+resetBtn.addEventListener('click', function () {
+  resetAllTemplates();
+  textWasEdited = true;
+});
 
 //Removes all template classes
 function resetAllTemplates() {
