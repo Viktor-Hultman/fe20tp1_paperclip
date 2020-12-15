@@ -1,0 +1,188 @@
+/* font family */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+/* variable for colors */
+:root {
+    --background-color-:#F6F4F3;
+    --color-:#005392;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: white;
+}
+/* body styling */
+.body{
+    max-height: 100vh;
+    background-color: var(--background-color-);
+}
+/* all section background colors */
+section{
+    background-color: var(--background-color-);
+}
+/* style for h1 and h2 tags */
+h1, h2{
+    color: black;
+}
+/* back to editor button */
+.home{
+    position: absolute;
+    text-align: center;
+    width: 7.5em;
+    height: 2.3em;
+    left: 2.7em;
+    top: 1.5em;
+    font-size: 20px;
+    color: black;
+}
+/* section 1 */
+.sec1{
+    width: 100%;
+    height: 20vh;
+    
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+/* section 1 title font size */
+.sec1 h1{
+    font-size: 34px;
+}
+/* circle with total notes */
+.circle{
+    border-radius: 50%;
+    height: 5.5em;
+    width: 5.5em;
+    text-align: center;
+    line-height: 5.5em;
+    font-size: 32px;
+
+    background: var(--color-);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+}
+/* section 2 */
+.sec2{
+    width: 100%;
+    height: 35vh;
+    font-size: 18px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* section 3 */
+.sec3{
+    height: 45vh;
+}
+
+/* floxbox div for ever written notes title */
+.content{
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+
+/* title for ever written notes */
+.title{
+    width: 13.750em;
+    color: black;
+    font-size: 20px;
+}
+
+/* flexbox where ever written notes box lies inside */
+
+.content2{
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    line-height: 3.125em;
+    font-size: 24px;
+}
+
+/* box for total notes ever written  */
+.div1{
+    width: 11.458em;
+    height: 3.125em;
+    
+    background: var(--color-);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+} 
+
+/* line on page */
+hr{
+    position: fixed;
+    width:auto;
+    left: 95px;
+    right: 95px;
+    top: 75vh;
+
+    border: 1px solid #000000;
+}
+/* Responsive styling */
+@media (max-width: 414px) {
+
+    .home{
+        left: 12px;
+        top: 20px;
+        font-size: 18px;
+    }
+
+    .sec1{
+        font-size: 18px;
+    }
+    
+    .sec2{
+        font-size: 16px;
+    }
+
+    .circle{
+        height: 125px;
+        width: 125px;
+        line-height: 125px;
+        font-size: 28px;
+    }
+    .title{
+        width: 210px;
+        color: black;
+        font-size: 18px;
+    }
+    
+    .content2{
+        line-height: 55px;
+        font-size: 20px;
+    }
+    
+    .div1{
+        width: 205px;
+        height: 55px;
+    } 
+
+    hr{
+        left: 30px;
+        right: 30px;
+        top: 75vh;
+    }
+}
+
+@media (max-height:740px){
+
+    hr{
+        left: 30px;
+        right: 30px;
+        top: 75vh;
+    
+        border: 1px solid #000000;
+    }
+}
