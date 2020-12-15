@@ -1,22 +1,23 @@
 :root {
-            /* GREEN */
+    /* GREEN */
     /* green text color  */
-    --green-dark-txt: #1c4c1c;
-    --green-blue-txt: #009207;
+    --green-dark-txt: #067302;
+    --green-blue-txt: #97BF04;
     /* green background color */
-    --green-dark-bg: #1c4c1c;
-    --green-blue-bg: #009207;
-    --green-blue-bg-active: #00b30f;
+    --green-dark-bg: #067302;
+    --green-blue-bg: #97BF04;
+    --green-blue-bg-active: #aec462;
+    --green-gray-bg: #EDF2C2;
     /* green fill color */
-    --green-dark-fill: #1c4c1c;
-    --green-blue-fill: #009207;
+    --green-dark-fill: #067302;
+    --green-blue-fill: #97BF04;
     /* green borders */
-    --green-notes-border: 2.5px solid #bad6ba;
-    --green-links-border: 2.5px solid #009207;
-    --green-button-border-dark: 1.5px solid #1c4c1c;
-    --green-editor-border: 1px solid #bad6ba;
+    --green-notes-border: 2.5px solid #E7F294;
+    --green-links-border: 2.5px solid #95D904;
+    --green-button-border-dark: 1.5px solid #97BF04;
+    --green-editor-border: 1px solid #E7F294;
 
-        /* RED */
+    /* RED */
     /* red text color  */
     --red-dark-txt: #4c1c1c;
     --red-blue-txt: #920000;
@@ -25,12 +26,12 @@
     --red-blue-bg: #920000;
     --red-blue-bg-active: #b30000;
     /* red fill color */
-    --red-dark-fill: #4c1c1c;
+    --red-dark-fill: #695252;
     --red-blue-fill: #920000;
     /* red borders */
     --red-notes-border: 2.5px solid #d6baba;
     --red-links-border: 2.5px solid #920000;
-    --red-button-border-dark: 1.5px solid #4c1c1c;
+    --red-button-border-dark: 1.5px solid #920000;
     --red-editor-border: 1px solid #d6baba;
 }
 
@@ -48,11 +49,11 @@ body {
     --blue-bg-active: #0065b3;
     /*fill color*/
     --white-fill: #fff;
-    --dark-fill: #1C354C;
+    --dark-fill: #495663;
     --blue-fill: #005392;
     --selected-fill: gold;
     /* font */
-    --title-font: 'Playfair Display', serif;
+    --title-font: 'Montserrat', serif;
     --text-font: 'Montserrat', sans-serif;
     /*borders*/
     --notes-border: 2.5px solid #D3D3D3;
@@ -65,13 +66,14 @@ body {
 }
 
 body.theme-green {
-        /* text color  */
+    /* text color  */
     --dark-txt: var(--green-dark-txt);
     --blue-txt: var(--green-blue-txt);
     /* background color */
     --dark-bg: var(--green-dark-bg);
     --blue-bg: var(--green-blue-bg);
     --blue-bg-active: var(--green-blue-bg-active);
+    --light-grey-bg: var(--green-gray-bg);
     /*fill color*/
     --dark-fill: var(--green-dark-fill);
     --blue-fill: var(--green-blue-fill);
@@ -79,12 +81,12 @@ body.theme-green {
     /*borders*/
     --notes-border: var(--green-notes-border);
     --links-border: 2.5px solid var(--green-links-border);
-    /*--button-border-dark: 1.5px solid var(--green-button-border-dark);  FUNKAR INTE??*/
+    --button-border-blue: var(--green-button-border-dark);
     --editor-border: var(--green-editor-border);
 }
 
 body.theme-red {
-        /* text color  */
+    /* text color  */
     --dark-txt: var(--red-dark-txt);
     --blue-txt: var(--red-blue-txt);
     /* background color */
@@ -98,16 +100,61 @@ body.theme-red {
     /*borders*/
     --notes-border: var(--red-notes-border);
     --links-border: 2.5px solid var(--red-links-border);
-    /*--button-border-dark: 1.5px solid var(--red-button-border-dark);  FUNKAR INTE??*/
+    --button-border-blue: var(--red-button-border-dark);
     --editor-border: var(--red-editor-border);
 }
 
 body.theme-rainbow {
+    /* text color  */
+    --blue-txt: #C850C0;
+    --white-txt: #4158D0;
+
+    /* background color */
     --dark-bg: none;
     --blue-bg: none;
     --blue-bg-active: #4357c9f1;
-background-color: #4158D0;
-background-image: linear-gradient(135deg, #4158D0 0%, #C850C0 35%, #FFCC70 73%, #ffffff 100%);       
+    background-color: #4158D0;
+    background-image: linear-gradient(135deg, #4158D0 0%, #C850C0 35%, #FFCC70 73%, #ffffff 100%);
+
+    /*fill color*/
+    --dark-fill: #4158D0;
+    --blue-fill: #4158D0;
+
+    /*borders*/
+    --notes-border: .5px solid #4158D0;
+    --links-border: 2.5px solid #4158D0;
+    --button-border-blue: 1.5px solid #4158D0;
+    --editor-border: 2.5px solid #4158D0;
+}
+
+body.theme-dark {
+    background: #121212;
+    /* text color  */
+    --white-txt: #4B3620;
+    --dark-txt: #f1efef;
+    --blue-txt: #4B3620;
+    /* background color */
+    --white-bg: #2E2E2E;
+    --light-grey-bg: #080808;
+    --dark-bg: #2E2E2E;
+    --blue-bg: #121212;
+    --blue-bg-active: #0c0c0c;
+    /*fill color*/
+    --white-fill: #fff;
+    --dark-fill: #97dbdf;
+    --blue-fill: #EEC186;
+    --selected-fill: gold;
+    /* font */
+    --title-font: 'Playfair Display', serif;
+    --text-font: 'Montserrat', sans-serif;
+    /*borders*/
+    --notes-border: 2.5px solid #111b27;
+    --links-border: 2.5px solid #3A5D8C;
+    --button-border-dark: 1.5px solid #5E9ABF;
+    --button-border-blue: 1px solid #EEC186;
+    --editor-border: 1px solid #253C59;
+    /*shadows*/
+    --hover-note-shadow: 0 3px 20px 0 #000, 0 3px 20px 1px #000;
 }
 
 /* IF WE HAVE TIME TO MAKE DARKMODE
