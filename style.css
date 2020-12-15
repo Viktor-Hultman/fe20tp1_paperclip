@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Inconsolata&family=Noto+Serif&family=Roboto&Montserrat&family=Playfair+Display:ital,wght@0,500;1,700&family=Roboto&family=Sofia&family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Creepster&family=Jolly+Lodger&family=Indie+Flower&family=Inconsolata&family=Noto+Serif&family=Roboto&Montserrat&family=Playfair+Display:ital,wght@0,500;1,700&family=Roboto&family=Sofia&family=Ubuntu&display=swap');
 /* @import url('https://fonts.googleapis.com/css2?family=family=Montserrat&family=Playfair+Display:wght@500;700&display=swap'); */
 
 
@@ -75,19 +75,14 @@ a {
 }
 
 .favorite-toggle {
-    padding: 0;
-    margin: 0;
     border: 0;
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
     cursor: pointer;
     background-color: transparent;
 }
 
 .favorite-toggle svg {
-    width: 20px;
-    fill: var(--white-fill);
+    width: 17px;
+    fill: var(--dark-fill);
 }
 
 .saved-notes-div {
@@ -135,7 +130,7 @@ a {
 }
 
 #editor {
-    height: calc(1fr - 50px);
+    /* height: calc(1fr - 50px); */
     overflow: auto;
 }
 
@@ -149,7 +144,7 @@ a {
 .logo {
     font-family: 'Playfair Display', serif;
     font-size: 30px;
-    color: var(--white-txt);
+    color: var(--white-fill);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -179,8 +174,8 @@ a {
 
 .nav-icon svg {
     height: 16px;
-    fill: var(--white-txt);
-    color: var(--white-txt);
+    fill: var(--white-fill);
+    color: var(--white-fill);
 }
 
 #starred-button.selected svg,
@@ -204,10 +199,16 @@ a {
 .cogwheel-select {
     max-width: 50px;
     min-width: 50px;
-    height: 50px;
+    height: auto;
     color: transparent;
     border: none;
     background: transparent;
+}
+
+.cogwheel-select option {
+    background: var(--blue-bg);
+    color: var(--white-txt);
+    height: 100%;
 }
 
 
@@ -219,9 +220,7 @@ h2 {
     color: var(--dark-txt);
 }
 
-.intro h2 {
-    font-variant: small-caps;
-}
+
 
 p,
 li {
@@ -237,31 +236,108 @@ li {
 }
 
 /*intro section*/
+.main-on-intro .logo {
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    padding-bottom: 5px;
+    font-size: 2.1rem;
+}
+
 .intro {
+    width: 100%;
+    margin: 0 auto;
+    background: url(images/sticky-notes.png) no-repeat center fixed;
+    background-size: cover;
+    color: var(--white-txt);
+    font-weight: 700;
+    min-height: 100vh;
+}
+
+.intro h1 {
+    color: var(--white-txt);
+    background-color: rgba(89, 89, 90, 0.71);
     width: 90%;
     margin: 0 auto;
-    overflow: auto;
+    margin-top: 15px;
+    padding: 5px;
+}
+
+.intro h2 {
+    font-variant: small-caps;
+    color: var(--white-txt);
+    background-color: rgba(89, 89, 90, 0.71);
+    width: 90%;
+    margin: 0 auto;
+    padding: 5px;
 }
 
 .intro p {
     margin-bottom: 50px;
+    color: var(--white-txt);
+    background-color: rgba(89, 89, 90, 0.71);
+    width: 90%;
+    margin: 0 auto;
+    padding: 5px;
 }
 
 .intro p a {
-    color: var(--blue-txt);
+    color: var(--dark-txt);
     font-weight: bold;
     border-bottom: var(--links-border);
+    border-top: var(--links-border);
+    background-color: var(--white-bg);
+    text-align: center;
+    padding: 3px 4px;
+    border-radius: 6px;
+    display: block;
+    width: 120px;
+    margin: 15px auto 0 auto;
+    font-size: 1.3rem;
+}
+
+.intro p a:hover,
+.intro p a:active,
+.intro p a:focus {
+    color: var(--white-txt);
+    background-color: transparent;
 }
 
 /* Toolbar buttons */
-#playfair-display-btn,
-#roboto-btn,
-#noto-btn,
-#save-note-btn,
-#print-btn {
+.ql-snow.ql-toolbar button,
+.printBtn svg,
+#themes {
+    color: var(--dark-fill);
+    fill: var(--dark-fill) !important;
+}
+
+.ql-toolbar .ql-stroke {
+    fill: none;
+    stroke: var(--dark-fill);
+}
+
+.ql-toolbar .ql-fill {
+    fill: var(--dark-fill);
+    stroke: none;
+}
+
+.ql-toolbar .ql-picker {
+    color: var(--dark-fill);
+}
+
+.save-note-btn,
+#print-btn,
+#themes {
     width: fit-content;
     font-size: 0.8em;
     margin-left: 10px;
+}
+
+#themes {
+    background-color: var(--white-bg);
 }
 
 
@@ -282,25 +358,6 @@ li {
     background-color: var(--blue-bg);
     color: var(--white-txt);
 }
-/* 
-.save-note-btn {
-    width: 80px;
-    align-self: center;
-    font-size: 1.1rem;
-    font-family: 'Montserrat';
-    margin: 20px 0;
-    padding: 6px;
-    color: var(--white-txt);
-    background: var(--blue-bg);
-    border: none;
-} */
-
-.save-note-btn:hover,
-.save-note-btn:active,
-.save-note-btn:focus {
-    background: var(--dark-bg);
-    color: var(--white-txt);
-}
 
 .close-btn {
     font-size: 2rem;
@@ -310,9 +367,9 @@ li {
 .close-btn button {
     border: none;
     background-color: transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
+    position: relative;
+    top: -7px;
+    right: -50px;
 }
 
 .delete-note-btn,
@@ -328,16 +385,10 @@ li {
 .delete-note-btn svg,
 .restore-note-btn svg,
 .permanently-delete svg,
-.save-note-btn svg,
 #print-btn svg {
     height: 12px;
     color: var(--dark-fill);
     fill: var(--dark-fill);
-}
-
-.save-note-btn svg,
-#print-btn svg {
-    color: #444444;
 }
 
 .clear-trash-bin {
@@ -361,7 +412,7 @@ li {
     max-width: 400px;
     margin: 0 auto 5px auto;
     transition: width .2s;
-    background-color: #fff;
+    background-color: var(--white-bg);
 }
 
 .note.favorite .favorite-toggle svg {
@@ -374,8 +425,8 @@ li {
 .note h4,
 .note h5,
 .note h6 {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 500;
     margin-top: 0;
 }
 
@@ -385,10 +436,6 @@ li {
     border-left: none;
     width: 100%;
     border-radius: 0;
-}
-
-.active-note button {
-    background-color: white;
 }
 
 .note-text {
@@ -418,6 +465,36 @@ li {
     border-radius: 5px;
     letter-spacing: 1px;
 }
+
+/* Start of big size classes */
+#big-size-btn {
+    position: absolute;
+    left: 250px;
+}
+
+.big-size-note>h1 {
+    font-size: 45px !important;
+}
+
+.big-size-note>h2 {
+    font-size: 38px !important;
+}
+
+.big-size-note>h3 {
+    font-size: 30px !important;
+}
+
+.big-size-note>p {
+    font-size: 24px !important;
+}
+
+/* Targets all unordered and ordered list items */
+.big-size-note>ul>li,
+.big-size-note>ol>li {
+    font-size: 24px !important;
+}
+
+/*End of big size classes*/
 
 /* Start of academic classes */
 /* #academic-btn {
@@ -506,10 +583,51 @@ li {
 }
 
 /*End of playfull classes*/
+
+/*Start of creepy classes*/
+.creepy-note {
+    background-color: #212421;
+}
+
+.creepy-note>h1 {
+    font-family: 'Creepster', cursive;
+    color: crimson;
+    font-size: 30px !important;
+}
+
+.creepy-note>h2 {
+    font-family: 'Creepster', cursive;
+    color: crimson;
+    font-size: 24px !important;
+}
+
+.creepy-note>h3 {
+    font-family: 'Creepster', cursive;
+    color: crimson;
+    font-size: 20px !important;
+}
+
+.creepy-note>p {
+    font-family: 'Jolly Lodger', cursive;
+    color: #a0a0a0;
+    font-size: 16px !important;
+}
+
+/* Targets all unordered and ordered list items */
+.creepy-note>ul>li,
+.creepy-note>ol>li {
+    font-family: 'Jolly Lodger', cursive;
+    color: #a0a0a0;
+    font-size: 16px !important;
+}
+
+/*End of creepy classes*/
+
 /*note toolbar*/
 .note-toolbar {
     display: flex;
     align-items: center;
+    justify-content: space-around;
 }
 
 /*date*/
@@ -564,6 +682,7 @@ li {
 }
 
 @media print {
+
     .navbar,
     .saved-notes-div,
     .toolbar-and-editor-container .close-btn,
@@ -574,7 +693,7 @@ li {
 
 #themes {
     display: inline-block !important;
-    float: left;
+    float: left; /*This "problem" is needed for the template drop down to be displayed correctly*/
     border: none;
     cursor: pointer;
     height: 24px;
@@ -585,7 +704,6 @@ li {
 /* #themes {
     width: fit-content;
 }
-
 .ql-snow #themes.ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
     position: relative;
     margin-top: 0;

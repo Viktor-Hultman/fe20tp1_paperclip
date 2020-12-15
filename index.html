@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="theme.css">
+  <script src="index.js" defer></script>
 </head>
 
 <body onload="redirectNewUser()">
@@ -24,7 +25,7 @@
       <div class="logo">Q</div>
       <ul class="nav-list">
         <li class="nav-icon">
-          <button class="nav-button" id="search-button">
+          <button class="nav-button" id="search-button" aria-label="search">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search"
               class="svg-inline--fa fa-search fa-w-16" role="img" viewBox="0 0 512 512">
               <title>Search</title>
@@ -35,7 +36,7 @@
           </button>
         </li>
         <li class="nav-icon">
-          <button class="nav-button" id="starred-button">
+          <button class="nav-button" id="starred-button" aria-label="favorite">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
               class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 576 512">
@@ -47,7 +48,7 @@
           </button>
         </li>
         <li class="nav-icon">
-          <button class="nav-button" id="chart-bar-button">
+          <button class="nav-button" id="chart-bar-button" aria-label="statistics">
             <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="chart-bar"
               class="svg-inline--fa fa-chart-bar fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512">
@@ -59,7 +60,7 @@
           </button>
         </li>
         <li class="nav-icon">
-          <button class="nav-button" id="trash-bin-button">
+          <button class="nav-button" id="trash-bin-button" aria-label="deleted">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash"
               class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512">
@@ -73,10 +74,10 @@
         <li class="nav-icon cogwheel-list-item">
           <select class="nav-button cogwheel-select" id="theme">
             <option value="auto">Auto</option>
-            <option value="green">Green</option>
+            <option value="green">Lime</option>
             <option value="red">Red</option>
             <option value="rainbow">Rainbow</option>
-            <title>Color-theme</title>
+            <option value="dark">Night mode</option>
           </select>
         </li>
       </ul>
@@ -91,7 +92,6 @@
     </section>
 
     <section class="toolbar-and-editor-container hidden">
-      <div class="close-btn"><button>&times;</button></div>
       <div id="toolbar">
         <select class="ql-header">
           <option value="1">Title</option>
@@ -105,17 +105,13 @@
         <button class="ql-list" value="bullet"></button>
         <button class="ql-link"></button>
         <button class="ql-image"></button>
-
         <select id="themes">
           <option id="reset-btn" value="reset">Standard</option>
           <option id="academic-btn" value="academic">Academic</option>
+          <option id="big-size-btn" value="big-size">Big-size</option>
           <option id="playfull-btn" value="playfull">Playfull</option>
+          <option id="creepy-btn" value="creepy">Creepy</option>
         </select>
-
-        <!--         <button id="academic-btn">Academic</button>
-        <button id="playfull-btn">Playfull</button>
-        <button id="reset-btn">Reset</button> -->
-
         <button id="save-note-btn" class="save-note-btn">Save</button>
         <button id="print-btn" class="printBtn" onclick="printContent()">
           <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="print"
@@ -126,6 +122,7 @@
             </path>
           </svg>
         </button>
+        <div class="close-btn"><button>&times;</button></div>
       </div>
       <div id="editor">
         <h1>Please add a title here</h1>
@@ -135,7 +132,6 @@
 
   </main>
   <script src="confetti.js"></script>
-  <script src="index.js"></script>
 </body>
 
 </html>
