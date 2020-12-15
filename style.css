@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Inconsolata&family=Noto+Serif&family=Roboto&Montserrat&family=Playfair+Display:ital,wght@0,500;1,700&family=Roboto&family=Sofia&family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Creepster&family=Jolly+Lodger&family=Indie+Flower&family=Inconsolata&family=Noto+Serif&family=Roboto&Montserrat&family=Playfair+Display:ital,wght@0,500;1,700&family=Roboto&family=Sofia&family=Ubuntu&display=swap');
 /* @import url('https://fonts.googleapis.com/css2?family=family=Montserrat&family=Playfair+Display:wght@500;700&display=swap'); */
 
 
@@ -130,7 +130,7 @@ a {
 }
 
 #editor {
-    height: calc(1fr - 50px);
+    /* height: calc(1fr - 50px); */
     overflow: auto;
 }
 
@@ -328,9 +328,6 @@ li {
     color: var(--dark-fill);
 }
 
-#playfair-display-btn,
-#roboto-btn,
-#noto-btn,
 .save-note-btn,
 #print-btn,
 #themes {
@@ -370,9 +367,9 @@ li {
 .close-btn button {
     border: none;
     background-color: transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
+    position: relative;
+    top: -7px;
+    right: -50px;
 }
 
 .delete-note-btn,
@@ -473,10 +470,6 @@ li {
 #big-size-btn {
     position: absolute;
     left: 250px;
-}
-
-.big-size-note {
-    background-color: #ffffff;
 }
 
 .big-size-note>h1 {
@@ -590,6 +583,46 @@ li {
 }
 
 /*End of playfull classes*/
+
+/*Start of creepy classes*/
+.creepy-note {
+    background-color: #212421;
+}
+
+.creepy-note>h1 {
+    font-family: 'Creepster', cursive;
+    color: crimson;
+    font-size: 30px !important;
+}
+
+.creepy-note>h2 {
+    font-family: 'Creepster', cursive;
+    color: crimson;
+    font-size: 24px !important;
+}
+
+.creepy-note>h3 {
+    font-family: 'Creepster', cursive;
+    color: crimson;
+    font-size: 20px !important;
+}
+
+.creepy-note>p {
+    font-family: 'Jolly Lodger', cursive;
+    color: #a0a0a0;
+    font-size: 16px !important;
+}
+
+/* Targets all unordered and ordered list items */
+.creepy-note>ul>li,
+.creepy-note>ol>li {
+    font-family: 'Jolly Lodger', cursive;
+    color: #a0a0a0;
+    font-size: 16px !important;
+}
+
+/*End of creepy classes*/
+
 /*note toolbar*/
 .note-toolbar {
     display: flex;
@@ -660,7 +693,7 @@ li {
 
 #themes {
     display: inline-block !important;
-    float: left;
+    float: left; /*This "problem" is needed for the template drop down to be displayed correctly*/
     border: none;
     cursor: pointer;
     height: 24px;

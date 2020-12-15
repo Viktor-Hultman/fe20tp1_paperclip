@@ -2,14 +2,7 @@
 //=========================
 //quill editor setup section
 //=========================
-//sets up the options available in the toolbar
-let toolbarOptions = [
-  [{ 'header': [1, 2, 3, false] }],
-  ['bold', 'italic', 'underline'],
-  ['blockquote'],
-  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-  ['link', 'image'],
-];
+
 //Sets up the quill editor in the element with the id of "editor"
 quill = new Quill('#editor', {
   modules: {
@@ -27,13 +20,13 @@ quill = new Quill('#editor', {
 //constants can come first, they do not change their value(cannot be reasigned new values)
 // Saves the initial content of the editor. When one pushes on "Create new note" button, the content of the editor is set to this variable
 const initialContent = quill.getContents();
-const editingField = document.querySelector(".ql-editor");
+const editingField = document.querySelector('.ql-editor');
 const notesListContainer = document.querySelector('.saved-notes-list');
 const saveNoteBtn = document.querySelector('.save-note-btn');
 const newNoteButton = document.querySelector(".new-note-button");
 const starButton = document.querySelector('#starred-button');
 const closeBtn = document.querySelector('div.close-btn > button');
-const editorContainer = document.querySelector(".toolbar-and-editor-container");
+const editorContainer = document.querySelector('.toolbar-and-editor-container');
 const trashBinBtn = document.querySelector('#trash-bin-button');
 const emptyTrashBinBtn = document.querySelector('.clear-trash-bin');
 const printBtn = document.querySelector('.printBtn');
@@ -42,6 +35,7 @@ const resetBtn = document.querySelector('#reset-btn');
 const playfullBtn = document.querySelector('#playfull-btn');
 const academicBtn = document.querySelector('#academic-btn');
 const bigSizeBtn = document.querySelector('#big-size-btn');
+const creepyBtn = document.querySelector('#creepy-btn');
 const changeListButton = document.querySelectorAll('.ql-list');
 // THIS IS NEEDED TO REMOVE THE QUILL-CREATED SPAN WITH THE SAME ID AS THE SELECT-ELEMENT
 const spanTheme = document.querySelector('#themes');
@@ -55,7 +49,7 @@ let textWasEdited = false;
 //variable to identify the clicked note for saving edited content
 let clickedNoteId = 0;
 //variable to identify the clicked element for saving edited content
-let clickedNote = "";
+let clickedNote = '';
 let currentView = 'allNotes';
 //if the user has visited the page before page visit variable will load from local storage, otherwise it will be null
 let pageVisits = JSON.parse(localStorage.getItem('pageVisits'));
@@ -98,7 +92,10 @@ document.addEventListener('DOMContentLoaded', e => {
 
 //open editor when clicking on new note button
 newNoteButton.addEventListener("click", function () {
-  openEditor(); 
+  templateData = "undefined";
+  resetAllTemplates();
+  selectTheme.value = 'reset';
+  openEditor();
   clickedNote = "";
 });
 
@@ -132,7 +129,7 @@ notesListContainer.addEventListener('click', e => {
   else if (e.target.closest('.favorite-toggle')){
       const noteId = e.target.closest('li').dataset.noteid;       
       toggleFavorite(noteId);
-  } 
+  }
   // 5. exits the function if clicked on everything else that is not a inside a note
   else if (!e.target.closest('.note-text')) {
     return
@@ -160,10 +157,11 @@ notesListContainer.addEventListener('click', e => {
       } else if(templateData == "big-size") {
         changeToBigSize();
 
+      } else if(templateData == "creepy") {
+        changeToCreepy();
+
       } else {
-        removePlayfull();
-        removeAcademic();
-        removeBigSize();
+        resetAllTemplates();
       }
       clickedNote.parentElement.classList.add('active-note');
     }
@@ -266,6 +264,8 @@ document.addEventListener('keydown', (event) => {
     changeToAcademic();
   } else if (keyName === 'Enter' && editingField.classList.contains("big-size-note")) {
     changeToBigSize();
+  } else if (keyName === 'Enter' && editingField.classList.contains("creepy-note")) {
+    changeToCreepy();
 
   } else {
     return;
@@ -280,6 +280,9 @@ document.addEventListener('keydown', (event) => {
 
   } else if (keyName === 'Backspace' && editingField.classList.contains("big-size-note")) {
     changeToBigSize();
+
+  } else if (keyName === 'Backspace' && editingField.classList.contains("creepy-note")) {
+    changeToCreepy();
 
   } else {
     return;
@@ -306,6 +309,10 @@ selectTheme.addEventListener('change', function (event) {
   }
   if (event.target.value === 'big-size') {
     changeToBigSize();
+    textWasEdited = true;
+  }
+  if (event.target.value === 'creepy') {
+    changeToCreepy();
     textWasEdited = true;
   }
 })
@@ -436,6 +443,9 @@ function saveNewNote() {
     } else if(editingField.classList.contains("big-size-note")) {
       templateData = "big-size"
 
+    } else if(editingField.classList.contains("creepy-note")) {
+      templateData = "creepy"
+
     } else {
       //If none of the templates are "active" sets the data-template to "undefined"
       templateData = "undefined"
@@ -479,6 +489,11 @@ function saveNote() {
     //If they have then the data template atribute sets to bigsize
     activeNote.setAttribute('data-template', "big-size"); 
 
+    //Checks if the user has clicked the creepy button
+  } else if (editingField.classList.contains("creepy-note")) {
+    //If they have then the data template atribute sets to creepy
+    activeNote.setAttribute('data-template', "creepy");
+
   } else {
     //If the user clicked a note without a template then the note will get the "standard" atribute of "undefined"
     activeNote.setAttribute('data-template', "undefined");
@@ -499,8 +514,7 @@ function saveNote() {
     removeFocus();
   } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
 
-  removeAcademic();
-  removePlayfull();
+  resetAllTemplates();
 }
 
 //function that identyfies wether the note needs to be saved over an existing one or a new note should be created
@@ -756,6 +770,18 @@ function removeBigSize() {
   templateData = "undefined";
 }
 
+//Function for adding the creepy template
+function changeToCreepy() {
+  resetAllTemplates();
+  editingField.classList.add('creepy-note')
+  templateData = "creepy";
+};
+//Function for removing the creepy template
+function removeCreepy() {
+  editingField.classList.remove('creepy-note')
+  templateData = "undefined";
+}
+
 
 //Removes all template classes
 function resetAllTemplates() {
@@ -763,6 +789,7 @@ function resetAllTemplates() {
   editingField.classList.remove('playfull-note')
   editingField.classList.remove('academic-note')
   editingField.classList.remove('big-size-note')
+  editingField.classList.remove('creepy-note')
 };
 
 //Function for checking after witch template is active
@@ -781,6 +808,11 @@ function checkTemplate() {
   } else if (editingField.classList.contains("big-size-note")){
     //The academic template function runs
     changeToBigSize();
+
+    //If the active template is bigsize
+  } else if (editingField.classList.contains("creepy-note")){
+    //The academic template function runs
+    changeToCreepy();
 
   } else {
     return;
