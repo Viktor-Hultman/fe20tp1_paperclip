@@ -5,7 +5,7 @@ let toolbarOptions = [
   ['blockquote'],
   [{ 'list': 'ordered' }, { 'list': 'bullet' }],
   ['link', 'image'],
-   // [{ 'style': ['Playfair', 'Roboto', 'Noto Serif'] }], // my custom dropdown
+  // [{ 'style': ['Playfair', 'Roboto', 'Noto Serif'] }], // my custom dropdown
   // ['clean']                                         // remove formatting button
 ];
 
@@ -69,8 +69,9 @@ let emptyTrashBinBtn = document.querySelector('.clear-trash-bin');
 let resetBtn = document.querySelector('#reset-btn');
 let playfullBtn = document.querySelector('#playfull-btn');
 let academicBtn = document.querySelector('#academic-btn');
-let headingsPicker = document.querySelector('.ql-picker-options')
-let changeListButton = document.querySelectorAll('.ql-list')
+let headingsPicker = document.querySelector('.ql-picker-options');
+let changeListButton = document.querySelectorAll('.ql-list');
+let totalNotes = 0;
 
 let templateData = "undefined"
 
@@ -165,6 +166,10 @@ function createNote() {
   //notesListContainer.innerHTML += note;
   //saves the note html as a JSON string in Local Storage
   localStorage.setItem(notesNumber, JSON.stringify(note))
+
+  // saves a number each time a note is created in localstorage to use in statistics page
+  totalNotes++;
+  localStorage.setItem('totalNotes', JSON.stringify(totalNotes))
 }
 
 function toggleFavorite(noteId) {
@@ -191,11 +196,11 @@ function saveNewNote() {
   //only creates a note if first element is a heading(h1, h2...h6) and it is not empty
   if (hasTitle()) {
     //Checks if the note editor has the playfull template "active" when saving note
-    if(editingField.classList.contains("playfull-note")) {
+    if (editingField.classList.contains("playfull-note")) {
       //Sets the data-template to "playfull" if it has
       templateData = "playfull"
 
-    } else if(editingField.classList.contains("academic-note")) {
+    } else if (editingField.classList.contains("academic-note")) {
       templateData = "academic"
 
     } else {
@@ -216,7 +221,7 @@ function saveNewNote() {
     // Resets template buttons to "deactivated"
     removeAcademic();
     removePlayfull();
-    
+
   } else alert("Please add a title or a subtitle at the begining of your note");
 }
 
@@ -234,7 +239,7 @@ function saveNote() {
     //Checks if the user has clicked the academic button
   } else if (editingField.classList.contains("academic-note")) {
     //If they have then the data template atribute sets to academic
-    activeNote.setAttribute('data-template', "academic"); 
+    activeNote.setAttribute('data-template', "academic");
 
   } else {
     //If the user clicked a note without a template then the note will get the "standard" atribute of "undefined"
@@ -255,7 +260,7 @@ function saveNote() {
     //remove focus from list items
     removeFocus();
   } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
-  
+
   removeAcademic();
   removePlayfull();
 }
@@ -273,8 +278,8 @@ saveNoteBtn.addEventListener('click', function () {
 function loadAllNotes() {
   for (let i = notesNumber; i >= 1; i--) {
     let note = JSON.parse(localStorage.getItem(i));
-    if (note === null){
-    continue
+    if (note === null) {
+      continue
     }
     notesListContainer.innerHTML += note;
   }
@@ -353,9 +358,9 @@ function bindStarButton() {
 
 }
 //function that chooses theme color
-  function applyTheme(theme) {
-    document.body.classList.remove("theme-auto", "theme-green", "theme-red", "theme-rainbow");
-    document.body.classList.add(`theme-${theme}`);
+function applyTheme(theme) {
+  document.body.classList.remove("theme-auto", "theme-green", "theme-red", "theme-rainbow");
+  document.body.classList.add(`theme-${theme}`);
 }
 
 document.addEventListener('DOMContentLoaded', e => {
@@ -367,22 +372,24 @@ document.addEventListener('DOMContentLoaded', e => {
   applyTheme(savedTheme);
 
   for (const optionElement of document.querySelectorAll("#theme option")) {
-        optionElement.selected = savedTheme === optionElement.value;
-    }
+    optionElement.selected = savedTheme === optionElement.value;
+  }
 
-    document.querySelector("#theme").addEventListener("change", function () {
-      localStorage.setItem("theme", this.value);
-      applyTheme(this.value);
-      if (this.value === "rainbow") {
-        const confettiElement = document.querySelector(".logo")
-        confetti(confettiElement, {
-          angle: "10", 
-          spread: "150",
-          elementCount: "100",
-          startVelocity: window.innerWidth/20
-        })
-      }
-    });
+  document.querySelector("#theme").addEventListener("change", function () {
+    localStorage.setItem("theme", this.value);
+    applyTheme(this.value);
+    if (this.value === "rainbow") {
+      const confettiElement = document.querySelector(".logo")
+      confetti(confettiElement, {
+        angle: "10",
+        spread: "150",
+        elementCount: "100",
+        startVelocity: window.innerWidth / 20
+      })
+    }
+  });
+  // loads localstorage counted saved notes for the statistics page
+  totalNotes = localStorage.getItem('totalNotes');
 })
 
 //remove focus from notes
@@ -396,7 +403,7 @@ function removeFocus() {
 
 
 //function that deletes a note
-function deleteNote(note){
+function deleteNote(note) {
   //get the note's id to be able to change it in local storage
   let noteId = note.dataset.noteid;
   //remove eventual active class
@@ -419,9 +426,13 @@ function deleteNote(note){
   //add code to save new class in local storage before removing the note
   localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
   note.remove();
+
+  // removes note from totalNotes when a note is deleted
+  totalNotes--;
+  localStorage.setItem('totalNotes', totalNotes);
 }
 
-trashBinBtn.addEventListener('click', function(){
+trashBinBtn.addEventListener('click', function () {
   trashBinBtn.classList.toggle('selected');
   emptyTrashBinBtn.classList.toggle('hidden');
   //when current view is "deleted", view insted all notes on click"
@@ -453,19 +464,23 @@ function restoreDeleted(note) {
    <title>Delete</title>
    <path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
  </button>`;
-   //removes permanently delete button
-   let permDelBtn = note.querySelector('.permanently-delete');
-   permDelBtn.remove();
-   //add code to save new class in local storage before removing the note
-   localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
+  //removes permanently delete button
+  let permDelBtn = note.querySelector('.permanently-delete');
+  permDelBtn.remove();
+  //add code to save new class in local storage before removing the note
+  localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
+
+  // restores a deleted note count to totalNotes for statistics
+  totalNotes++;
+  localStorage.setItem('totalNotes', totalNotes);
 }
 
 //permanently delete items in trash bin
-function permanentlyDelete(note){
+function permanentlyDelete(note) {
   //make sure the user want's to permanently delete
   let areYouSure = confirm('Are you sure you want to permanently delete this note?');
   //stop running function if user does not want to permanently delete
-  if(!areYouSure) { return }
+  if (!areYouSure) { return }
   //get the note's id to be able to change it in local storage
   let noteId = note.dataset.noteid;
   //delete the note from local storage
@@ -475,16 +490,16 @@ function permanentlyDelete(note){
 }
 
 //Clears the trash bin and permanently deletes all notes with delete class
-function emptyTrashBin(){
+function emptyTrashBin() {
   //make sure the user want's to permanently delete
   let areYouSure = confirm('Are you sure you want to permanently delete all the notes in the trash bin?');
   //stop running function if user does not want to permanently delete
-  if(!areYouSure) { return }
+  if (!areYouSure) { return }
   //select all notes with the class of deleted
   let deletedNotes = document.querySelectorAll('.note.deleted');
   //grab each note and delete it
-  deletedNotes.forEach(note =>{
-     //get the note's id to be able to change it in local storage
+  deletedNotes.forEach(note => {
+    //get the note's id to be able to change it in local storage
     let noteId = note.dataset.noteid;
     //delete the note from local storage
     localStorage.removeItem(noteId);
@@ -503,24 +518,24 @@ notesListContainer.addEventListener('click', e => {
     deleteNote(note);
   }
   // 2. second if targets the restore notes buttons in the notes toolbar
-  else if (e.target.closest('.restore-note-btn')){
-      let note = e.target.closest('li');
-      restoreDeleted(note);
-  } 
+  else if (e.target.closest('.restore-note-btn')) {
+    let note = e.target.closest('li');
+    restoreDeleted(note);
+  }
   // 3. targets the permanently delete button in the deleted notes toolbar
-  else if (e.target.closest('.permanently-delete')){
+  else if (e.target.closest('.permanently-delete')) {
     let note = e.target.closest('li');
     permanentlyDelete(note);
   }
   // 4. targets the favorite toggle button in the notes toolbar
-  else if (e.target.closest('.favorite-toggle')){
-      const noteId = e.target.closest('li').dataset.noteid;       
-      toggleFavorite(noteId);
-  } 
+  else if (e.target.closest('.favorite-toggle')) {
+    const noteId = e.target.closest('li').dataset.noteid;
+    toggleFavorite(noteId);
+  }
   // 5. exits the function if clicked on everything else that is not a inside a note
   else if (!e.target.closest('.note-text')) {
     return
-  } 
+  }
   // 6. last else adds active class to note and opens it in editor
   else {
     if (e.target.closest('.note-text').parentElement.classList.contains('deleted')) {
@@ -534,17 +549,17 @@ notesListContainer.addEventListener('click', e => {
     clickedNoteId = clickedNote.parentElement.getAttribute('data-noteid');
     templateData = clickedNote.parentElement.getAttribute('data-template');
     if (window.innerWidth > 800) {
-      if(templateData == "playfull") {
+      if (templateData == "playfull") {
         changeToPlayfull();
 
-      } else if(templateData == "academic") {
+      } else if (templateData == "academic") {
         changeToAcademic();
 
       } else {
         removePlayfull();
         removeAcademic();
       }
-    
+
       clickedNote.parentElement.classList.add('active-note');
     }
     editingField.innerHTML = clickedNote.innerHTML.trim();
@@ -713,13 +728,13 @@ changeListButton[0].addEventListener('click', checkTemplate);
 changeListButton[1].addEventListener('click', checkTemplate);
 
 //Function for checking after witch template is active
-function  checkTemplate() {
+function checkTemplate() {
   // If statement that checks if the templates are "active or not"
   if (editingField.classList.contains("playfull-note")) {
     //If the playfull template is "active" then the playfull template function is executed
     changeToPlayfull();
     //If the active template is academic
-  } else if (editingField.classList.contains("academic-note")){
+  } else if (editingField.classList.contains("academic-note")) {
     //The academic template function runs
     changeToAcademic();
   } else {
@@ -740,7 +755,7 @@ document.addEventListener('keydown', (event) => {
     changeToAcademic();
 
   } else {
-      return;
+    return;
   }
   // Checks if both the backspace key is pressed and the playfull template is "active"
   if (keyName === 'Backspace' && editingField.classList.contains("playfull-note")) {
@@ -751,7 +766,13 @@ document.addEventListener('keydown', (event) => {
     changeToAcademic();
 
   } else {
-      return;
+    return;
   }
 })
+
+
+//Chart button directing to chart html
+document.getElementById('chart-bar-button').onclick = function () {
+  location.href = "stat.html";
+};
 
