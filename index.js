@@ -57,7 +57,7 @@ let templateData = "undefined";
 //not very sure if it should be a constant, i think so though
 let headingsPicker = document.querySelector('.ql-picker-options');
 let searchStatus = false;
-
+let totalNotes = 0;
 
 //=========================
 //event listeners section
@@ -72,22 +72,24 @@ document.addEventListener('DOMContentLoaded', e => {
   applyTheme(savedTheme);
 
   for (const optionElement of document.querySelectorAll("#theme option")) {
-        optionElement.selected = savedTheme === optionElement.value;
-    }
+    optionElement.selected = savedTheme === optionElement.value;
+  }
 
-    document.querySelector("#theme").addEventListener("change", function () {
-      localStorage.setItem("theme", this.value);
-      applyTheme(this.value);
-      if (this.value === "rainbow") {
-        const confettiElement = document.querySelector(".logo")
-        confetti(confettiElement, {
-          angle: "10", 
-          spread: "150",
-          elementCount: "100",
-          startVelocity: window.innerWidth/20
-        })
-      }
-    });
+  document.querySelector("#theme").addEventListener("change", function () {
+    localStorage.setItem("theme", this.value);
+    applyTheme(this.value);
+    if (this.value === "rainbow") {
+      const confettiElement = document.querySelector(".logo")
+      confetti(confettiElement, {
+        angle: "10",
+        spread: "150",
+        elementCount: "100",
+        startVelocity: window.innerWidth / 20
+      })
+    }
+  });
+  // loads localstorage counted saved notes for the statistics page
+  totalNotes = localStorage.getItem('totalNotes');
 })
 
 //open editor when clicking on new note button
@@ -116,24 +118,24 @@ notesListContainer.addEventListener('click', e => {
     deleteNote(note);
   }
   // 2. second if targets the restore notes buttons in the notes toolbar
-  else if (e.target.closest('.restore-note-btn')){
-      let note = e.target.closest('li');
-      restoreDeleted(note);
-  } 
+  else if (e.target.closest('.restore-note-btn')) {
+    let note = e.target.closest('li');
+    restoreDeleted(note);
+  }
   // 3. targets the permanently delete button in the deleted notes toolbar
-  else if (e.target.closest('.permanently-delete')){
+  else if (e.target.closest('.permanently-delete')) {
     let note = e.target.closest('li');
     permanentlyDelete(note);
   }
   // 4. targets the favorite toggle button in the notes toolbar
-  else if (e.target.closest('.favorite-toggle')){
-      const noteId = e.target.closest('li').dataset.noteid;       
-      toggleFavorite(noteId);
+  else if (e.target.closest('.favorite-toggle')) {
+    const noteId = e.target.closest('li').dataset.noteid;
+    toggleFavorite(noteId);
   }
   // 5. exits the function if clicked on everything else that is not a inside a note
   else if (!e.target.closest('.note-text')) {
     return
-  } 
+  }
   // 6. last else adds active class to note and opens it in editor
   else {
     if (e.target.closest('.note-text').parentElement.classList.contains('deleted')) {
@@ -141,7 +143,7 @@ notesListContainer.addEventListener('click', e => {
     }
     openEditor();
     removeFocus();
-  
+
     //store the clicked note into a variable
     clickedNote = e.target.closest('.note-text');
     //store the clicked notes id in the global variable clickedNoteId
@@ -154,10 +156,10 @@ notesListContainer.addEventListener('click', e => {
       } else if (templateData == "academic") {
         changeToAcademic();
 
-      } else if(templateData == "big-size") {
+      } else if (templateData == "big-size") {
         changeToBigSize();
 
-      } else if(templateData == "creepy") {
+      } else if (templateData == "creepy") {
         changeToCreepy();
 
       } else {
@@ -218,7 +220,7 @@ editingField.addEventListener('click', () => {
 });
 
 //toggle seen notes when navbar trash bin is clicked
-trashBinBtn.addEventListener('click', function(){
+trashBinBtn.addEventListener('click', function () {
   trashBinBtn.classList.toggle('selected');
   emptyTrashBinBtn.classList.toggle('hidden');
   //when current view is "deleted", view insted all notes on click"
@@ -362,12 +364,12 @@ function closeEditor() {
 function confirmClose() {
   //console.log(styleWhenNoteWasOpened, editingField.classList)
   if (clickedNote === "") {
-      if (textWasEdited) {
-        saveNewNote();
-      } else closeEditor();
-    } else if (clickedNote.innerHTML != editingField.innerHTML || textWasEdited) { 
-      saveNote();
+    if (textWasEdited) {
+      saveNewNote();
     } else closeEditor();
+  } else if (clickedNote.innerHTML != editingField.innerHTML || textWasEdited) {
+    saveNote();
+  } else closeEditor();
 }
 
 //creating a note
@@ -408,6 +410,10 @@ function createNote() {
   //notesListContainer.innerHTML += note;
   //saves the note html as a JSON string in Local Storage
   localStorage.setItem(notesNumber, JSON.stringify(note))
+
+  // saves a number each time a note is created in localstorage to use in statistics page
+  totalNotes++;
+  localStorage.setItem('totalNotes', JSON.stringify(totalNotes))
 }
 
 function toggleFavorite(noteId) {
@@ -440,10 +446,10 @@ function saveNewNote() {
     } else if (editingField.classList.contains("academic-note")) {
       templateData = "academic"
 
-    } else if(editingField.classList.contains("big-size-note")) {
+    } else if (editingField.classList.contains("big-size-note")) {
       templateData = "big-size"
 
-    } else if(editingField.classList.contains("creepy-note")) {
+    } else if (editingField.classList.contains("creepy-note")) {
       templateData = "creepy"
 
     } else {
@@ -487,7 +493,7 @@ function saveNote() {
     //Checks if the user has clicked the bigsize button
   } else if (editingField.classList.contains("big-size-note")) {
     //If they have then the data template atribute sets to bigsize
-    activeNote.setAttribute('data-template', "big-size"); 
+    activeNote.setAttribute('data-template', "big-size");
 
     //Checks if the user has clicked the creepy button
   } else if (editingField.classList.contains("creepy-note")) {
@@ -610,9 +616,9 @@ function bindStarButton() {
 }
 
 //function that chooses theme color
-  function applyTheme(theme) {
-    document.body.classList.remove("theme-auto", "theme-green", "theme-red", "theme-rainbow", "theme-dark");
-    document.body.classList.add(`theme-${theme}`);
+function applyTheme(theme) {
+  document.body.classList.remove("theme-auto", "theme-green", "theme-red", "theme-rainbow", "theme-dark");
+  document.body.classList.add(`theme-${theme}`);
 }
 
 //remove focus from notes
@@ -647,6 +653,10 @@ function deleteNote(note) {
   //add code to save new class in local storage before removing the note
   localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
   note.remove();
+
+  // removes note from totalNotes when a note is deleted
+  totalNotes--;
+  localStorage.setItem('totalNotes', totalNotes);
 }
 
 function restoreDeleted(note) {
@@ -666,6 +676,10 @@ function restoreDeleted(note) {
   permDelBtn.remove();
   //add code to save new class in local storage before removing the note
   localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
+
+  // restores a deleted note count to totalNotes for statistics
+  totalNotes++;
+  localStorage.setItem('totalNotes', totalNotes);
 }
 
 //permanently delete items in trash bin
@@ -805,12 +819,12 @@ function checkTemplate() {
     changeToAcademic();
 
     //If the active template is bigsize
-  } else if (editingField.classList.contains("big-size-note")){
+  } else if (editingField.classList.contains("big-size-note")) {
     //The academic template function runs
     changeToBigSize();
 
     //If the active template is bigsize
-  } else if (editingField.classList.contains("creepy-note")){
+  } else if (editingField.classList.contains("creepy-note")) {
     //The academic template function runs
     changeToCreepy();
 
@@ -831,3 +845,8 @@ function setTheme() {
     selectTheme.value = activeNoteTemplate;
   }
 }
+
+//Chart button directing to chart html
+document.getElementById('chart-bar-button').onclick = function () {
+  location.href = "stat.html";
+};
