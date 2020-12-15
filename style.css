@@ -307,10 +307,9 @@ li {
 }
 
 /* Toolbar buttons */
-
-
 .ql-snow.ql-toolbar button,
-.printBtn svg {
+.printBtn svg,
+#themes {
     color: var(--dark-fill);
     fill: var(--dark-fill) !important;
 }
@@ -333,10 +332,15 @@ li {
 #roboto-btn,
 #noto-btn,
 .save-note-btn,
-#print-btn {
+#print-btn,
+#themes {
     width: fit-content;
     font-size: 0.8em;
     margin-left: 10px;
+}
+
+#themes {
+    background-color: var(--white-bg);
 }
 
 
@@ -409,7 +413,7 @@ li {
     position: relative;
     width: 85%;
     max-width: 400px;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 5px auto;
     transition: width .2s;
     background-color: var(--white-bg);
 }
@@ -465,11 +469,45 @@ li {
     letter-spacing: 1px;
 }
 
+/* Start of big size classes */
+#big-size-btn {
+    position: absolute;
+    left: 250px;
+}
+
+.big-size-note {
+    background-color: #ffffff;
+}
+
+.big-size-note>h1 {
+    font-size: 45px !important;
+}
+
+.big-size-note>h2 {
+    font-size: 38px !important;
+}
+
+.big-size-note>h3 {
+    font-size: 30px !important;
+}
+
+.big-size-note>p {
+    font-size: 24px !important;
+}
+
+/* Targets all unordered and ordered list items */
+.big-size-note>ul>li,
+.big-size-note>ol>li {
+    font-size: 24px !important;
+}
+
+/*End of big size classes*/
+
 /* Start of academic classes */
-#academic-btn {
+/* #academic-btn {
     position: absolute;
     left: 50px;
-}
+} */
 
 .academic-note {
     background-color: #ffffff;
@@ -510,10 +548,10 @@ li {
 /*End of academic classes*/
 
 /* Start of playfull classes */
-#playfull-btn {
+/* #playfull-btn {
     position: absolute;
     left: 150px;
-}
+} */
 
 .playfull-note {
     background-color: #feff9c;
@@ -619,3 +657,24 @@ li {
         display: none;
     }
 }
+
+#themes {
+    display: inline-block !important;
+    float: left;
+    border: none;
+    cursor: pointer;
+    height: 24px;
+    width: fit-content;
+    font-size: 0.8em;
+}
+
+/* #themes {
+    width: fit-content;
+}
+
+.ql-snow #themes.ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+    position: relative;
+    margin-top: 0;
+    top: 0;
+    vertical-align: middle;
+} */

@@ -9,7 +9,6 @@ let toolbarOptions = [
   ['blockquote'],
   [{ 'list': 'ordered' }, { 'list': 'bullet' }],
   ['link', 'image'],
-   // [{ 'style': ['Playfair', 'Roboto', 'Noto Serif'] }], // my custom dropdown
 ];
 //Sets up the quill editor in the element with the id of "editor"
 quill = new Quill('#editor', {
@@ -18,15 +17,6 @@ quill = new Quill('#editor', {
   },
   theme: 'snow'
 });
-
-//just in case dropdown does not work
-//sets custom style dropdown in quill editor
-// const stylePickerItems = Array.prototype.slice.call(document.querySelectorAll('.ql-style .ql-picker-item'));
-
-// stylePickerItems.forEach(item => item.textContent = item.dataset.value);
-
-// document.querySelector('.ql-style .ql-picker-label').innerHTML
-//     = document.querySelector('.ql-style .ql-picker-label').innerHTML;
 
 
 
@@ -51,17 +41,13 @@ const searchButton = document.getElementById('search-button');
 const resetBtn = document.querySelector('#reset-btn');
 const playfullBtn = document.querySelector('#playfull-btn');
 const academicBtn = document.querySelector('#academic-btn');
+const bigSizeBtn = document.querySelector('#big-size-btn');
 const changeListButton = document.querySelectorAll('.ql-list');
-//kept old dropdown variables in case we need them (if not delete them)
-// const playfairBtn = document.querySelector('[data-value="Playfair"]');
-// const robotoBtn = document.querySelector('#roboto-btn');
-// const robotoBtn = document.querySelector("[data-value='Roboto']");
-// const notoBtn = document.querySelector("[data-value='Noto']");
+// THIS IS NEEDED TO REMOVE THE QUILL-CREATED SPAN WITH THE SAME ID AS THE SELECT-ELEMENT
+const spanTheme = document.querySelector('#themes');
+const selectTheme = document.querySelector('select#themes');
 
-
-
-
-//we declare variables that change their value throughout the code with let
+// variables that change their value throughout the code
 //unique identifyer for each note to act as a local storage key that is taken from local storage
 let notesNumber = JSON.parse(localStorage.getItem('notesNumber'));
 //variable that indicates when text will be edited starts false and becomes true on key upp in editor
@@ -165,20 +151,24 @@ notesListContainer.addEventListener('click', e => {
     clickedNoteId = clickedNote.parentElement.getAttribute('data-noteid');
     templateData = clickedNote.parentElement.getAttribute('data-template');
     if (window.innerWidth > 800) {
-      if(templateData == "playfull") {
+      if (templateData == "playfull") {
         changeToPlayfull();
 
-      } else if(templateData == "academic") {
+      } else if (templateData == "academic") {
         changeToAcademic();
+
+      } else if(templateData == "big-size") {
+        changeToBigSize();
 
       } else {
         removePlayfull();
         removeAcademic();
+        removeBigSize();
       }
-    
       clickedNote.parentElement.classList.add('active-note');
     }
     editingField.innerHTML = clickedNote.innerHTML.trim();
+    setTheme();
   }
 });
 
@@ -256,16 +246,16 @@ emptyTrashBinBtn.addEventListener('click', emptyTrashBin);
 saveNoteBtn.addEventListener('click', chooseSaveType);
 
 // Eventlistener for when academic button is clicked
-academicBtn.addEventListener('click',function(){
-  changeToAcademic();
-  textWasEdited = true;
-});
+// academicBtn.addEventListener('click',function(){
+//   changeToAcademic();
+//   textWasEdited = true;
+// });
 
-// Eventlistener for when playfull button is clicked
-playfullBtn.addEventListener('click', function () {
-  changeToPlayfull();
-  textWasEdited = true;
-});
+// // Eventlistener for when playfull button is clicked
+// playfullBtn.addEventListener('click', function () {
+//   changeToPlayfull();
+//   textWasEdited = true;
+// });
 
 // Eventlistener when headings are selected or changed
 headingsPicker.addEventListener('click', checkTemplate);
@@ -286,9 +276,11 @@ document.addEventListener('keydown', (event) => {
     changeToPlayfull();
   } else if (keyName === 'Enter' && editingField.classList.contains("academic-note")) {
     changeToAcademic();
+  } else if (keyName === 'Enter' && editingField.classList.contains("big-size-note")) {
+    changeToBigSize();
 
   } else {
-      return;
+    return;
   }
   // Checks if both the backspace key is pressed and the playfull template is "active"
   if (keyName === 'Backspace' && editingField.classList.contains("playfull-note")) {
@@ -298,11 +290,43 @@ document.addEventListener('keydown', (event) => {
   } else if (keyName === 'Backspace' && editingField.classList.contains("academic-note")) {
     changeToAcademic();
 
+  } else if (keyName === 'Backspace' && editingField.classList.contains("big-size-note")) {
+    changeToBigSize();
+
   } else {
-      return;
+    return;
   }
 })
 
+//removes quill editors built in theme element
+spanTheme.remove();
+// Change theme from dropdown menu
+// Select the dropdown
+selectTheme.addEventListener('change', function (event) {
+
+  if (event.target.value === 'reset') {
+    resetAllTemplates();
+    textWasEdited = true;
+  }
+  if (event.target.value === 'academic') {
+    changeToAcademic();
+    textWasEdited = true;
+  }
+  if (event.target.value === 'playfull') {
+    changeToPlayfull();
+    textWasEdited = true;
+  }
+  if (event.target.value === 'big-size') {
+    changeToBigSize();
+    textWasEdited = true;
+  }
+})
+
+//Eventlistener for the reset button
+resetBtn.addEventListener('click', function () {
+  resetAllTemplates();
+  textWasEdited = true;
+});
 
 
 //=========================
@@ -422,12 +446,15 @@ function saveNewNote() {
   //only creates a note if first element is a heading(h1, h2...h6) and it is not empty
   if (hasTitle()) {
     //Checks if the note editor has the playfull template "active" when saving note
-    if(editingField.classList.contains("playfull-note")) {
+    if (editingField.classList.contains("playfull-note")) {
       //Sets the data-template to "playfull" if it has
       templateData = "playfull"
 
-    } else if(editingField.classList.contains("academic-note")) {
+    } else if (editingField.classList.contains("academic-note")) {
       templateData = "academic"
+
+    } else if(editingField.classList.contains("big-size-note")) {
+      templateData = "big-size"
 
     } else {
       //If none of the templates are "active" sets the data-template to "undefined"
@@ -447,7 +474,7 @@ function saveNewNote() {
     // Resets template buttons to "deactivated"
     removeAcademic();
     removePlayfull();
-    
+
   } else alert("Please add a title or a subtitle at the begining of your note");
 }
 
@@ -465,7 +492,12 @@ function saveNote() {
     //Checks if the user has clicked the academic button
   } else if (editingField.classList.contains("academic-note")) {
     //If they have then the data template atribute sets to academic
-    activeNote.setAttribute('data-template', "academic"); 
+    activeNote.setAttribute('data-template', "academic");
+
+    //Checks if the user has clicked the bigsize button
+  } else if (editingField.classList.contains("big-size-note")) {
+    //If they have then the data template atribute sets to bigsize
+    activeNote.setAttribute('data-template', "big-size"); 
 
   } else {
     //If the user clicked a note without a template then the note will get the "standard" atribute of "undefined"
@@ -478,7 +510,7 @@ function saveNote() {
     //update the date
     clickedNote.nextSibling.innerHTML = date();
     //recreates the li item
-    let editedNote = `<li data-noteid=\"${clickedNoteId}\" data-template=\"${templateData}\" class="note">${clickedNote.parentNode.innerHTML}</li>`;
+    let editedNote = `<li data-noteid=\"${clickedNoteId}\" data-template=${templateData} class="note">${clickedNote.parentNode.innerHTML}</li>`;
     //updates the note in local storage for access
     localStorage.setItem(clickedNoteId, JSON.stringify(editedNote));
     //closes the editor
@@ -486,7 +518,7 @@ function saveNote() {
     //remove focus from list items
     removeFocus();
   } else alert("Please add a heading at the begining of your note, it will act as the note\'s title");
-  
+
   removeAcademic();
   removePlayfull();
 }
@@ -502,8 +534,8 @@ function chooseSaveType() {
 function loadAllNotes() {
   for (let i = notesNumber; i >= 1; i--) {
     let note = JSON.parse(localStorage.getItem(i));
-    if (note === null){
-    continue
+    if (note === null) {
+      continue
     }
     notesListContainer.innerHTML += note;
   }
@@ -598,7 +630,7 @@ function removeFocus() {
 }
 
 //function that deletes a note
-function deleteNote(note){
+function deleteNote(note) {
   //get the note's id to be able to change it in local storage
   let noteId = note.dataset.noteid;
   //remove eventual active class
@@ -635,19 +667,19 @@ function restoreDeleted(note) {
    <title>Delete</title>
    <path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
  </button>`;
-   //removes permanently delete button
-   let permDelBtn = note.querySelector('.permanently-delete');
-   permDelBtn.remove();
-   //add code to save new class in local storage before removing the note
-   localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
+  //removes permanently delete button
+  let permDelBtn = note.querySelector('.permanently-delete');
+  permDelBtn.remove();
+  //add code to save new class in local storage before removing the note
+  localStorage.setItem(noteId, JSON.stringify(note.outerHTML));
 }
 
 //permanently delete items in trash bin
-function permanentlyDelete(note){
+function permanentlyDelete(note) {
   //make sure the user want's to permanently delete
   let areYouSure = confirm('Are you sure you want to permanently delete this note?');
   //stop running function if user does not want to permanently delete
-  if(!areYouSure) { return }
+  if (!areYouSure) { return }
   //get the note's id to be able to change it in local storage
   let noteId = note.dataset.noteid;
   //delete the note from local storage
@@ -657,16 +689,16 @@ function permanentlyDelete(note){
 }
 
 //Clears the trash bin and permanently deletes all notes with delete class
-function emptyTrashBin(){
+function emptyTrashBin() {
   //make sure the user want's to permanently delete
   let areYouSure = confirm('Are you sure you want to permanently delete all the notes in the trash bin?');
   //stop running function if user does not want to permanently delete
-  if(!areYouSure) { return }
+  if (!areYouSure) { return }
   //select all notes with the class of deleted
   let deletedNotes = document.querySelectorAll('.note.deleted');
   //grab each note and delete it
-  deletedNotes.forEach(note =>{
-     //get the note's id to be able to change it in local storage
+  deletedNotes.forEach(note => {
+    //get the note's id to be able to change it in local storage
     let noteId = note.dataset.noteid;
     //delete the note from local storage
     localStorage.removeItem(noteId);
@@ -712,6 +744,7 @@ function date() {
 function changeToAcademic() {
   resetAllTemplates();
   editingField.classList.add('academic-note')
+  templateData = "academic";
 };
 //Function for removing the academic template
 function removeAcademic() {
@@ -723,6 +756,7 @@ function removeAcademic() {
 function changeToPlayfull() {
   resetAllTemplates();
   editingField.classList.add('playfull-note')
+  templateData = "playfull";
 };
 //Function for removing the playfull template
 function removePlayfull() {
@@ -730,30 +764,58 @@ function removePlayfull() {
   templateData = "undefined";
 }
 
-//Eventlistener for the reset button
-resetBtn.addEventListener('click', function () {
+//Function for adding the bigsize template
+function changeToBigSize() {
   resetAllTemplates();
-  textWasEdited = true;
-});
+  editingField.classList.add('big-size-note')
+  templateData = "big-size";
+};
+//Function for removing the bigsize template
+function removeBigSize() {
+  editingField.classList.remove('big-size-note')
+  templateData = "undefined";
+}
+
 
 //Removes all template classes
 function resetAllTemplates() {
   templateData = "undefined";
   editingField.classList.remove('playfull-note')
   editingField.classList.remove('academic-note')
+  editingField.classList.remove('big-size-note')
 };
 
 //Function for checking after witch template is active
-function  checkTemplate() {
+function checkTemplate() {
   // If statement that checks if the templates are "active or not"
   if (editingField.classList.contains("playfull-note")) {
     //If the playfull template is "active" then the playfull template function is executed
     changeToPlayfull();
+
     //If the active template is academic
-  } else if (editingField.classList.contains("academic-note")){
+  } else if (editingField.classList.contains("academic-note")) {
     //The academic template function runs
     changeToAcademic();
+
+    //If the active template is bigsize
+  } else if (editingField.classList.contains("big-size-note")){
+    //The academic template function runs
+    changeToBigSize();
+
   } else {
     return;
   }
 };
+
+// function to update the theme in the toolbar so it shows the correct theme for the active note
+function setTheme() {
+  // get the data template of the active note
+  const activeNoteTemplate = document.querySelector('.active-note').dataset.template
+
+  // set the value of the select element in the toolbar to the current theme
+  if (activeNoteTemplate == 'undefined') {
+    selectTheme.value = 'reset';
+  } else {
+    selectTheme.value = activeNoteTemplate;
+  }
+}
