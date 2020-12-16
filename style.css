@@ -656,6 +656,7 @@ li {
         position: static;
         max-width: 800px;
         height: 100%;
+        border-right: var(--editor-border);
     }
 
     #editor {
