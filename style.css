@@ -127,6 +127,7 @@ a {
     /*makes sure toolbar buttons are never over close button*/
     padding-right: 70px;
     margin-bottom: 10px;
+    position: relative;
 }
 
 #editor {
@@ -679,11 +680,6 @@ li {
         flex-direction: column;
         align-items: center;
         min-height: 50px;
-    }
-
-    .close-btn {
-        right: auto;
-        left: 95%;
     }
 }
 
