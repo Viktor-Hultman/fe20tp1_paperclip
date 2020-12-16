@@ -360,16 +360,17 @@ li {
 }
 
 .close-btn {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bolder;
+    position: absolute;
+    top: 5px;
+    right: 10px;
 }
 
 .close-btn button {
     border: none;
     background-color: transparent;
     position: relative;
-    top: -7px;
-    right: -50px;
 }
 
 .delete-note-btn,
@@ -679,6 +680,11 @@ li {
         align-items: center;
         min-height: 50px;
     }
+
+    .close-btn {
+        right: auto;
+        left: 95%;
+    }
 }
 
 @media print {
@@ -693,7 +699,8 @@ li {
 
 #themes {
     display: inline-block !important;
-    float: left; /*This "problem" is needed for the template drop down to be displayed correctly*/
+    float: left;
+    /*This "problem" is needed for the template drop down to be displayed correctly*/
     border: none;
     cursor: pointer;
     height: 24px;
