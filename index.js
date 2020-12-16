@@ -334,13 +334,13 @@ function redirectToInfo() {
   window.location = "intro.html";
 }
 
-// function redirectNewUser() {
-//   if (pageVisits == null) {
-//     pageVisits += 1;
-//     localStorage.setItem("pageVisits", pageVisits);
-//     redirectToInfo();
-//   }
-// }
+function redirectNewUser() {
+  if (pageVisits == null) {
+    pageVisits += 1;
+    localStorage.setItem("pageVisits", pageVisits);
+    redirectToInfo();
+  }
+}
 
 //function that opens the editor
 function openEditor() {
