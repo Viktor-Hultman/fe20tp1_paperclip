@@ -1,6 +1,7 @@
 "# ToDoList" 
 
-Short description of Quire. what it is etc.
+Quire helps you capture ideeas and find them fast.
+It is a browser based program that let's you save notes directly from your computer or mobile device.
 
 Describe the editor
 
