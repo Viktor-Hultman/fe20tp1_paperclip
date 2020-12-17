@@ -13,4 +13,4 @@ Shortly describe its features
 - Themes
 
 Contributors
-- Imgae (optional)
+![Team members](/images/team-members.png)
