@@ -127,6 +127,7 @@ a {
     /*makes sure toolbar buttons are never over close button*/
     padding-right: 70px;
     margin-bottom: 10px;
+    position: relative;
 }
 
 #editor {
@@ -360,16 +361,17 @@ li {
 }
 
 .close-btn {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bolder;
+    position: absolute;
+    top: 5px;
+    right: 10px;
 }
 
 .close-btn button {
     border: none;
     background-color: transparent;
     position: relative;
-    top: -7px;
-    right: -50px;
 }
 
 .delete-note-btn,
@@ -467,31 +469,31 @@ li {
 }
 
 /* Start of big size classes */
-#big-size-btn {
+/* #big-size-btn {
     position: absolute;
     left: 250px;
-}
+} */
 
 .big-size-note>h1 {
-    font-size: 45px !important;
+    font-size: 65px !important;
 }
 
 .big-size-note>h2 {
-    font-size: 38px !important;
+    font-size: 48px !important;
 }
 
 .big-size-note>h3 {
-    font-size: 30px !important;
+    font-size: 40px !important;
 }
 
 .big-size-note>p {
-    font-size: 24px !important;
+    font-size: 34px !important;
 }
 
 /* Targets all unordered and ordered list items */
 .big-size-note>ul>li,
 .big-size-note>ol>li {
-    font-size: 24px !important;
+    font-size: 34px !important;
 }
 
 /*End of big size classes*/
@@ -553,25 +555,25 @@ li {
 .playfull-note>h1 {
     font-family: 'Caveat', cursive;
     color: #2a4e44;
-    font-size: 30px !important;
+    font-size: 32px !important;
 }
 
 .playfull-note>h2 {
     font-family: 'Caveat', cursive;
     color: #2a4e44;
-    font-size: 24px !important;
+    font-size: 26px !important;
 }
 
 .playfull-note>h3 {
     font-family: 'Caveat', cursive;
     color: #2a4e44;
-    font-size: 20px !important;
+    font-size: 24px !important;
 }
 
 .playfull-note>p {
     font-family: 'Indie Flower', cursive;
     color: #6dadab;
-    font-size: 16px !important;
+    font-size: 18px !important;
 }
 
 /* Targets all unordered and ordered list items */
@@ -579,7 +581,7 @@ li {
 .playfull-note>ol>li {
     font-family: 'Indie Flower', cursive;
     color: #ff65a3;
-    font-size: 16px !important;
+    font-size: 18px !important;
 }
 
 /*End of playfull classes*/
@@ -592,13 +594,13 @@ li {
 .creepy-note>h1 {
     font-family: 'Creepster', cursive;
     color: crimson;
-    font-size: 30px !important;
+    font-size: 40px !important;
 }
 
 .creepy-note>h2 {
     font-family: 'Creepster', cursive;
     color: crimson;
-    font-size: 24px !important;
+    font-size: 28px !important;
 }
 
 .creepy-note>h3 {
@@ -610,7 +612,7 @@ li {
 .creepy-note>p {
     font-family: 'Jolly Lodger', cursive;
     color: #a0a0a0;
-    font-size: 16px !important;
+    font-size: 18px !important;
 }
 
 /* Targets all unordered and ordered list items */
@@ -618,7 +620,7 @@ li {
 .creepy-note>ol>li {
     font-family: 'Jolly Lodger', cursive;
     color: #a0a0a0;
-    font-size: 16px !important;
+    font-size: 18px !important;
 }
 
 /*End of creepy classes*/
@@ -654,6 +656,7 @@ li {
         position: static;
         max-width: 800px;
         height: 100%;
+        border-right: var(--editor-border);
     }
 
     #editor {
@@ -693,7 +696,8 @@ li {
 
 #themes {
     display: inline-block !important;
-    float: left; /*This "problem" is needed for the template drop down to be displayed correctly*/
+    float: left;
+    /*This "problem" is needed for the template drop down to be displayed correctly*/
     border: none;
     cursor: pointer;
     height: 24px;

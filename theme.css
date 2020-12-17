@@ -1,33 +1,20 @@
 :root {
-    /* GREEN */
-    /* green text color  */
-    --green-dark-txt: #067302;
-    --green-blue-txt: #97BF04;
-    /* green background color */
-    --green-dark-bg: #067302;
-    --green-blue-bg: #97BF04;
-    --green-blue-bg-active: #aec462;
-    --green-gray-bg: #EDF2C2;
-    /* green fill color */
-    --green-dark-fill: #067302;
-    --green-blue-fill: #97BF04;
+    /*** GREEN ***/
+    --green-dark: #3d6b01;
+    --green-fill: #569700;
+    --green-bg-active: #83bd38;
+    --green-gray-bg: #ccebbe;
     /* green borders */
-    --green-notes-border: 2.5px solid #E7F294;
+    --green-notes-border: 2.5px solid #a4c25f;
     --green-links-border: 2.5px solid #95D904;
-    --green-button-border-dark: 1.5px solid #97BF04;
-    --green-editor-border: 1px solid #E7F294;
+    --green-button-border-dark: 1.5px solid #569700;
+    --green-editor-border: 1px solid #a4c25f;
 
-    /* RED */
-    /* red text color  */
-    --red-dark-txt: #4c1c1c;
-    --red-blue-txt: #920000;
-    /* red background color */
-    --red-dark-bg: #4c1c1c;
-    --red-blue-bg: #920000;
-    --red-blue-bg-active: #b30000;
-    /* red fill color */
-    --red-dark-fill: #695252;
-    --red-blue-fill: #920000;
+    /*** RED ***/
+    --red-dark: #4c1c1c;
+    --red-fill: #920000;
+    --red-bg-active: #b30000;
+    --red-gray-bg: #eed4d4;
     /* red borders */
     --red-notes-border: 2.5px solid #d6baba;
     --red-links-border: 2.5px solid #920000;
@@ -67,16 +54,16 @@ body {
 
 body.theme-green {
     /* text color  */
-    --dark-txt: var(--green-dark-txt);
-    --blue-txt: var(--green-blue-txt);
+    --dark-txt: var(--green-dark);
+    --blue-txt: var(--green-fill);
     /* background color */
-    --dark-bg: var(--green-dark-bg);
-    --blue-bg: var(--green-blue-bg);
-    --blue-bg-active: var(--green-blue-bg-active);
+    --dark-bg: var(--green-dark);
+    --blue-bg: var(--green-fill);
+    --blue-bg-active: var(--green-bg-active);
     --light-grey-bg: var(--green-gray-bg);
     /*fill color*/
-    --dark-fill: var(--green-dark-fill);
-    --blue-fill: var(--green-blue-fill);
+    --dark-fill: var(--green-dark);
+    --blue-fill: var(--green-fill);
 
     /*borders*/
     --notes-border: var(--green-notes-border);
@@ -87,15 +74,16 @@ body.theme-green {
 
 body.theme-red {
     /* text color  */
-    --dark-txt: var(--red-dark-txt);
-    --blue-txt: var(--red-blue-txt);
+    --dark-txt: var(--red-dark);
+    --blue-txt: var(--red-fill);
     /* background color */
-    --dark-bg: var(--red-dark-bg);
-    --blue-bg: var(--red-blue-bg);
-    --blue-bg-active: var(--red-blue-bg-active);
+    --dark-bg: var(--red-dark);
+    --blue-bg: var(--red-fill);
+    --blue-bg-active: var(--red-bg-active);
+    --light-grey-bg: var(--red-gray-bg);
     /*fill color*/
-    --dark-fill: var(--red-dark-fill);
-    --blue-fill: var(--red-blue-fill);
+    --dark-fill: var(--red-dark);
+    --blue-fill: var(--red-fill);
 
     /*borders*/
     --notes-border: var(--red-notes-border);
@@ -157,22 +145,35 @@ body.theme-dark {
     --hover-note-shadow: 0 3px 20px 0 #000, 0 3px 20px 1px #000;
 }
 
-/* IF WE HAVE TIME TO MAKE DARKMODE
+/* DARK MODE in browser*/
 @media (prefers-color-scheme: dark){
-    body.theme-auto{
-   
-    --dark-txt: var(--red-dark-txt);
-    --blue-txt: var(--red-blue-txt);
-    
-    --dark-bg: var(--red-dark-bg);
-    --blue-bg: var(--red-blue-bg);
-    --blue-bg-active: var(--red-blue-bg-active);
-   
-    --dark-fill: var(--red-dark-fill);
-    --blue-fill: var(--red-blue-fill);
-    
-    --links-border: 2.5px solid var(--red-links-border);
-    --button-border-dark: 1.5px solid var(--red-button-border-dark);
-    }
+body.theme-auto {
+    background: #121212;
+    /* text color  */
+    --white-txt: #4B3620;
+    --dark-txt: #f1efef;
+    --blue-txt: #4B3620;
+    /* background color */
+    --white-bg: #2E2E2E;
+    --light-grey-bg: #080808;
+    --dark-bg: #2E2E2E;
+    --blue-bg: #121212;
+    --blue-bg-active: #0c0c0c;
+    /*fill color*/
+    --white-fill: #fff;
+    --dark-fill: #97dbdf;
+    --blue-fill: #EEC186;
+    --selected-fill: gold;
+    /* font */
+    --title-font: 'Playfair Display', serif;
+    --text-font: 'Montserrat', sans-serif;
+    /*borders*/
+    --notes-border: 2.5px solid #111b27;
+    --links-border: 2.5px solid #3A5D8C;
+    --button-border-dark: 1.5px solid #5E9ABF;
+    --button-border-blue: 1px solid #EEC186;
+    --editor-border: 1px solid #253C59;
+    /*shadows*/
+    --hover-note-shadow: 0 3px 20px 0 #000, 0 3px 20px 1px #000;
 }
-*/
+}
