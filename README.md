@@ -7,7 +7,7 @@ It is a browser based program that let's you save notes directly from your compu
 
 ![](https://github.com/Viktor-Hultman/quire_notebook_assignment_paperclip/blob/master/readme-gifs/create-note.gif)
 
-Features
+**Features**
 - Automatically save notes when leaving editor.
 - Mark as favorite in order to easily find the most important notes.
 - Statiastics page that allows users to see how many notes have been saved and how many were ever written.
