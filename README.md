@@ -5,6 +5,7 @@ Quire is a project built for KYH Yrkeshögskola - Front End Developer Education 
 It is a browser based program that let's you save notes directly from your computer or mobile device.
 
 Describe the editor
+![](https://github.com/Viktor-Hultman/quire_notebook_assignment_paperclip/blob/master/readme-gifs/create-note.gif)
 
 Features
 - Automatically save notes when leaving editor.
@@ -13,6 +14,8 @@ Features
 - Delete functionality that allows user to restore the deleted notes or to permanently remove them.
 - Search functionality to easily find something among saved, deleted or favorite notes.
 - Cool color themes and dark mode for using in low light environments.
+
+![](https://github.com/Viktor-Hultman/quire_notebook_assignment_paperclip/blob/master/readme-gifs/notes.gif)
 
 Contributors
 ![Team members](/images/team-members.png)
