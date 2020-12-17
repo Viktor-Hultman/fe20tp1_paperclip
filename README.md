@@ -13,6 +13,7 @@ Features
 - Statiastics page that allows users to see how many notes have been saved and how many were ever written.
 - Delete functionality that allows user to restore the deleted notes or to permanently remove them.
 - Search functionality to easily find something among saved, deleted or favorite notes.
+- Format text your own way using the editors toolbar or simply use preset styles for your notes.
 - Cool color themes and dark mode for using in low light environments.
 
 ![](https://github.com/Viktor-Hultman/quire_notebook_assignment_paperclip/blob/master/readme-gifs/notes.gif)
