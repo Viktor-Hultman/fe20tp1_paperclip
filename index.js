@@ -850,5 +850,6 @@ function setTheme() {
 
 //Chart button directing to chart html
 document.getElementById('chart-bar-button').onclick = function () {
+  confirmClose();
   location.href = "stat.html";
 };
