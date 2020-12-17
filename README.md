@@ -5,12 +5,13 @@ It is a browser based program that let's you save notes directly from your compu
 
 Describe the editor
 
-Shortly describe its features
-- Search
-- Favorites
-- Statiastics
-- Deleted
-- Themes
+<h1>Features</h1>
+- Automatically save notes when leaving editor.
+- Mark as favorite in order to easily find the most important notes.
+- Statiastics page that allows users to see how many notes have been saved and how many were ever written.
+- Delete functionality that allows user to restore the deleted notes or to permanently remove them.
+- Search functionality to easily find something among saved, deleted or favorite notes.
+- Cool color themes and dark mode for using in low light environments.
 
-Contributors
+<h1>Contributors</h1>
 ![Team members](/images/team-members.png)
