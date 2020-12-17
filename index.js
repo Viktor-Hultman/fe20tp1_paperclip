@@ -149,7 +149,6 @@ notesListContainer.addEventListener('click', e => {
     //store the clicked notes id in the global variable clickedNoteId
     clickedNoteId = clickedNote.parentElement.getAttribute('data-noteid');
     templateData = clickedNote.parentElement.getAttribute('data-template');
-    if (window.innerWidth > 800) {
       if (templateData == "playfull") {
         changeToPlayfull();
 
@@ -170,7 +169,7 @@ notesListContainer.addEventListener('click', e => {
     editingField.innerHTML = clickedNote.innerHTML.trim();
     setTheme();
   }
-});
+);
 
 // Creates a search input field
 searchButton.addEventListener('click', function () {
@@ -589,7 +588,7 @@ function renderFavorites() {
   //get all non-favorite-listItem
   const nonFavoriteItems = notesListContainer.querySelectorAll('.note:not(.favorite)')
   nonFavoriteItems.forEach(function (nonFavoriteItem) {
-    nonFavoriteItem.remove()
+    nonFavoriteItem.classList.add('hidden')
   })
 }
 
