@@ -1,6 +1,7 @@
 "# ToDoList" 
 
-Quire helps you capture ideeas and find them fast.
+Quire is a project built for KYH Yrkeshögskola - Front End Developer Education Program.
+
 It is a browser based program that let's you save notes directly from your computer or mobile device.
 
 Describe the editor
