@@ -17,5 +17,5 @@ Features
 
 ![](https://github.com/Viktor-Hultman/quire_notebook_assignment_paperclip/blob/master/readme-gifs/notes.gif)
 
-Contributors
+**Contributors**
 ![Team members](/images/team-members.png)
