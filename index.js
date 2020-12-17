@@ -220,6 +220,7 @@ editingField.addEventListener('click', () => {
 
 //toggle seen notes when navbar trash bin is clicked
 trashBinBtn.addEventListener('click', function () {
+  confirmClose();
   trashBinBtn.classList.toggle('selected');
   emptyTrashBinBtn.classList.toggle('hidden');
   //when current view is "deleted", view insted all notes on click"
@@ -593,6 +594,7 @@ function renderFavorites() {
 
 function bindStarButton() {
   starButton.addEventListener('click', function () {
+    confirmClose();
     //when starButton is selected, it gets gold
     starButton.classList.toggle('selected')
     //mekes the delete all notes button hidden again
@@ -847,5 +849,6 @@ function setTheme() {
 
 //Chart button directing to chart html
 document.getElementById('chart-bar-button').onclick = function () {
+  confirmClose();
   location.href = "stat.html";
 };
