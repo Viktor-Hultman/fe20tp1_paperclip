@@ -1,7 +1,7 @@
-"# ToDoList" 
-
+ 
 ## Quire is a project built for KYH Yrkeshögskola - Front End Developer Education Program.
 #### [Go to Quire](https://viktor-hultman.github.io/quire_notebook_assignment_paperclip/)
+#### [Here you can find our Trello for this projekt](https://trello.com/b/b7Fdfe3L/teamprojekt-1)
 
 It is a browser based program that let's you save notes directly from your computer or mobile device.
 
